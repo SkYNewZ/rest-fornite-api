@@ -50,7 +50,7 @@ app.get('/user/:platform/:username', function (req, res) {
       res.json(stats);
     })
     .catch((err) => {
-      res.json(err);
+      res.status(500).send("Sorry! Please contact admin");
       console.log(err);
     });
   });
@@ -68,7 +68,7 @@ app.get('/stats/:platform/:username', function (req, res) {
       res.json(stats);
     })
     .catch((err) => {
-      res.json(err);
+      res.status(500).send("Sorry! Please contact admin");
       console.log(err);
     });
   });
@@ -86,7 +86,7 @@ app.get('/statsById/:platform/:user', function (req, res) {
       res.json(stats);
     })
     .catch((err) => {
-      res.json(err);
+      res.status(500).send("Sorry! Please contact admin");
       console.log(err);
     });
   });
@@ -107,7 +107,7 @@ app.get('/news/:lang?', function (req, res) {
       res.json(news);
     })
     .catch((err) => {
-      res.json(err);
+      res.status(500).send("Sorry! Please contact admin");
       console.log(err);
     });
   });
@@ -123,7 +123,7 @@ app.get('/check', function (req, res) {
       res.json(status);
     })
     .catch((err) => {
-      res.json(err);
+      res.status(500).send("Sorry! Please contact admin");
       console.log(err);
     });
   });
@@ -139,7 +139,7 @@ app.get('/pve', function (req, res) {
       res.json(status);
     })
     .catch((err) => {
-      res.json(err);
+      res.status(500).send("Sorry! Please contact admin");
       console.log(err);
     });
   });
@@ -156,7 +156,7 @@ app.get('/store', function (req, res) {
       console.log(store);
     })
     .catch((err) => {
-      res.json(err);
+      res.status(500).send("Sorry! Please contact admin");
       console.log(err);
     });
   });
