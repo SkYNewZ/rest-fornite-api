@@ -1,0 +1,23 @@
+{
+  "name": "rest-fortnite-api",
+  "version": "1.0.0",
+  "description": "REST API using fortnite API (stats, users, etc)",
+  "main": "api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SkYNewZ/fortnite-api.git"
+  },
+  "author": "Quentin LEMAIRE <quentin@lemairepro.fr>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SkYNewZ/fortnite-api/issues"
+  },
+  "homepage": "https://github.com/SkYNewZ/fortnite-api#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "fortnite-api": "file:fortnite-api"
+  }
+}
