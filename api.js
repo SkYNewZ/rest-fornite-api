@@ -30,8 +30,8 @@ auth.forEach(function (item, index) {
         break;
 
     }
+		process.exit();
   }
-  process.exit();
 })
 
 console.log('Using credentials :' + auth);
