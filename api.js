@@ -39,8 +39,7 @@ auth.forEach(function (item, index) {
 let fortniteAPI = new Fortnite(auth);
 
 // get user by name
-app.get('/user/:platform/:username', function (req, res) {
-	console.log(req);
+app.get('/v1/user/:platform/:username', function (req, res) {
   var username = req.params.username;
   var platform = req.params.platform;
   fortniteAPI.login()
@@ -50,15 +49,14 @@ app.get('/user/:platform/:username', function (req, res) {
       res.json(stats);
     })
     .catch((err) => {
-      res.status(500).send("Sorry! Please contact admin");
+      res.status(500).send(err);
       console.log(err);
     });
   });
 });
 
 // get user stats by name
-app.get('/stats/:platform/:username', function (req, res) {
-	console.log(req);
+app.get('/v1/stats/:platform/:username', function (req, res) {
   var username = req.params.username;
   var platform = req.params.platform;
   fortniteAPI.login()
@@ -68,15 +66,14 @@ app.get('/stats/:platform/:username', function (req, res) {
       res.json(stats);
     })
     .catch((err) => {
-      res.status(500).send("Sorry! Please contact admin");
+      res.status(500).send(err);
       console.log(err);
     });
   });
 });
 
 // get users stats by user id
-app.get('/statsById/:platform/:user', function (req, res) {
-	console.log(req);
+app.get('/v1/statsById/:platform/:user', function (req, res) {
   var id = req.params.user;
   var platform = req.params.platform;
   fortniteAPI.login()
@@ -86,15 +83,14 @@ app.get('/statsById/:platform/:user', function (req, res) {
       res.json(stats);
     })
     .catch((err) => {
-      res.status(500).send("Sorry! Please contact admin");
+      res.status(500).send(err);
       console.log(err);
     });
   });
 })
 
 // get fortnite news
-app.get('/news/:lang?', function (req, res) {
-	console.log(req);
+app.get('/v1/news/:lang?', function (req, res) {
   var language = req.params.lang;
   if (!language) {
     language = 'en';
@@ -107,15 +103,14 @@ app.get('/news/:lang?', function (req, res) {
       res.json(news);
     })
     .catch((err) => {
-      res.status(500).send("Sorry! Please contact admin");
+      res.status(500).send(err);
       console.log(err);
     });
   });
 })
 
 // get fortnite status
-app.get('/check', function (req, res) {
-	console.log(req);
+app.get('/v1/check', function (req, res) {
   fortniteAPI.login()
   .then(()=> {
     fortniteAPI.checkFortniteStatus()
@@ -123,15 +118,14 @@ app.get('/check', function (req, res) {
       res.json(status);
     })
     .catch((err) => {
-      res.status(500).send("Sorry! Please contact admin");
+      res.status(500).send(err);
       console.log(err);
     });
   });
 })
 
 // get pve info
-app.get('/pve', function (req, res) {
-	console.log(req);
+app.get('/v1/pve', function (req, res) {
   fortniteAPI.login()
   .then(()=> {
     fortniteAPI.getFortnitePVEInfo()
@@ -139,15 +133,14 @@ app.get('/pve', function (req, res) {
       res.json(status);
     })
     .catch((err) => {
-      res.status(500).send("Sorry! Please contact admin");
+      res.status(500).send(err);
       console.log(err);
     });
   });
 })
 
 // get store
-app.get('/store', function (req, res) {
-	console.log(req);
+app.get('/v1/store', function (req, res) {
   fortniteAPI.login()
   .then(()=> {
     fortniteAPI.getStore()
@@ -156,7 +149,7 @@ app.get('/store', function (req, res) {
       console.log(store);
     })
     .catch((err) => {
-      res.status(500).send("Sorry! Please contact admin");
+      res.status(500).send(err);
       console.log(err);
     });
   });

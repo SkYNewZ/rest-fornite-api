@@ -42,7 +42,7 @@ This will launch node server, listening on port 3000. You can check at http://lo
 ## Routing
 Supported plateform : `pc`, `ps4`, `xb1`.
 
-- `/user/<platform>/<username>` get user info by epic games username
+- `/v1/user/<platform>/<username>` get user info by epic games username
 ```js
 {
   "id": "8b057df0e63744f38962f3c7635674b4",
@@ -52,7 +52,7 @@ Supported plateform : `pc`, `ps4`, `xb1`.
 
 ---
 
-- `/stats/<platform>/<username>` Get stats of given username
+- `/v1/stats/<platform>/<username>` Get stats of given username
 ```js
 {
   "group": {
@@ -134,7 +134,7 @@ Supported plateform : `pc`, `ps4`, `xb1`.
 
 ---
 
-- `/news/<lang>` Check Fortnite ETA
+- `/v1/news/<lang>` Check Fortnite ETA
 ```js
 {
   "common": {
@@ -171,7 +171,7 @@ Supported plateform : `pc`, `ps4`, `xb1`.
 
 ---
 
-- `/check`
+- `/v1/check`
 ```js
 true
 ```
