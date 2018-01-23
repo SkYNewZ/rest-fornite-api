@@ -2,6 +2,7 @@
 const Fortnite = require('fortnite-api');
 const express = require('express');
 const app = express();
+
 const auth = [
 	process.env.LOGIN_EMAIL,
 	process.env.LOGIN_PASSWORD,
@@ -34,7 +35,8 @@ auth.forEach(function (item, index) {
   }
 })
 
-console.log('Using credentials :' + auth);
+// Authentification
+let fortniteAPI = new Fortnite(auth);
 
 // get user by name
 app.get('/user/:platform/:username', function (req, res) {
