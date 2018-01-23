@@ -1,11 +1,14 @@
 FROM mhart/alpine-node:9.4.0
-
-ARG FORTNITE_API_VERSION=v2.4.0
-
 WORKDIR /app
 
-ADD https://github.com/SkYNewZ/fortnite-api/archive/$FORTNITE_API_VERSION.zip .
+# get app
+RUN apk add --update --no-cache git && \
+    git clone --single-branch --depth=1 https://github.com/SkYNewZ/docker-fortnite-api /app && \
+    git clone --single-branch --depth=1 https://github.com/qlaffont/fortnite-api /app/fortnite-api
+
+# install dependencies
 RUN npm install
 
 EXPOSE 3000
-ENTRYPOINT ["node", "api.js"]
+
+CMD ["node", "api.js"]

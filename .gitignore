@@ -62,3 +62,6 @@ fortnite-api/
 
 # test file
 test.js
+
+# Dockerfile
+Dockerfile-test

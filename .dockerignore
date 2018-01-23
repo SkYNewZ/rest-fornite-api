@@ -60,5 +60,5 @@ typings/
 # Fortnite API
 fortnite-api/
 
-# test file
-test.js
+# Docker
+Dockerfile*

@@ -38,6 +38,7 @@ console.log('Using credentials :' + auth);
 
 // get user by name
 app.get('/user/:platform/:username', function (req, res) {
+	console.log(req);
   var username = req.params.username;
   var platform = req.params.platform;
   fortniteAPI.login()
@@ -55,6 +56,7 @@ app.get('/user/:platform/:username', function (req, res) {
 
 // get user stats by name
 app.get('/stats/:platform/:username', function (req, res) {
+	console.log(req);
   var username = req.params.username;
   var platform = req.params.platform;
   fortniteAPI.login()
@@ -72,6 +74,7 @@ app.get('/stats/:platform/:username', function (req, res) {
 
 // get users stats by user id
 app.get('/statsById/:platform/:user', function (req, res) {
+	console.log(req);
   var id = req.params.user;
   var platform = req.params.platform;
   fortniteAPI.login()
@@ -89,6 +92,7 @@ app.get('/statsById/:platform/:user', function (req, res) {
 
 // get fortnite news
 app.get('/news/:lang?', function (req, res) {
+	console.log(req);
   var language = req.params.lang;
   if (!language) {
     language = 'en';
@@ -109,6 +113,7 @@ app.get('/news/:lang?', function (req, res) {
 
 // get fortnite status
 app.get('/check', function (req, res) {
+	console.log(req);
   fortniteAPI.login()
   .then(()=> {
     fortniteAPI.checkFortniteStatus()
@@ -124,6 +129,7 @@ app.get('/check', function (req, res) {
 
 // get pve info
 app.get('/pve', function (req, res) {
+	console.log(req);
   fortniteAPI.login()
   .then(()=> {
     fortniteAPI.getFortnitePVEInfo()
@@ -139,6 +145,7 @@ app.get('/pve', function (req, res) {
 
 // get store
 app.get('/store', function (req, res) {
+	console.log(req);
   fortniteAPI.login()
   .then(()=> {
     fortniteAPI.getStore()
@@ -155,5 +162,9 @@ app.get('/store', function (req, res) {
 
 // start server
 app.listen(3000, function () {
-  console.log('Welcome on lemairepro Fornite stats application')
+  console.log('Listening on port 3000')
+});
+
+process.on('SIGINT', function() {
+    process.exit();
 });
