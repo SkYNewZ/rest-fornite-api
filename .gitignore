@@ -57,11 +57,4 @@ typings/
 # dotenv environment variables file
 .env
 
-# Fortnite API
-fortnite-api/
-
-# test file
 test.js
-
-# Dockerfile
-Dockerfile-test

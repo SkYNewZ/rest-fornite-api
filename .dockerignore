@@ -54,11 +54,4 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
-.env
-
-# Fortnite API
-fortnite-api/
-
-# Docker
-Dockerfile*
+test.js
