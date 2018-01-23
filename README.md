@@ -1,4 +1,11 @@
 # Fortnite-API on NodeJs Server
+[![Build Status](https://travis-ci.org/SkYNewZ/docker-fortnite-api.svg?branch=master)](https://travis-ci.org/SkYNewZ/docker-fortnite-api)
+[![Docker Pulls](https://img.shields.io/docker/pulls/skynewz/fortnite-api.svg)](https://hub.docker.com/r/skynewz/fortnite-api/)
+[![Docker Stars](https://img.shields.io/docker/stars/skynewz/fortnite-api.svg)](https://hub.docker.com/u/skynewz/fortnite-api)
+[![](https://images.microbadger.com/badges/image/skynewz/fortnite-api.svg)](https://microbadger.com/images/skynewz/fortnite-api "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/skynewz/fortnite-api.svg)](https://microbadger.com/images/skynewz/fortnite-api "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/commit/skynewz/fortnite-api.svg)](https://microbadger.com/images/skynewz/fortnite-api "Get your own commit badge on microbadger.com")
+
 A simple NodeJS API under docker container to retrieve stats and infos from [Fortnite Game](https://www.epicgames.com/fortnite/fr/home) API.
 
 See on [Docker Hub](https://hub.docker.com/r/skynewz/fortnite-api/)
