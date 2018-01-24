@@ -19,6 +19,7 @@
   "dependencies": {
     "express": "^4.16.2",
     "fortnite-api": "file:fortnite-api",
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "swagger-ui-dist": "^3.9.2"
   }
 }

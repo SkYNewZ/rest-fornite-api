@@ -2,6 +2,7 @@ var Fortnite = require('fortnite-api'),
   express = require('express'),
   app = express(),
   morgan = require('morgan'),
+  pathToSwaggerUi = require('swagger-ui-dist').absolutePath(),
   auth = [
     process.env.LOGIN_EMAIL,
     process.env.LOGIN_PASSWORD,
@@ -39,6 +40,8 @@ app.all('/*', function(req, res, next) {
   next();
 });
 
+//swagger
+app.use(express.static(pathToSwaggerUi))
 
 // Authentification
 var fortniteAPI = new Fortnite(auth);
