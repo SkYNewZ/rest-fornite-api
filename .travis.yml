@@ -7,8 +7,11 @@ language: generic
 before_install:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 
-script:
+install:
   - docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg VERSION=$(cat VERSION) -t $DOCKER_USERNAME/fortnite-api:$(cat VERSION) .
+
+script:
+  - docker run -d -e LOGIN_EMAIL=$LOGIN_EMAIL -e LOGIN_PASSWORD=$LOGIN_PASSWORD -e OAUTH_EPIC_LAUNCHER=$OAUTH_EPIC_LAUNCHER -e OAUTH_FORTNITE=$OAUTH_FORTNITE $DOCKER_USERNAME/fortnite-api:$(cat VERSION)
 
 after_success:
  - docker push $DOCKER_USERNAME/fortnite-api:$(cat VERSION)
