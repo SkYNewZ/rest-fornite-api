@@ -38,6 +38,9 @@ $ docker run -d --restart=always \
 ```
 This will launch node server, listening on port 3000. You can check at http://localhost:3000/news
 
+> **Note:**
+> You can can the option -e PORT=1234 in order to use a custom port
+
 --------
 
 ## Endpoint
