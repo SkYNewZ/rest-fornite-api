@@ -2,6 +2,7 @@ FROM mhart/alpine-node:9.4.0
 ARG BUILD_DATE
 ARG VCS_REF
 ARG VERSION
+ENV NODE_ENV production
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="Fortnite REST API" \
       org.label-schema.description="NodeJS REST FORTNITE API, get users infos and stats" \
