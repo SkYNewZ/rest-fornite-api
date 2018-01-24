@@ -7,10 +7,11 @@
 [![](https://images.microbadger.com/badges/commit/skynewz/fortnite-api.svg)](https://microbadger.com/images/skynewz/fortnite-api "Get your own commit badge on microbadger.com")
 
 A simple NodeJS API under docker container to retrieve stats and infos from [Fortnite Game](https://www.epicgames.com/fortnite/fr/home) API.
-
-See on [Docker Hub](https://hub.docker.com/r/skynewz/fortnite-api/)
-
+See on [Docker Hub](https://hub.docker.com/r/skynewz/fortnite-api/).
 Thanks to [qlaffont](https://github.com/qlaffont/fortnite-api) for doing this API. You can support him with a donation : [Paypal Donation](https://www.paypal.me/qlaffont)
+
+## Example
+You can found this API as an example here https://api.fortnite.lemairepro.fr
 
 ## INIT
 To setup this module, you need to have an account on Epic Games. After that you need to get 2 dedicated headers from Fortnite.
@@ -39,10 +40,11 @@ This will launch node server, listening on port 3000. You can check at http://lo
 
 --------
 
-## Routing
+## Endpoint
 Supported plateform : `pc`, `ps4`, `xb1`.
 
 - `/v1/user/<platform>/<username>` get user info by epic games username
+https://api.fortnite.lemairepro.fr/v1/user/pc/skynewz
 ```js
 {
   "id": "8b057df0e63744f38962f3c7635674b4",
@@ -53,6 +55,7 @@ Supported plateform : `pc`, `ps4`, `xb1`.
 ---
 
 - `/v1/stats/<platform>/<username>` Get stats of given username
+https://api.fortnite.lemairepro.fr/v1/stats/pc/skynewz
 ```js
 {
   "group": {
@@ -135,6 +138,7 @@ Supported plateform : `pc`, `ps4`, `xb1`.
 ---
 
 - `/v1/news/<lang>` Check Fortnite ETA
+https://api.fortnite.lemairepro.fr/v1/news
 ```js
 {
   "common": {
@@ -172,6 +176,7 @@ Supported plateform : `pc`, `ps4`, `xb1`.
 ---
 
 - `/v1/check`
+https://api.fortnite.lemairepro.fr/v1/check
 ```js
 true
 ```
