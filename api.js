@@ -35,8 +35,26 @@ auth.forEach(function (item, index) {
   }
 })
 
+function getCurrentDate(){
+  var currentdate = new Date();
+  return datetime = currentdate.getDate() + "/"
+                  + (currentdate.getMonth()+1)  + "/"
+                  + currentdate.getFullYear() + " @ "
+                  + currentdate.getHours() + ":"
+                  + currentdate.getMinutes() + ":"
+                  + currentdate.getSeconds();
+}
+
 // Authentification
 let fortniteAPI = new Fortnite(auth);
+
+app.use(function(req, res, next) {
+  console.log(getCurrentDate() + ' : Request URL:', req.originalUrl);
+  next();
+}, function (req, res, next) {
+  console.log(getCurrentDate() + ' : Request Type:', req.method);
+  next();
+});
 
 // get user by name
 app.get('/v1/user/:platform/:username', function (req, res) {
@@ -49,7 +67,24 @@ app.get('/v1/user/:platform/:username', function (req, res) {
       res.json(stats);
     })
     .catch((err) => {
-      res.status(500).send(err);
+      if (err === "Player Not Found") {
+        res.status(404).send({
+          code: 404,
+          message: err
+        });
+      }
+      if (err === "Impossible to fetch User. User not found on this platform") {
+        res.status(404).send({
+          code: 404,
+          message: err
+        });
+      }
+      else {
+        res.status(500).send({
+          code: 500,
+          message: err
+        });
+      }
       console.log(err);
     });
   });
@@ -66,7 +101,24 @@ app.get('/v1/stats/:platform/:username', function (req, res) {
       res.json(stats);
     })
     .catch((err) => {
-      res.status(500).send(err);
+      if (err === "Player Not Found") {
+        res.status(404).send({
+          code: 404,
+          message: err
+        });
+      }
+      if (err === "Impossible to fetch User. User not found on this platform") {
+        res.status(404).send({
+          code: 404,
+          message: err
+        });
+      }
+      else {
+        res.status(500).send({
+          code: 500,
+          message: err
+        });
+      }
       console.log(err);
     });
   });
@@ -83,7 +135,24 @@ app.get('/v1/statsById/:platform/:user', function (req, res) {
       res.json(stats);
     })
     .catch((err) => {
-      res.status(500).send(err);
+      if (err === "Player Not Found") {
+        res.status(404).send({
+          code: 404,
+          message: err
+        });
+      }
+      if (err === "Impossible to fetch User. User not found on this platform") {
+        res.status(404).send({
+          code: 404,
+          message: err
+        });
+      }
+      else {
+        res.status(500).send({
+          code: 500,
+          message: err
+        });
+      }
       console.log(err);
     });
   });
@@ -103,7 +172,10 @@ app.get('/v1/news/:lang?', function (req, res) {
       res.json(news);
     })
     .catch((err) => {
-      res.status(500).send(err);
+      res.status(500).send({
+        code: 500,
+        message: err
+      });
       console.log(err);
     });
   });
@@ -118,7 +190,10 @@ app.get('/v1/check', function (req, res) {
       res.json(status);
     })
     .catch((err) => {
-      res.status(500).send(err);
+      res.status(500).send({
+        code: 500,
+        message: err
+      });
       console.log(err);
     });
   });
@@ -133,7 +208,10 @@ app.get('/v1/pve', function (req, res) {
       res.json(status);
     })
     .catch((err) => {
-      res.status(500).send(err);
+      res.status(500).send({
+        code: 500,
+        message: err
+      });
       console.log(err);
     });
   });
@@ -149,7 +227,10 @@ app.get('/v1/store', function (req, res) {
       console.log(store);
     })
     .catch((err) => {
-      res.status(500).send(err);
+      res.status(500).send({
+        code: 500,
+        message: err
+      });
       console.log(err);
     });
   });
