@@ -26,10 +26,12 @@ auth.forEach(function(item, index) {
         console.log('OAUTH_FORTNITE is missing');
         break;
     }
+    console.log('Please check https://github.com/SkYNewZ/docker-fortnite-api#setup-api for more informations');
     process.exit();
   }
 })
 
+//app configuration
 app.use(morgan('dev'));
 app.set('port', process.env.PORT || 3000);
 app.all('/*', function(req, res, next) {
