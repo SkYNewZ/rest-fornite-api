@@ -41,9 +41,6 @@ app.all('/*', function(req, res, next) {
   next();
 });
 
-//swaggerUi
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 // Authentification
 var fortniteAPI = new Fortnite(auth);
 
@@ -220,6 +217,10 @@ app.get('/v1/store', function(req, res) {
         });
     });
 })
+
+
+//swaggerUi
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // start server
 app.listen(app.get('port'), function() {
