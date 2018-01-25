@@ -1,3 +1,0 @@
-dom_id: "#swaggerui"
-url: "http://localhost:3000/swagger.json"
-validatorUrl: "https://online.swagger.io/validator"
