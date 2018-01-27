@@ -140,7 +140,7 @@ https://api.fortnite.lemairepro.fr/v1/stats/pc/skynewz
 
 ---
 
-- `/v1/stats/<platform>/<username>` Get stats of given username
+- `/v1/pve/<username>` Get stats of given username
 https://api.fortnite.lemairepro.fr/v1/pve/skynewz
 ---
 
