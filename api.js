@@ -205,23 +205,6 @@ app.get('/v1/check', function(req, res) {
     });
 })
 
-// get pve info
-app.get('/v1/pve', function(req, res) {
-  fortniteAPI.login()
-    .then(() => {
-      fortniteAPI.getFortnitePVEInfo()
-        .then((status) => {
-          res.json(status);
-        })
-        .catch((err) => {
-          res.status(500).send({
-            code: 500,
-            message: err
-          });
-        });
-    });
-})
-
 // get store
 app.get('/v1/store', function(req, res) {
   fortniteAPI.login()

@@ -29,5 +29,5 @@ before_deploy:
 deploy:
   provider: releases
   api_key: $GITHUB_TOKEN
-  name: Build v$(cat VERSION) - $(date +'%d.%m.%Y %R')
+  name: v$(cat VERSION)
   skip_cleanup: true
