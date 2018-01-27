@@ -142,6 +142,31 @@ app.get('/v1/statsById/:platform/:user', function(req, res) {
     });
 })
 
+// PVE stats
+app.get('/v1/pve/:username', function (req, res) {
+  var username = req.params.username;
+  fortniteAPI.login()
+    .then(()=> {
+      fortniteAPI.getStatsPVE(username)
+      .then((stats) => {
+        res.json(stats);
+      })
+      .catch((err) => {
+        if (err === "Player Not Found") {
+          res.status(404).send({
+            code: 404,
+            message: err
+          });
+        } else {
+          res.status(500).send({
+            code: 500,
+            message: err
+          });
+        }
+      });
+    });
+})
+
 // get fortnite news
 app.get('/v1/news/:lang?', function(req, res) {
   var language = req.params.lang;
