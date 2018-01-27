@@ -1,19 +1,32 @@
 if: branch = master
+language: node_js
+node_js:
+  - "8"
+
 services:
   - docker
 
-language: generic
-
 before_install:
+  - node -v
+  - npm -v
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 
 install:
-  - docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg VERSION=$(cat VERSION) -t $DOCKER_USERNAME/fortnite-api:$(cat VERSION) .
+  - npm install
 
 script:
-  - docker run -d -e LOGIN_EMAIL=$LOGIN_EMAIL -e LOGIN_PASSWORD=$LOGIN_PASSWORD -e OAUTH_EPIC_LAUNCHER=$OAUTH_EPIC_LAUNCHER -e OAUTH_FORTNITE=$OAUTH_FORTNITE $DOCKER_USERNAME/fortnite-api:$(cat VERSION)
+  - npm test
 
 after_success:
- - docker push $DOCKER_USERNAME/fortnite-api:$(cat VERSION)
- - docker tag $DOCKER_USERNAME/fortnite-api:$(cat VERSION) $DOCKER_USERNAME/fortnite-api:latest
- - docker push $DOCKER_USERNAME/fortnite-api:latest
+  - docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg VERSION=$(cat VERSION) -t $DOCKER_USERNAME/fortnite-api:$(cat VERSION) .
+  - docker push $DOCKER_USERNAME/fortnite-api:$(cat VERSION)
+  - docker tag $DOCKER_USERNAME/fortnite-api:$(cat VERSION) $DOCKER_USERNAME/fortnite-api:latest
+  - docker push $DOCKER_USERNAME/fortnite-api:latest
+
+before_deploy:
+    - git tag "$(cat VERSION)"
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_TOKEN
+  skip_cleanup: true

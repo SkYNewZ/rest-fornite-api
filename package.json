@@ -4,7 +4,8 @@
   "description": "REST API using fortnite API by Quentin Laffont",
   "main": "api.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node api.js",
+    "test": "mocha --timeout 5000"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,11 @@
     "express": "^4.16.2",
     "fortnite-api": "file:fortnite-api",
     "morgan": "^1.9.0",
-    "swagger-ui-express": "^2.0.14"
+    "swagger-ui-express": "^2.0.15"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "mocha": "^2.4.5"
   }
 }

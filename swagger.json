@@ -3,7 +3,7 @@
     "info": {
         "title": "FORTNITE REST API",
         "description": "REST API bout Fortnite games to get stats",
-        "version": "1.0.0"
+        "version": "2.5.0"
     },
     "host": "api.fortnite.lemairepro.fr",
     "schemes": [
@@ -166,6 +166,58 @@
                                     "type": "string"
                                 }
                             }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found or not found on this plateform",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pve/{username}": {
+            "get": {
+                "summary": "Get pve stats by username",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "type": "string",
+                        "required": true,
+                        "description": "Fortnite username"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "All okay",
+                        "schema": {
+                            "type": "object"
                         }
                     },
                     "404": {

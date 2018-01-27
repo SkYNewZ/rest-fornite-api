@@ -140,6 +140,10 @@ https://api.fortnite.lemairepro.fr/v1/stats/pc/skynewz
 
 ---
 
+- `/v1/pve/<username>` Get stats of given username
+https://api.fortnite.lemairepro.fr/v1/pve/skynewz
+---
+
 - `/v1/news/<lang>` Check Fortnite ETA
 https://api.fortnite.lemairepro.fr/v1/news
 ```js
