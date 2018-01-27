@@ -13,6 +13,7 @@ before_install:
 
 install:
   - npm install
+  - npm install -g istanbul codecov
 
 script:
   - npm test
