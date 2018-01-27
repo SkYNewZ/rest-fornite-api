@@ -35,9 +35,9 @@ auth.forEach(function(item, index) {
 
 //app configuration
 //don't show the log when it is test
-if(process.env.NODE_ENV !== 'test') {
-    //use morgan to log at command line
-    app.use(morgan('combined')); //'combined' outputs the Apache style LOGs
+if (process.env.NODE_ENV !== 'test') {
+  //use morgan to log at command line
+  app.use(morgan('combined')); //'combined' outputs the Apache style LOGs
 }
 
 app.set('port', process.env.PORT || 3000);
@@ -143,27 +143,27 @@ app.get('/v1/statsById/:platform/:user', function(req, res) {
 })
 
 // PVE stats
-app.get('/v1/pve/:username', function (req, res) {
+app.get('/v1/pve/:username', function(req, res) {
   var username = req.params.username;
   fortniteAPI.login()
-    .then(()=> {
+    .then(() => {
       fortniteAPI.getStatsPVE(username)
-      .then((stats) => {
-        res.json(stats);
-      })
-      .catch((err) => {
-        if (err === "Player Not Found") {
-          res.status(404).send({
-            code: 404,
-            message: err
-          });
-        } else {
-          res.status(500).send({
-            code: 500,
-            message: err
-          });
-        }
-      });
+        .then((stats) => {
+          res.json(stats);
+        })
+        .catch((err) => {
+          if (err === "Player Not Found") {
+            res.status(404).send({
+              code: 404,
+              message: err
+            });
+          } else {
+            res.status(500).send({
+              code: 500,
+              message: err
+            });
+          }
+        });
     });
 })
 

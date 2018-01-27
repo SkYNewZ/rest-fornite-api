@@ -11,16 +11,16 @@ chai.use(chaiHttp);
 
 //Our parent block
 describe('News', () => {
-    describe('/GET /v1/news', () => {
-          it('it should return news', (done) => {
-            chai.request(server)
-            .get('/v1/news')
-            .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-              done();
-            });
+  describe('/GET /v1/news', () => {
+    it('it should return news', (done) => {
+      chai.request(server)
+        .get('/v1/news')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          done();
+        });
 
-          });
-      });
+    });
+  });
 });
