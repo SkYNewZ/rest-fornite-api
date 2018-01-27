@@ -11,7 +11,7 @@ var Fortnite = require('fortnite-api'),
     process.env.OAUTH_FORTNITE
   ];
 
-//checl auth
+//checlk auth
 auth.forEach(function(item, index) {
   if (!item) {
     switch (index) {
@@ -34,7 +34,12 @@ auth.forEach(function(item, index) {
 })
 
 //app configuration
-app.use(morgan('dev'));
+//don't show the log when it is test
+if (process.env.NODE_ENV !== 'test') {
+  //use morgan to log at command line
+  app.use(morgan('combined')); //'combined' outputs the Apache style LOGs
+}
+
 app.set('port', process.env.PORT || 3000);
 app.all('/*', function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -71,7 +76,6 @@ app.get('/v1/user/:platform/:username', function(req, res) {
               message: err
             });
           }
-          console.log(err);
         });
     });
 });
@@ -103,7 +107,6 @@ app.get('/v1/stats/:platform/:username', function(req, res) {
               message: err
             });
           }
-          console.log(err);
         });
     });
 });
@@ -135,7 +138,31 @@ app.get('/v1/statsById/:platform/:user', function(req, res) {
               message: err
             });
           }
-          console.log(err);
+        });
+    });
+})
+
+// PVE stats
+app.get('/v1/pve/:username', function(req, res) {
+  var username = req.params.username;
+  fortniteAPI.login()
+    .then(() => {
+      fortniteAPI.getStatsPVE(username)
+        .then((stats) => {
+          res.json(stats);
+        })
+        .catch((err) => {
+          if (err === "Player Not Found") {
+            res.status(404).send({
+              code: 404,
+              message: err
+            });
+          } else {
+            res.status(500).send({
+              code: 500,
+              message: err
+            });
+          }
         });
     });
 })
@@ -146,7 +173,6 @@ app.get('/v1/news/:lang?', function(req, res) {
   if (!language) {
     language = 'en';
   }
-  console.log(language);
   fortniteAPI.login()
     .then(() => {
       fortniteAPI.getFortniteNews(language)
@@ -158,7 +184,6 @@ app.get('/v1/news/:lang?', function(req, res) {
             code: 500,
             message: err
           });
-          console.log(err);
         });
     });
 })
@@ -176,7 +201,6 @@ app.get('/v1/check', function(req, res) {
             code: 500,
             message: err
           });
-          console.log(err);
         });
     });
 })
@@ -194,7 +218,6 @@ app.get('/v1/pve', function(req, res) {
             code: 500,
             message: err
           });
-          console.log(err);
         });
     });
 })
@@ -206,17 +229,26 @@ app.get('/v1/store', function(req, res) {
       fortniteAPI.getStore()
         .then((store) => {
           res.json(store);
-          console.log(store);
         })
         .catch((err) => {
           res.status(500).send({
             code: 500,
             message: err
           });
-          console.log(err);
         });
     });
 })
+
+// swagger file
+app.get('/swagger.json', function(req, res){
+  var file = __dirname + '/swagger.json';
+  res.download(file); // Set disposition and send it.
+});
+
+app.get('/swagger.yaml', function(req, res){
+  var file = __dirname + '/swagger.yaml';
+  res.download(file); // Set disposition and send it.
+});
 
 
 //swaggerUi
@@ -230,3 +262,5 @@ app.listen(app.get('port'), function() {
 process.on('SIGINT', function() {
   process.exit();
 });
+
+module.exports = app;

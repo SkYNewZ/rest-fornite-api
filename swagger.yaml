@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: FORTNITE REST API
   description: REST API bout Fortnite games to get stats
-  version: "1.0.0"
+  version: "2.5.0"
 # the domain of the service
 host: api.fortnite.lemairepro.fr
 # array of all schemes that your API supports
@@ -135,6 +135,42 @@ paths:
                 format: int32
               message:
                 type: string
+  /pve/{username}:
+    get:
+      summary: Get pve stats by username
+      parameters:
+        - name: username
+          in: path
+          type: string
+          required: true
+          description: Fortnite username
+      responses:
+        200:
+          description: All okay
+          schema:
+            type: object
+        404:
+          description: User not found or not found on this plateform
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+        default:
+          description: Unexpected error
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+  
+  
   /stats/{plateform}/{username}:
     get:
       summary: Get user's stats
