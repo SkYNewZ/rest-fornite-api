@@ -4,34 +4,26 @@ var Fortnite = require('fortnite-api'),
   morgan = require('morgan'),
   swaggerUi = require('swagger-ui-express'),
   swaggerDocument = require('./swagger.json'),
-  auth = [
-    process.env.LOGIN_EMAIL,
-    process.env.LOGIN_PASSWORD,
-    process.env.OAUTH_EPIC_LAUNCHER,
-    process.env.OAUTH_FORTNITE
-  ];
+  auth = [];
 
-//checlk auth
-auth.forEach(function(item, index) {
-  if (!item) {
-    switch (index) {
-      case 0:
-        console.log('LOGIN_EMAIL is missing');
-        break;
-      case 1:
-        console.log('LOGIN_PASSWORD is missing');
-        break;
-      case 2:
-        console.log('OAUTH_EPIC_LAUNCHER is missing');
-        break;
-      case 3:
-        console.log('OAUTH_FORTNITE is missing');
-        break;
-    }
-    console.log('Please check https://github.com/SkYNewZ/docker-fortnite-api#setup-api for more informations');
-    process.exit();
-  }
-})
+if (process.env.LOGIN_EMAIL) {
+  auth.push(process.env.LOGIN_EMAIL);
+}
+
+if (process.env.LOGIN_PASSWORD) {
+  auth.push(process.env.LOGIN_PASSWORD);
+}
+
+if (process.env.OAUTH_EPIC_LAUNCHER) {
+  auth.push(process.env.OAUTH_EPIC_LAUNCHER);
+}
+
+if (process.env.OAUTH_FORTNITE) {
+  auth.push(process.env.OAUTH_FORTNITE);
+}
+
+// Authentification
+var fortniteAPI = new Fortnite(auth);
 
 //app configuration
 //don't show the log when it is test
@@ -45,9 +37,6 @@ app.all('/*', function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   next();
 });
-
-// Authentification
-var fortniteAPI = new Fortnite(auth);
 
 // get user by name
 app.get('/v1/user/:platform/:username', function(req, res) {
@@ -112,22 +101,22 @@ app.get('/v1/stats/:platform/:username', function(req, res) {
 });
 
 // get users stats by user id
-app.get('/v1/statsById/:platform/:user', function(req, res) {
-  var id = req.params.user;
+app.get('/v1/stats/id/:platform/:id', function(req, res) {
+  var id = req.params.id;
   var platform = req.params.platform;
   fortniteAPI.login()
     .then(() => {
-      fortniteAPI.getStatsBR(id, platform)
+      fortniteAPI.getStatsBRFromID(id, platform)
         .then((stats) => {
           res.json(stats);
         })
         .catch((err) => {
-          if (err === "Player Not Found") {
+          if (err === "Impossible to fetch User. User not found on this platform") {
             res.status(404).send({
               code: 404,
               message: err
             });
-          } else if (err === "Impossible to fetch User. User not found on this platform") {
+          } else if (err === "Impossible to fetch User.") {
             res.status(404).send({
               code: 404,
               message: err
@@ -155,6 +144,11 @@ app.get('/v1/pve/:username', function(req, res) {
           if (err === "Player Not Found") {
             res.status(404).send({
               code: 404,
+              message: err
+            });
+          } else if (err === "No Data") {
+            res.status(400).send({
+              code: 400,
               message: err
             });
           } else {
@@ -206,10 +200,35 @@ app.get('/v1/check', function(req, res) {
 })
 
 // get store
-app.get('/v1/store', function(req, res) {
+app.get('/v1/store/:lang?', function(req, res) {
+  var language = req.params.lang;
+  if (!language) {
+    language = 'en';
+  }
   fortniteAPI.login()
     .then(() => {
-      fortniteAPI.getStore()
+      fortniteAPI.getStore(language)
+        .then((store) => {
+          res.json(store);
+        })
+        .catch((err) => {
+          res.status(500).send({
+            code: 500,
+            message: err
+          });
+        });
+    });
+})
+
+// getFortnitePVEInfo
+app.get('/v1/pve/info/:lang?', function(req, res) {
+  var language = req.params.lang;
+  if (!language) {
+    language = 'en';
+  }
+  fortniteAPI.login()
+    .then(() => {
+      fortniteAPI.getFortnitePVEInfo(language)
         .then((store) => {
           res.json(store);
         })
@@ -223,12 +242,12 @@ app.get('/v1/store', function(req, res) {
 })
 
 // swagger file
-app.get('/swagger.json', function(req, res){
+app.get('/swagger.json', function(req, res) {
   var file = __dirname + '/swagger.json';
   res.download(file); // Set disposition and send it.
 });
 
-app.get('/swagger.yaml', function(req, res){
+app.get('/swagger.yaml', function(req, res) {
   var file = __dirname + '/swagger.yaml';
   res.download(file); // Set disposition and send it.
 });
