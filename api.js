@@ -163,10 +163,7 @@ app.get('/v1/pve/:username', function(req, res) {
 
 // get fortnite news
 app.get('/v1/news/:lang?', function(req, res) {
-  var language = req.params.lang;
-  if (!language) {
-    language = 'en';
-  }
+  var language = req.params.lang || 'en';
   fortniteAPI.login()
     .then(() => {
       fortniteAPI.getFortniteNews(language)
@@ -201,10 +198,7 @@ app.get('/v1/check', function(req, res) {
 
 // get store
 app.get('/v1/store/:lang?', function(req, res) {
-  var language = req.params.lang;
-  if (!language) {
-    language = 'en';
-  }
+  var language = req.params.lang || 'en';
   fortniteAPI.login()
     .then(() => {
       fortniteAPI.getStore(language)
@@ -222,10 +216,7 @@ app.get('/v1/store/:lang?', function(req, res) {
 
 // getFortnitePVEInfo
 app.get('/v1/pve/info/:lang?', function(req, res) {
-  var language = req.params.lang;
-  if (!language) {
-    language = 'en';
-  }
+  var language = req.params.lang || 'en';
   fortniteAPI.login()
     .then(() => {
       fortniteAPI.getFortnitePVEInfo(language)
@@ -242,12 +233,12 @@ app.get('/v1/pve/info/:lang?', function(req, res) {
 })
 
 // swagger file
-app.get('/swagger.json', function(req, res) {
+app.get('/v1/swagger.json', function(req, res) {
   var file = __dirname + '/swagger.json';
   res.download(file); // Set disposition and send it.
 });
 
-app.get('/swagger.yaml', function(req, res) {
+app.get('/v1/swagger.yaml', function(req, res) {
   var file = __dirname + '/swagger.yaml';
   res.download(file); // Set disposition and send it.
 });
