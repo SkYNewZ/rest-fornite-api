@@ -11,6 +11,7 @@ chai.use(chaiHttp);
 
 //Our parent block
 describe('PVE', () => {
+
   describe('/GET /v1/pve/:username', () => {
     it('it should return 404 because wrong username', (done) => {
       chai.request(server)
@@ -23,17 +24,41 @@ describe('PVE', () => {
           done();
         });
     });
+  });
 
-    describe('/GET /v1/pve/:username', () => {
-      it('it should return pve info', (done) => {
-        chai.request(server)
-          .get('/v1/pve/skynewz')
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.a('object');
-            done();
-          });
-      });
+  describe('/GET /v1/pve/:username', () => {
+    it('it should return pve info for given username', (done) => {
+      chai.request(server)
+        .get('/v1/pve/skynewz')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          done();
+        });
+    });
+  });
+
+  describe('/GET /v1/pve/info/:lang?', () => {
+    it('it fornite pve info', (done) => {
+      chai.request(server)
+        .get('/v1/pve/info')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          done();
+        });
+    });
+  });
+
+  describe('/GET /v1/pve/info/:lang?', () => {
+    it('it fornite pve info if french', (done) => {
+      chai.request(server)
+        .get('/v1/pve/info/fr')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          done();
+        });
     });
   });
 });
