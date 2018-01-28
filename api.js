@@ -2,6 +2,7 @@ var express = require('express'),
   app = express(),
   morgan = require('morgan'),
   swaggerUi = require('swagger-ui-express'),
+  mcache = require('memory-cache');
   auth = [];
 
 //routes methods
@@ -12,10 +13,32 @@ var user = require('./routes/user'),
   store = require('./routes/store'),
   check = require('./routes/check');
 
+// https://medium.com/the-node-js-collection/simple-server-side-cache-for-express-js-with-node-js-45ff296ca0f0
+var cache = (duration) => {
+  return (req, res, next) => {
+    let key = '__express__' + req.originalUrl || req.url
+    let cachedBody = mcache.get(key)
+    if (cachedBody) {
+      res.send(cachedBody)
+      return
+    } else {
+      res.sendResponse = res.send
+      res.send = (body) => {
+        // convert to milliseconds
+        mcache.put(key, body, duration * 60000);
+        res.sendResponse(body)
+      }
+      next()
+    }
+  }
+}
+
 //don't show the log when it is test
 if (process.env.NODE_ENV !== 'test') {
   //use morgan to log at command line
   app.use(morgan('combined')); //'combined' outputs the Apache style LOGs
+  //use cache for response, defaut 6 hours
+  app.use(cache(process.env.CACHE_DURATION || 360));
 }
 
 app.set('port', process.env.PORT || 3000);
