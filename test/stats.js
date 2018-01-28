@@ -22,7 +22,6 @@ describe('Stats', () => {
           res.body.should.have.property('message');
           done();
         });
-
     });
   });
 
@@ -37,7 +36,6 @@ describe('Stats', () => {
           res.body.should.have.property('message');
           done();
         });
-
     });
   });
 
@@ -50,7 +48,46 @@ describe('Stats', () => {
           res.body.should.be.a('object');
           done();
         });
+    });
+  });
 
+  describe('/GET /v1/stats/id/:platform/:id', () => {
+    it('it should GET stats by the given ID', (done) => {
+      chai.request(server)
+        .get('/v1/stats/id/pc/8b057df0e63744f38962f3c7635674b4')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          done();
+        });
+    });
+  });
+
+  describe('/GET /v1/stats/id/:platform/:id', () => {
+    it('it should return 404 because wrong plateform', (done) => {
+      chai.request(server)
+        .get('/v1/stats/id/ps4/8b057df0e63744f38962f3c7635674b4')
+        .end((err, res) => {
+          res.should.have.status(404);
+          res.body.should.be.a('object');
+          res.body.should.have.property('code');
+          res.body.should.have.property('message');
+          done();
+        });
+    });
+  });
+
+  describe('/GET /v1/stats/id/:platform/:id', () => {
+    it('it should return 404 because wrong ID', (done) => {
+      chai.request(server)
+        .get('/v1/stats/id/pc/wrongisatall')
+        .end((err, res) => {
+          res.should.have.status(404);
+          res.body.should.be.a('object');
+          res.body.should.have.property('code');
+          res.body.should.have.property('message');
+          done();
+        });
     });
   });
 });
