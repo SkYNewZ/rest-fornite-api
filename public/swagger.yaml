@@ -1,23 +1,33 @@
 swagger: '2.0'
 info:
   title: FORTNITE REST API
-  description: REST API bout Fortnite games to get stats
-  version: "2.5.0"
-# the domain of the service
+  description: REST API about Fortnite game
+  version: 2.5.2
 host: api.fortnite.lemairepro.fr
-# array of all schemes that your API supports
 schemes:
   - https
-# will be prefixed to all paths
 basePath: /v1
+tags:
+- name: "User"
+  description: "Get user info"
+- name: "Stats"
+  description: "Get all you Fornite stats"
+- name: "Check"
+  description: "Get Fortnite status"
+- name: "PVE"
+  description: "Get all your PVE Stats"
+- name: "Store"
+  description: "Get store infos"
 produces:
   - application/json
 paths:
   /check:
     get:
+      tags:
+        - "Check"
       summary: Get Fortnite game status
       responses:
-        200:
+        '200':
           description: Fortnite is okay !
           schema:
             type: boolean
@@ -33,9 +43,11 @@ paths:
                 type: string
   /news:
     get:
+      tags:
+        - "News"
       summary: Get Fortnite News
       responses:
-        200:
+        '200':
           description: A JSON objects of current news
           schema:
             type: object
@@ -90,22 +102,24 @@ paths:
                 format: int32
               message:
                 type: string
-  /user/{plateform}/{username}:
+  '/user/{plateform}/{username}':
     get:
-      summary: Get a user by ID
+      tags:
+        - "User"
+      summary: Get a user by username
       parameters:
         - name: plateform
           in: path
           type: string
           required: true
-          description: Playing plateform, can be xb1, ps4 or pc
+          description: 'Playing plateform, can be xb1, ps4 or pc'
         - name: username
           in: path
           type: string
           required: true
           description: Player username
       responses:
-        200:
+        '200':
           description: JSON Object of user
           schema:
             type: object
@@ -115,7 +129,7 @@ paths:
                 description: ID of player
               displayName:
                 type: string
-        404:
+        '404':
           description: User not found or not found on this plateform
           schema:
             type: object
@@ -135,58 +149,24 @@ paths:
                 format: int32
               message:
                 type: string
-  /pve/{username}:
+  '/stats/{plateform}/{username}':
     get:
-      summary: Get pve stats by username
-      parameters:
-        - name: username
-          in: path
-          type: string
-          required: true
-          description: Fortnite username
-      responses:
-        200:
-          description: All okay
-          schema:
-            type: object
-        404:
-          description: User not found or not found on this plateform
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-        default:
-          description: Unexpected error
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-
-
-  /stats/{plateform}/{username}:
-    get:
-      summary: Get user's stats
+      tags:
+        - "Stats"
+      summary: Get user's stats by username
       parameters:
         - name: plateform
           in: path
           type: string
           required: true
-          description: Playing plateform, can be xb1, ps4 or pc
+          description: 'Playing plateform, can be xb1, ps4 or pc'
         - name: username
           in: path
           type: string
           required: true
           description: Player username
       responses:
-        200:
+        '200':
           description: JSON Object of user stats
           schema:
             type: object
@@ -229,7 +209,7 @@ paths:
                         description: Number of kills
                       timePlayed:
                         type: string
-                        description: Number of days, hours and minutes played
+                        description: 'Number of days, hours and minutes played'
                       killsPerMatch:
                         type: string
                         description: Number of kill/match
@@ -273,7 +253,7 @@ paths:
                         description: Number of kills
                       timePlayed:
                         type: string
-                        description: Number of days, hours and minutes played
+                        description: 'Number of days, hours and minutes played'
                       killsPerMatch:
                         type: string
                         description: Number of kill/match
@@ -317,7 +297,7 @@ paths:
                         description: Number of kills
                       timePlayed:
                         type: string
-                        description: Number of days, hours and minutes played
+                        description: 'Number of days, hours and minutes played'
                       killsPerMatch:
                         type: string
                         description: Number of kill/match
@@ -326,7 +306,7 @@ paths:
                         description: Number of kill/minute
                       score:
                         type: integer
-                description: Stats on solo, duo or squad
+                description: 'Stats on solo, duo or squad'
               info:
                 type: object
                 description: Display user info
@@ -372,7 +352,7 @@ paths:
                     description: Number of kills
                   timePlayed:
                     type: string
-                    description: Number of days, hours and minutes played
+                    description: 'Number of days, hours and minutes played'
                   killsPerMatch:
                     type: string
                     description: Number of kill/match
@@ -381,7 +361,7 @@ paths:
                     description: Number of kill/minute
                   score:
                     type: integer
-        404:
+        '404':
           description: User not found or not found on this plateform
           schema:
             type: object
@@ -391,6 +371,316 @@ paths:
                 format: int32
               message:
                 type: string
+        default:
+          description: "Unexpected error"
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+
+  '/stats/id/{plateform}/{id}':
+    get:
+      tags:
+        - "Stats"
+      summary: Get user's stats by user id
+      parameters:
+        - name: plateform
+          in: path
+          type: string
+          required: true
+          description: 'Playing plateform, can be xb1, ps4 or pc'
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: "Player ID"
+      responses:
+        '200':
+          description: JSON Object of user stats
+          schema:
+            type: object
+            properties:
+              group:
+                type: object
+                properties:
+                  solo:
+                    type: object
+                    properties:
+                      wins:
+                        type: integer
+                        description: Number of top1
+                      top3:
+                        type: integer
+                        description: Number of top3
+                      top5:
+                        type: integer
+                        description: Number of top5
+                      top6:
+                        type: integer
+                        description: Number of top6
+                      top10:
+                        type: integer
+                        description: Number of top10
+                      top12:
+                        type: integer
+                        description: Number of top12
+                      top25:
+                        type: integer
+                        description: Number of top25
+                      k/d:
+                        type: number
+                        description: Ratio Kill/Dead
+                      win%:
+                        type: number
+                        description: Wins ratio
+                      kills:
+                        type: integer
+                        description: Number of kills
+                      timePlayed:
+                        type: string
+                        description: 'Number of days, hours and minutes played'
+                      killsPerMatch:
+                        type: string
+                        description: Number of kill/match
+                      killsPerMin:
+                        type: string
+                        description: Number of kill/minute
+                      score:
+                        type: integer
+                  duo:
+                    type: object
+                    properties:
+                      wins:
+                        type: integer
+                        description: Number of top1
+                      top3:
+                        type: integer
+                        description: Number of top3
+                      top5:
+                        type: integer
+                        description: Number of top5
+                      top6:
+                        type: integer
+                        description: Number of top6
+                      top10:
+                        type: integer
+                        description: Number of top10
+                      top12:
+                        type: integer
+                        description: Number of top12
+                      top25:
+                        type: integer
+                        description: Number of top25
+                      k/d:
+                        type: number
+                        description: Ratio Kill/Dead
+                      win%:
+                        type: number
+                        description: Wins ratio
+                      kills:
+                        type: integer
+                        description: Number of kills
+                      timePlayed:
+                        type: string
+                        description: 'Number of days, hours and minutes played'
+                      killsPerMatch:
+                        type: string
+                        description: Number of kill/match
+                      killsPerMin:
+                        type: string
+                        description: Number of kill/minute
+                      score:
+                        type: integer
+                  squad:
+                    type: object
+                    properties:
+                      wins:
+                        type: integer
+                        description: Number of top1
+                      top3:
+                        type: integer
+                        description: Number of top3
+                      top5:
+                        type: integer
+                        description: Number of top5
+                      top6:
+                        type: integer
+                        description: Number of top6
+                      top10:
+                        type: integer
+                        description: Number of top10
+                      top12:
+                        type: integer
+                        description: Number of top12
+                      top25:
+                        type: integer
+                        description: Number of top25
+                      k/d:
+                        type: number
+                        description: Ratio Kill/Dead
+                      win%:
+                        type: number
+                        description: Wins ratio
+                      kills:
+                        type: integer
+                        description: Number of kills
+                      timePlayed:
+                        type: string
+                        description: 'Number of days, hours and minutes played'
+                      killsPerMatch:
+                        type: string
+                        description: Number of kill/match
+                      killsPerMin:
+                        type: string
+                        description: Number of kill/minute
+                      score:
+                        type: integer
+                description: 'Stats on solo, duo or squad'
+              info:
+                type: object
+                description: Display user info
+                properties:
+                  accountId:
+                    type: integer
+                  username:
+                    type: string
+                  plateform:
+                    type: string
+              lifetimeStats:
+                type: object
+                properties:
+                  wins:
+                    type: integer
+                    description: Number of top1
+                  top3:
+                    type: integer
+                    description: Number of top3
+                  top5:
+                    type: integer
+                    description: Number of top5
+                  top6:
+                    type: integer
+                    description: Number of top6
+                  top10:
+                    type: integer
+                    description: Number of top10
+                  top12:
+                    type: integer
+                    description: Number of top12
+                  top25:
+                    type: integer
+                    description: Number of top25
+                  k/d:
+                    type: number
+                    description: Ratio Kill/Dead
+                  win%:
+                    type: number
+                    description: Wins ratio
+                  kills:
+                    type: integer
+                    description: Number of kills
+                  timePlayed:
+                    type: string
+                    description: 'Number of days, hours and minutes played'
+                  killsPerMatch:
+                    type: string
+                    description: Number of kill/match
+                  killsPerMin:
+                    type: string
+                    description: Number of kill/minute
+                  score:
+                    type: integer
+        '404':
+          description: User not found or not found on this plateform
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+        default:
+          description: Unexpected error
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+  '/pve/{username}':
+    get:
+      tags:
+        - "PVE"
+      summary: "Get PVE Stat by given username"
+      parameters:
+        - name: username
+          in: path
+          type: string
+          required: true
+          description: Fortnite username
+      responses:
+        '200':
+          description: All okay
+          schema:
+            type: object
+        '404':
+          description: User not found or not found on this plateform
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+        default:
+          description: Unexpected error
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+  '/pve/info':
+    get:
+      tags:
+        - "PVE"
+      summary: "Get Fortnite PVE Info (storm, etc)"
+      responses:
+        '200':
+          description: All okay
+          schema:
+            type: object
+        default:
+          description: Unexpected error
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+
+  '/store':
+    get:
+      tags:
+        - "Store"
+      summary: "Get Fortnite Store"
+      responses:
+        '200':
+          description: Current store object
+          schema:
+            type: object
         default:
           description: Unexpected error
           schema:
