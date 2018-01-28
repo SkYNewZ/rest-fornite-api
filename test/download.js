@@ -11,10 +11,10 @@ chai.use(chaiHttp);
 
 //Our parent block
 describe('Downloadable files', () => {
-  describe('/GET /v1/swagger.json', () => {
+  describe('/GET /static/swagger.json', () => {
     it('it should 200', (done) => {
       chai.request(server)
-        .get('/v1/swagger.json')
+        .get('/static/swagger.json')
         .end((err, res) => {
           res.should.have.status(200);
           done();
@@ -23,10 +23,10 @@ describe('Downloadable files', () => {
     });
   });
 
-  describe('/GET /v1/swagger.yaml', () => {
+  describe('/GET /static/swagger.yaml', () => {
     it('it should 200', (done) => {
       chai.request(server)
-        .get('/v1/swagger.yaml')
+        .get('/static/swagger.yaml')
         .end((err, res) => {
           res.should.have.status(200);
           done();
