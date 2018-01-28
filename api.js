@@ -14,6 +14,7 @@ var user = require('./routes/user'),
   check = require('./routes/check');
 
 // https://medium.com/the-node-js-collection/simple-server-side-cache-for-express-js-with-node-js-45ff296ca0f0
+/* istanbul ignore next */
 var cache = (duration) => {
   return (req, res, next) => {
     let key = '__express__' + req.originalUrl || req.url
@@ -34,6 +35,7 @@ var cache = (duration) => {
 }
 
 //don't show the log when it is test
+/* istanbul ignore if */
 if (process.env.NODE_ENV !== 'test') {
   //use morgan to log at command line
   app.use(morgan('combined')); //'combined' outputs the Apache style LOGs
