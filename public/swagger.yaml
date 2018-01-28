@@ -169,8 +169,8 @@ paths:
                 format: int32
               message:
                 type: string
-  
-  
+
+
   /stats/{plateform}/{username}:
     get:
       summary: Get user's stats
