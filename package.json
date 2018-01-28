@@ -1,6 +1,6 @@
 {
   "name": "rest-fortnite-api",
-  "version": "1.0.0",
+  "version": "2.5.2",
   "description": "REST API using fortnite API by Quentin Laffont",
   "main": "api.js",
   "scripts": {
@@ -20,6 +20,7 @@
   "dependencies": {
     "express": "^4.16.2",
     "fortnite-api": "file:fortnite-api",
+    "memory-cache": "^0.2.0",
     "morgan": "^1.9.0",
     "swagger-ui-express": "^2.0.15"
   },
