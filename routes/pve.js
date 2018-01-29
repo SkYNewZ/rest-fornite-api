@@ -14,12 +14,15 @@ function getStatsPVE(req, res) {
               code: 404,
               message: err
             });
-          } else if (err === "No Data") {
+          }
+          /* istanbul ignore next */
+          else if (err === "No Data") {
             res.status(400).send({
               code: 400,
               message: err
             });
           } else {
+            /* istanbul ignore next */
             res.status(500).send({
               code: 500,
               message: err
@@ -38,6 +41,7 @@ function getFortnitePVEInfo(req, res) {
           res.json(store);
         })
         .catch((err) => {
+          /* istanbul ignore next */
           res.status(500).send({
             code: 500,
             message: err

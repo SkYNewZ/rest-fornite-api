@@ -15,7 +15,7 @@ function checkPlayer(req, res) {
               code: 404,
               message: err
             });
-          } else if (err === "Impossible to fetch User. User not found on this platform") {
+          } else /* istanbul ignore else  */ if (err === "Impossible to fetch User. User not found on this platform") {
             res.status(404).send({
               code: 404,
               message: err

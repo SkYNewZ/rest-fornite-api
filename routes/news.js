@@ -9,6 +9,7 @@ function getFortniteNews(req, res) {
           res.json(news);
         })
         .catch((err) => {
+          /* istanbul ignore next */
           res.status(500).send({
             code: 500,
             message: err

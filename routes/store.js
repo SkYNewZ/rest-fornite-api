@@ -9,6 +9,7 @@ function getStore(req, res) {
           res.json(store);
         })
         .catch((err) => {
+          /* istanbul ignore next */
           res.status(500).send({
             code: 500,
             message: err
