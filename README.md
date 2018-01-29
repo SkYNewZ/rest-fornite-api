@@ -10,7 +10,7 @@ See on [Docker Hub](https://hub.docker.com/r/skynewz/fortnite-api/).
 Thanks to [qlaffont](https://github.com/qlaffont/fortnite-api) for doing this API. You can support him with a donation : [Paypal Donation](https://www.paypal.me/qlaffont)
 
 ## Example
-You can found SwaggerUI here https://api.fortnite.lemairepro.fr
+You can found SwaggerUI here https://api.fortnite.lemairepro.fr/api-docs
 
 ## INIT
 To setup this module, you need to have an account on Epic Games. After that you need to get 2 dedicated headers from Fortnite.
