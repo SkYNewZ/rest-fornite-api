@@ -10,7 +10,7 @@ let server = require('../api');
 chai.use(chaiHttp);
 
 //Our parent block
-describe('Downloadable files', () => {
+describe('Swagger', () => {
   describe('/GET /static/swagger.json', () => {
     it('it should 200', (done) => {
       chai.request(server)
@@ -27,6 +27,18 @@ describe('Downloadable files', () => {
     it('it should 200', (done) => {
       chai.request(server)
         .get('/static/swagger.yaml')
+        .end((err, res) => {
+          res.should.have.status(200);
+          done();
+        });
+
+    });
+  });
+
+  describe('/GET /api-docs', () => {
+    it('it should 200', (done) => {
+      chai.request(server)
+        .get('/api-docs')
         .end((err, res) => {
           res.should.have.status(200);
           done();

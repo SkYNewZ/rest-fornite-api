@@ -1,11 +1,11 @@
 {
   "name": "rest-fortnite-api",
-  "version": "2.5.2",
+  "version": "2.5.4",
   "description": "REST API using fortnite API by Quentin Laffont",
   "main": "api.js",
   "scripts": {
     "start": "node api.js",
-    "test": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec --timeout 5000"
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec --timeout 10000"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-http": "^2.0.1",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "uuid": "^3.2.1"
   }
 }

@@ -1,4 +1,4 @@
-var fortniteAPI = require('../auth');
+var fortniteAPI = require('./auth');
 
 function getFortniteNews(req, res) {
   var language = req.params.lang || 'en';
@@ -9,6 +9,7 @@ function getFortniteNews(req, res) {
           res.json(news);
         })
         .catch((err) => {
+          /* istanbul ignore next */
           res.status(500).send({
             code: 500,
             message: err

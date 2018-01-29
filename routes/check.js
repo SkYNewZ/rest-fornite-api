@@ -1,4 +1,4 @@
-var fortniteAPI = require('../auth');
+var fortniteAPI = require('./auth');
 
 function checkFortniteStatus(req, res) {
   fortniteAPI.login()
@@ -8,6 +8,7 @@ function checkFortniteStatus(req, res) {
           res.json(status);
         })
         .catch((err) => {
+          /* istanbul ignore next */
           res.status(500).send({
             code: 500,
             message: err
