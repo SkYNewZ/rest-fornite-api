@@ -25,7 +25,7 @@ How to get these headers ?
 
 --------
 
-## Start ad docker container
+## Start as docker container
 ```bash
 $ docker run -d --restart=always \     
   -e LOGIN_EMAIL=EMAIL ACCOUNT \
