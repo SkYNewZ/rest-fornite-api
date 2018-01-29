@@ -1,4 +1,4 @@
-var fortniteAPI = require('../auth');
+var fortniteAPI = require('./auth');
 
 function getStatsBR(req, res) {
   var username = req.params.username;
@@ -15,17 +15,18 @@ function getStatsBR(req, res) {
               code: 404,
               message: err
             });
-          } else /* istanbul ignore else  */ if (err === "Impossible to fetch User. User not found on this platform") {
-            res.status(404).send({
-              code: 404,
-              message: err
-            });
-          } else {
-            res.status(500).send({
-              code: 500,
-              message: err
-            });
-          }
+          } else /* istanbul ignore else  */
+            if (err === "Impossible to fetch User. User not found on this platform") {
+              res.status(404).send({
+                code: 404,
+                message: err
+              });
+            } else {
+              res.status(500).send({
+                code: 500,
+                message: err
+              });
+            }
         });
     });
 }
@@ -45,17 +46,18 @@ function getStatsBRFromID(req, res) {
               code: 404,
               message: err
             });
-          } else /* istanbul ignore else  */ if (err === "Impossible to fetch User.") {
-            res.status(404).send({
-              code: 404,
-              message: err
-            });
-          } else {
-            res.status(500).send({
-              code: 500,
-              message: err
-            });
-          }
+          } else /* istanbul ignore next */
+            if (err === "Impossible to fetch User.") {
+              res.status(404).send({
+                code: 404,
+                message: err
+              });
+            } else {
+              res.status(500).send({
+                code: 500,
+                message: err
+              });
+            }
         });
     });
 }
