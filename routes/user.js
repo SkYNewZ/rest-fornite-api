@@ -1,4 +1,4 @@
-var fortniteAPI = require('../auth');
+var fortniteAPI = require('./auth');
 
 function checkPlayer(req, res) {
   var username = req.params.username;
@@ -15,17 +15,18 @@ function checkPlayer(req, res) {
               code: 404,
               message: err
             });
-          } else /* istanbul ignore else  */ if (err === "Impossible to fetch User. User not found on this platform") {
-            res.status(404).send({
-              code: 404,
-              message: err
-            });
-          } else {
-            res.status(500).send({
-              code: 500,
-              message: err
-            });
-          }
+          } else /* istanbul ignore else  */
+            if (err === "Impossible to fetch User. User not found on this platform") {
+              res.status(404).send({
+                code: 404,
+                message: err
+              });
+            } else {
+              res.status(500).send({
+                code: 500,
+                message: err
+              });
+            }
         });
     });
 }

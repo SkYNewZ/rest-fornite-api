@@ -6,6 +6,7 @@ let chai = require('chai');
 let chaiHttp = require('chai-http');
 let should = chai.should();
 let server = require('../api');
+const uuidv1 = require('uuid/v1');
 
 chai.use(chaiHttp);
 
@@ -77,10 +78,10 @@ describe('Stats', () => {
     });
   });
 
-  describe('/GET /v1/stats/id/:platform/:id', () => {
+  describe('/GET /v1/stats/id/:platform/:id with uid : ' + uuidv1(), () => {
     it('it should return 404 because wrong ID', (done) => {
       chai.request(server)
-        .get('/v1/stats/id/pc/wrongisatall')
+        .get('/v1/stats/id/pc/' + uuidv1())
         .end((err, res) => {
           res.should.have.status(404);
           res.body.should.be.a('object');

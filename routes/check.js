@@ -1,4 +1,4 @@
-var fortniteAPI = require('../auth');
+var fortniteAPI = require('./auth');
 
 function checkFortniteStatus(req, res) {
   fortniteAPI.login()

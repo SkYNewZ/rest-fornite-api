@@ -1,4 +1,4 @@
-var fortniteAPI = require('../auth');
+var fortniteAPI = require('./auth');
 
 function getStatsPVE(req, res) {
   var username = req.params.username;

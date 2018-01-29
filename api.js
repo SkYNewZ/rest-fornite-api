@@ -2,7 +2,7 @@ var express = require('express'),
   app = express(),
   morgan = require('morgan'),
   swaggerUi = require('swagger-ui-express'),
-  mcache = require('memory-cache');
+  mcache = require('memory-cache'),
   auth = [];
 
 //routes methods
@@ -77,7 +77,15 @@ app.route('/v1/store/:lang?').get(store.getStore);
 
 //swaggerUi
 var swaggerDocument = require('./public/swagger.json');
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+//The 404 Route (ALWAYS Keep this as the last route)
+app.get('*', function(req, res) {
+  res.status(404).send({
+    code: 404,
+    message: "Page not found"
+  });
+});
 
 // start server
 app.listen(app.get('port'), function() {
