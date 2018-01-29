@@ -17,9 +17,13 @@ WORKDIR /app
 # add sources
 COPY . .
 
+#ensure all files are correct
+RUN cd /app/public/store && \
+    for f in ./*; do mv "$f" "${f// /_}"; done
+
 # install dependencies
 RUN npm install
 
 EXPOSE 3000
 
-CMD ["node", "api.js"]
+ENTRYPOINT ["node", "api.js"]
