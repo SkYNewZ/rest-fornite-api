@@ -1,4 +1,4 @@
-var fortniteAPI = require('../auth');
+var fortniteAPI = require('./auth');
 
 function getFortniteNews(req, res) {
   var language = req.params.lang || 'en';
