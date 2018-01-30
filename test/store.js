@@ -34,4 +34,16 @@ describe('Store', () => {
         });
     });
   });
+
+  describe('/GET /v1/store/:lang?', () => {
+    it('it should get store info in it', (done) => {
+      chai.request(server)
+        .get('/v1/store/it')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          done();
+        });
+    });
+  });
 });

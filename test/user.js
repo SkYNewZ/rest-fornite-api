@@ -20,7 +20,6 @@ describe('User', () => {
           res.body.should.be.a('object');
           done();
         });
-
     });
   });
 
@@ -35,7 +34,6 @@ describe('User', () => {
           res.body.should.have.property('message');
           done();
         });
-
     });
   });
 
@@ -50,7 +48,20 @@ describe('User', () => {
           res.body.should.have.property('message');
           done();
         });
+    });
+  });
 
+  describe('/GET /v1/user/:plateform/:username', () => {
+    it('it should return 400 because wrond plateform', (done) => {
+      chai.request(server)
+        .get('/v1/user/aaa/skynewz')
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('code');
+          res.body.should.have.property('message');
+          done();
+        });
     });
   });
 });
