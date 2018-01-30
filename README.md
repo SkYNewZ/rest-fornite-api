@@ -1,6 +1,7 @@
 # Fortnite-API on NodeJs Server
 [![Build Status](https://travis-ci.org/SkYNewZ/REST-Fornite-api.svg?branch=master)](https://travis-ci.org/SkYNewZ/REST-Fornite-api)
 [![codecov](https://codecov.io/gh/SkYNewZ/REST-Fornite-api/branch/master/graph/badge.svg)](https://codecov.io/gh/SkYNewZ/REST-Fornite-api)
+[![npm version](https://badge.fury.io/js/fortnite-api.svg)](https://www.npmjs.com/package/fortnite-api)
 [![Docker Pulls](https://img.shields.io/docker/pulls/skynewz/fortnite-api.svg)](https://hub.docker.com/r/skynewz/fortnite-api/)
 [![](https://images.microbadger.com/badges/image/skynewz/fortnite-api.svg)](https://microbadger.com/images/skynewz/fortnite-api "Get your own image badge on microbadger.com")
 [![](https://images.microbadger.com/badges/version/skynewz/fortnite-api.svg)](https://microbadger.com/images/skynewz/fortnite-api "Get your own version badge on microbadger.com")
