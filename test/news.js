@@ -20,7 +20,6 @@ describe('News', () => {
           res.body.should.be.a('object');
           done();
         });
-
     });
   });
 
@@ -33,7 +32,18 @@ describe('News', () => {
           res.body.should.be.a('object');
           done();
         });
+    });
+  });
 
+  describe('/GET /v1/news/:lang?', () => {
+    it('it should return news in it', (done) => {
+      chai.request(server)
+        .get('/v1/news/it')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          done();
+        });
     });
   });
 });

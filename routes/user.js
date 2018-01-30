@@ -15,18 +15,24 @@ function checkPlayer(req, res) {
               code: 404,
               message: err
             });
-          } else /* istanbul ignore else  */
+          } else
             if (err === "Impossible to fetch User. User not found on this platform") {
               res.status(404).send({
                 code: 404,
                 message: err
               });
-            } else {
-              res.status(500).send({
-                code: 500,
-                message: err
-              });
-            }
+            } else /* istanbul ignore else  */
+              if (err === "Please precise a good platform: ps4/xb1/pc") {
+                res.status(400).send({
+                  code: 400,
+                  message: err
+                });
+              } else {
+                res.status(500).send({
+                  code: 500,
+                  message: err
+                });
+              }
         });
     });
 }

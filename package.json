@@ -1,6 +1,6 @@
 {
   "name": "rest-fortnite-api",
-  "version": "2.5.4",
+  "version": "2.5.5",
   "description": "REST API using fortnite API by Quentin Laffont",
   "main": "api.js",
   "scripts": {

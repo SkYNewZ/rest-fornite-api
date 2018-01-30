@@ -38,10 +38,12 @@ describe('PVE', () => {
     });
   });
 
+  // <-------------------> PVE INFO
+
   describe('/GET /v1/pve/info/:lang?', () => {
-    it('it fornite pve info', (done) => {
+    it('it fornite pve info in french', (done) => {
       chai.request(server)
-        .get('/v1/pve/info')
+        .get('/v1/pve/info/fr')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
@@ -51,9 +53,21 @@ describe('PVE', () => {
   });
 
   describe('/GET /v1/pve/info/:lang?', () => {
-    it('it fornite pve info if french', (done) => {
+    it('it fornite pve info in it', (done) => {
       chai.request(server)
-        .get('/v1/pve/info/fr')
+        .get('/v1/pve/info/it')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          done();
+        });
+    });
+  });
+
+  describe('/GET /v1/pve/info/:lang?', () => {
+    it('it fornite pve info', (done) => {
+      chai.request(server)
+        .get('/v1/pve/info')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
