@@ -14,15 +14,17 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 
 WORKDIR /app
 
+# install dependencies
+COPY package.json .
+COPY package-lock.json .
+RUN npm install
+
 # add sources
 COPY . .
 
 #ensure all files are correct
 RUN cd /app/public/store && \
     for f in ./*; do mv "$f" "${f// /_}"; done
-
-# install dependencies
-RUN npm install
 
 EXPOSE 3000
 
