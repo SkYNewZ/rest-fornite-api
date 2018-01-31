@@ -11,16 +11,15 @@ chai.use(chaiHttp);
 
 //Our parent block
 describe('Check', () => {
-  describe('/GET /v1/check', () => {
+  describe('/GET /check', () => {
     it('it should return fornite ETA', (done) => {
       chai.request(server)
-        .get('/v1/check')
+        .get('/check')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('boolean');
           done();
         });
-
     });
   });
 });

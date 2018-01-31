@@ -6,32 +6,31 @@ let chai = require('chai');
 let chaiHttp = require('chai-http');
 let should = chai.should();
 let server = require('../api');
+let Config = require('../src/config');
 
 chai.use(chaiHttp);
 
 //Our parent block
 describe('Swagger', () => {
-  describe('/GET /static/swagger.json', () => {
+  describe('/GET ' + Config.static_uri + '/swagger.json', () => {
     it('it should 200', (done) => {
       chai.request(server)
-        .get('/static/swagger.json')
+        .get(Config.static_uri + '/swagger.json')
         .end((err, res) => {
           res.should.have.status(200);
           done();
         });
-
     });
   });
 
-  describe('/GET /static/swagger.yaml', () => {
+  describe('/GET ' + Config.static_uri + '/swagger.yaml', () => {
     it('it should 200', (done) => {
       chai.request(server)
-        .get('/static/swagger.yaml')
+        .get(Config.static_uri + '/swagger.yaml')
         .end((err, res) => {
           res.should.have.status(200);
           done();
         });
-
     });
   });
 
@@ -43,7 +42,6 @@ describe('Swagger', () => {
           res.should.have.status(200);
           done();
         });
-
     });
   });
 });

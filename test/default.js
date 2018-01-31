@@ -22,7 +22,6 @@ describe('Default tests', () => {
           res.body.should.have.property('message').eql('Page not found');
           done();
         });
-
     });
   });
 });

@@ -42,7 +42,7 @@ $ docker run -d --restart=always \
   -p 3000:3000
   skynewz/fortnite-api
 ```
-This will listening on port 3000. You can check at http://localhost:3000/v1/check
+This will listening on port 3000. You can check at http://localhost:3000/check
 
 > **Note:**
 > You can can the option -e PORT=1234 in order to use a custom port

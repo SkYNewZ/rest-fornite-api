@@ -13,7 +13,13 @@ var user = require('./routes/user'),
   store = require('./routes/store'),
   check = require('./routes/check');
 
-//don't show the log when it is test
+app.set('port', process.env.PORT || 3000);
+app.all('/*', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+app.use(Config.static_uri, express.static('public'));
+
 /* istanbul ignore if */
 if (process.env.NODE_ENV !== 'test') {
   //use morgan to log at command line
@@ -30,18 +36,11 @@ if (process.env.NODE_ENV !== 'test') {
   }
 }
 
-app.set('port', process.env.PORT || 3000);
-app.all('/*', function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
-app.use('/static', express.static('public'));
-
 // check user bu username
-app.route('/v1/user/:platform/:username').get(user.checkPlayer);
+app.route('/user/:platform/:username').get(user.checkPlayer);
 
 // get user stats by username
-app.route('/v1/stats/:platform/:username').get(
+app.route('/stats/:platform/:username').get(
   //enable caching if cache enable ^^
   function(req, res, next) {
     if (cache) {
@@ -54,7 +53,7 @@ app.route('/v1/stats/:platform/:username').get(
   stats.getStatsBR);
 
 // get users stats by user id
-app.route('/v1/stats/id/:platform/:id').get(function(req, res, next) {
+app.route('/stats/id/:platform/:id').get(function(req, res, next) {
   //enable caching if cache enable ^^
   if (cache) {
     cache.route({
@@ -65,13 +64,13 @@ app.route('/v1/stats/id/:platform/:id').get(function(req, res, next) {
 }, stats.getStatsBRFromID);
 
 // PVE stats by username
-app.route('/v1/pve/:username').get(pve.getStatsPVE);
+app.route('/pve/:username').get(pve.getStatsPVE);
 
 // getFortnitePVEInfo
-app.route('/v1/pve/info/:lang?').get(pve.getFortnitePVEInfo);
+app.route('/pve/info/:lang?').get(pve.getFortnitePVEInfo);
 
 // get fortnite news
-app.route('/v1/news/:lang?').get(function(req, res, next) {
+app.route('/news/:lang?').get(function(req, res, next) {
   //enable caching if cache enable ^^
   if (cache) {
     cache.route({
@@ -82,10 +81,10 @@ app.route('/v1/news/:lang?').get(function(req, res, next) {
 }, news.getFortniteNews);
 
 // get fortnite status
-app.route('/v1/check').get(check.checkFortniteStatus);
+app.route('/check').get(check.checkFortniteStatus);
 
 // get store
-app.route('/v1/store/:lang?').get(function(req, res, next) {
+app.route('/store/:lang?').get(function(req, res, next) {
   //enable caching if cache enable ^^
   if (cache) {
     cache.route({

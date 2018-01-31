@@ -10,11 +10,11 @@ let server = require('../api');
 chai.use(chaiHttp);
 
 //Our parent block
-describe('Store', () => {
-  describe('/GET /v1/store/:lang?', () => {
+describe('Shop', () => {
+  describe('/GET /store/:lang?', () => {
     it('it should get store info', (done) => {
       chai.request(server)
-        .get('/v1/store')
+        .get('/store')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
@@ -23,10 +23,10 @@ describe('Store', () => {
     });
   });
 
-  describe('/GET /v1/store/:lang?', () => {
+  describe('/GET /store/:lang?', () => {
     it('it should get store info in french', (done) => {
       chai.request(server)
-        .get('/v1/store/fr')
+        .get('/store/fr')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
@@ -35,10 +35,10 @@ describe('Store', () => {
     });
   });
 
-  describe('/GET /v1/store/:lang?', () => {
+  describe('/GET /store/:lang?', () => {
     it('it should get store info in it', (done) => {
       chai.request(server)
-        .get('/v1/store/it')
+        .get('/store/it')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
