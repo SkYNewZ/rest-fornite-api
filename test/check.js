@@ -17,7 +17,8 @@ describe('Check', () => {
         .get('/check')
         .end((err, res) => {
           res.should.have.status(200);
-          res.body.should.be.a('boolean');
+          res.body.should.be.a('object');
+          res.should.have.property('status');
           done();
         });
     });
