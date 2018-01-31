@@ -28,10 +28,10 @@ before_deploy:
     - docker push $DOCKER_USERNAME/fortnite-api:latest
 
 deploy:
-  - docker run -it --rm cdrx/rancher-gitlab-deploy rancher-gitlab-deploy --rancher-url $RANCHER_URL --rancher-key $RANCHER_KEY --rancher-secret $RANCHER_SECRET --environment $RANCHER_ENVIRONMENT --stack fortnite --service api --new-image $DOCKER_USERNAME/fortnite-api:$(cat VERSION) --finish-upgrade --wait-for-upgrade-to-finish
-
-after_deploy:
   provider: releases
   api_key: $GITHUB_TOKEN
   name: v$(cat VERSION)
   skip_cleanup: true
+
+after_deploy:
+  - docker run -it --rm cdrx/rancher-gitlab-deploy rancher-gitlab-deploy --rancher-url $RANCHER_URL --rancher-key $RANCHER_KEY --rancher-secret $RANCHER_SECRET --environment $RANCHER_ENVIRONMENT --stack fortnite --service api --new-image $DOCKER_USERNAME/fortnite-api:$(cat VERSION) --finish-upgrade --wait-for-upgrade-to-finish
