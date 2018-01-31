@@ -10,12 +10,7 @@ const uuidv1 = require('uuid/v1');
 
 chai.use(chaiHttp);
 
-//Our parent block
-describe('Stats', () => {
-
-  // <---------------------------------> WITH USERNAME
-
-
+describe('Stats with username', () => {
   describe('/GET /v1/stats/:plateform/:username', () => {
     it('it should return 404 because wrong username', (done) => {
       chai.request(server)
@@ -69,14 +64,13 @@ describe('Stats', () => {
         });
     });
   });
+});
 
-
-  // <---------------------------------> WITH ID
-
+describe('Stats with ID', () => {
   describe('/GET /v1/stats/id/:platform/:id', () => {
     it('it should GET stats by the given ID', (done) => {
       chai.request(server)
-        .get('/v1/stats/id/pc/8b057df0e63744f38962f3c7635674b4')
+        .get('/v1/stats/id/pc/8b057df0-e637-44f3-8962-f3c7635674b4')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
@@ -86,9 +80,23 @@ describe('Stats', () => {
   });
 
   describe('/GET /v1/stats/id/:platform/:id', () => {
-    it('it should return 404 because wrong plateform', (done) => {
+    it('it should return 404 because GOOD id but WRONG plateform', (done) => {
       chai.request(server)
-        .get('/v1/stats/id/ps4/8b057df0e63744f38962f3c7635674b4')
+        .get('/v1/stats/id/ps4/8b057df0-e637-44f3-8962-f3c7635674b4')
+        .end((err, res) => {
+          res.should.have.status(404);
+          res.body.should.be.a('object');
+          res.body.should.have.property('code').eql(404);
+          res.body.should.have.property('message').eql('Impossible to fetch User. User not found on this platform');
+          done();
+        });
+    });
+  });
+
+  describe('/GET /v1/stats/id/:platform/:id with id : ' + uuidv1(), () => {
+    it('it should return 404 because GOOD platform but WROND id', (done) => {
+      chai.request(server)
+        .get('/v1/stats/id/pc/' + uuidv1())
         .end((err, res) => {
           res.should.have.status(404);
           res.body.should.be.a('object');
@@ -100,23 +108,9 @@ describe('Stats', () => {
   });
 
   describe('/GET /v1/stats/id/:platform/:id', () => {
-    it('it should return 404 because wrong ID', (done) => {
+    it('it should return 400 because plateform is unknown', (done) => {
       chai.request(server)
-        .get('/v1/stats/id/pc/8b057df0e63744f38962f3c7635674b4AAAAA')
-        .end((err, res) => {
-          res.should.have.status(404);
-          res.body.should.be.a('object');
-          res.body.should.have.property('code').eql(404);
-          res.body.should.have.property('message').eql('Impossible to fetch User.');
-          done();
-        });
-    });
-  });
-
-  describe('/GET /v1/stats/id/:platform/:id' + uuidv1(), () => {
-    it('it should return 400 because bad plateform', (done) => {
-      chai.request(server)
-        .get('/v1/stats/id/aaa/' + uuidv1())
+        .get('/v1/stats/id/aaa/8b057df0-e637-44f3-8962-f3c7635674b4')
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');

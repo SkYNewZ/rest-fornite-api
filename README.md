@@ -1,6 +1,7 @@
 # Fortnite-API on NodeJs Server
-[![Build Status](https://travis-ci.org/SkYNewZ/REST-Fornite-api.svg?branch=master)](https://travis-ci.org/SkYNewZ/REST-Fornite-api)
-[![codecov](https://codecov.io/gh/SkYNewZ/REST-Fornite-api/branch/master/graph/badge.svg)](https://codecov.io/gh/SkYNewZ/REST-Fornite-api)
+[![Build Status](https://travis-ci.org/SkYNewZ/rest-fornite-api.svg?branch=master)](https://travis-ci.org/SkYNewZ/rest-fornite-api)
+[![codecov](https://codecov.io/gh/SkYNewZ/rest-fornite-api/branch/master/graph/badge.svg)](https://codecov.io/gh/SkYNewZ/rest-fornite-api)
+[![npm version](https://badge.fury.io/js/fortnite-api.svg)](https://www.npmjs.com/package/fortnite-api)
 [![Docker Pulls](https://img.shields.io/docker/pulls/skynewz/fortnite-api.svg)](https://hub.docker.com/r/skynewz/fortnite-api/)
 [![](https://images.microbadger.com/badges/image/skynewz/fortnite-api.svg)](https://microbadger.com/images/skynewz/fortnite-api "Get your own image badge on microbadger.com")
 [![](https://images.microbadger.com/badges/version/skynewz/fortnite-api.svg)](https://microbadger.com/images/skynewz/fortnite-api "Get your own version badge on microbadger.com")
@@ -50,8 +51,8 @@ This will launch node server, listening on port 3000. You can check at http://lo
 
 ### Start
 ```bash
-$ git clone https://github.com/SkYNewZ/REST-Fornite-api
-$ cd REST-Fornite-api
+$ git clone https://github.com/SkYNewZ/rest-fornite-api
+$ cd rest-fornite-api
 # set environments variables on execution
 $ LOGIN_EMAIL=mail LOGIN_PASSWORD=pass ........ npm start
 ```

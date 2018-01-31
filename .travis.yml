@@ -33,3 +33,4 @@ after_deploy:
   - docker push $DOCKER_USERNAME/fortnite-api:$(cat VERSION)
   - docker tag $DOCKER_USERNAME/fortnite-api:$(cat VERSION) $DOCKER_USERNAME/fortnite-api:latest
   - docker push $DOCKER_USERNAME/fortnite-api:latest
+  - docker run -it --rm cdrx/rancher-gitlab-deploy rancher-gitlab-deploy --rancher-url $RANCHER_URL --rancher-key $RANCHER_KEY --rancher-secret $RANCHER_SECRET --environment $RANCHER_ENVIRONMENT --stack fortnite --service api --new-image $DOCKER_USERNAME/fortnite-api:$(cat VERSION) --finish-upgrade --wait-for-upgrade-to-finish
