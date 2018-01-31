@@ -38,10 +38,12 @@ if (process.env.NODE_ENV !== 'test') {
   //use morgan to log at command line
   app.use(morgan('combined')); //'combined' outputs the Apache style LOGs
 
-  //redis logs
-  cache.on('message', function(message) {
-    console.log('[REDIS] : ' + message);
-  });
+  if (cache) {
+    //redis logs
+    cache.on('message', function(message) {
+      console.log('[REDIS] : ' + message);
+    });
+  }
 }
 // <---END IF TESTING---->
 
