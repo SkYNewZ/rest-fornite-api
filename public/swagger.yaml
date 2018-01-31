@@ -2,35 +2,38 @@ swagger: '2.0'
 info:
   title: FORTNITE REST API
   description: REST API about Fortnite game
-  version: 2.5.7
+  version: 2.5.8
 host: api.fortnite.lemairepro.fr
 schemes:
   - https
 basePath: /
 tags:
-- name: "User"
-  description: "Get user info"
-- name: "Stats"
-  description: "Get all you Fornite stats"
-- name: "Check"
-  description: "Get Fortnite status"
-- name: "PVE"
-  description: "Get all your PVE Stats"
-- name: "Store"
-  description: "Get store infos"
+  - name: User
+    description: Get user info
+  - name: Stats
+    description: Get all you Fornite stats
+  - name: Check
+    description: Get Fortnite status
+  - name: PVE
+    description: Get all your PVE Stats
+  - name: Store
+    description: Get store infos
 produces:
   - application/json
 paths:
   /check:
     get:
       tags:
-        - "Check"
+        - Check
       summary: Get Fortnite game status
       responses:
         '200':
           description: Fortnite is okay !
           schema:
-            type: boolean
+            type: object
+            properties:
+              status:
+                type: boolean
         default:
           description: Unexpected error
           schema:
@@ -44,7 +47,7 @@ paths:
   /news:
     get:
       tags:
-        - "News"
+        - News
       summary: Get Fortnite News
       responses:
         '200':
@@ -105,7 +108,7 @@ paths:
   '/user/{plateform}/{username}':
     get:
       tags:
-        - "User"
+        - User
       summary: Get a user by username
       parameters:
         - name: plateform
@@ -152,7 +155,7 @@ paths:
   '/stats/{plateform}/{username}':
     get:
       tags:
-        - "Stats"
+        - Stats
       summary: Get user's stats by username
       parameters:
         - name: plateform
@@ -371,8 +374,10 @@ paths:
                 format: int32
               message:
                 type: string
+        '400':
+          description: 'Please precise a good platform: ps4/xb1/pc'
         default:
-          description: "Unexpected error"
+          description: Unexpected error
           schema:
             type: object
             properties:
@@ -381,11 +386,10 @@ paths:
                 format: int32
               message:
                 type: string
-
   '/stats/id/{plateform}/{id}':
     get:
       tags:
-        - "Stats"
+        - Stats
       summary: Get user's stats by user id
       parameters:
         - name: plateform
@@ -397,7 +401,7 @@ paths:
           in: path
           type: string
           required: true
-          description: "Player ID"
+          description: Player ID
       responses:
         '200':
           description: JSON Object of user stats
@@ -594,6 +598,8 @@ paths:
                     description: Number of kill/minute
                   score:
                     type: integer
+        '400':
+          description: 'Please precise a good platform: ps4/xb1/pc'
         '404':
           description: User not found or not found on this plateform
           schema:
@@ -617,8 +623,8 @@ paths:
   '/pve/{username}':
     get:
       tags:
-        - "PVE"
-      summary: "Get PVE Stat by given username"
+        - PVE
+      summary: Get PVE Stat by given username
       parameters:
         - name: username
           in: path
@@ -650,11 +656,11 @@ paths:
                 format: int32
               message:
                 type: string
-  '/pve/info':
+  /pve/info:
     get:
       tags:
-        - "PVE"
-      summary: "Get Fortnite PVE Info (storm, etc)"
+        - PVE
+      summary: 'Get Fortnite PVE Info (storm, etc)'
       responses:
         '200':
           description: All okay
@@ -670,12 +676,11 @@ paths:
                 format: int32
               message:
                 type: string
-
-  '/store':
+  /store:
     get:
       tags:
-        - "Store"
-      summary: "Get Fortnite Store"
+        - Store
+      summary: Get Fortnite Store
       responses:
         '200':
           description: Current store object

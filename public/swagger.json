@@ -3,7 +3,7 @@
   "info": {
     "title": "FORTNITE REST API",
     "description": "REST API about Fortnite game",
-    "version": "2.5.7"
+    "version": "2.5.8"
   },
   "host": "api.fortnite.lemairepro.fr",
   "schemes": [
@@ -46,7 +46,12 @@
           "200": {
             "description": "Fortnite is okay !",
             "schema": {
-              "type": "boolean"
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean"
+                }
+              }
             }
           },
           "default": {
@@ -524,6 +529,9 @@
               }
             }
           },
+          "400": {
+            "description": "Please precise a good platform: ps4/xb1/pc"
+          },
           "404": {
             "description": "User not found or not found on this plateform",
             "schema": {
@@ -848,6 +856,9 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Please precise a good platform: ps4/xb1/pc"
           },
           "404": {
             "description": "User not found or not found on this plateform",

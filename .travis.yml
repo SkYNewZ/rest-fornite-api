@@ -22,6 +22,10 @@ script:
 
 before_deploy:
     - git tag "$(cat VERSION)"
+    - docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg VERSION=$(cat VERSION) -t $DOCKER_USERNAME/fortnite-api:$(cat VERSION) .
+    - docker push $DOCKER_USERNAME/fortnite-api:$(cat VERSION)
+    - docker tag $DOCKER_USERNAME/fortnite-api:$(cat VERSION) $DOCKER_USERNAME/fortnite-api:latest
+    - docker push $DOCKER_USERNAME/fortnite-api:latest
 
 deploy:
   provider: releases
@@ -30,8 +34,4 @@ deploy:
   skip_cleanup: true
 
 after_deploy:
-  - docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg VERSION=$(cat VERSION) -t $DOCKER_USERNAME/fortnite-api:$(cat VERSION) .
-  - docker push $DOCKER_USERNAME/fortnite-api:$(cat VERSION)
-  - docker tag $DOCKER_USERNAME/fortnite-api:$(cat VERSION) $DOCKER_USERNAME/fortnite-api:latest
-  - docker push $DOCKER_USERNAME/fortnite-api:latest
   - docker run -it --rm cdrx/rancher-gitlab-deploy rancher-gitlab-deploy --rancher-url $RANCHER_URL --rancher-key $RANCHER_KEY --rancher-secret $RANCHER_SECRET --environment $RANCHER_ENVIRONMENT --stack fortnite --service api --new-image $DOCKER_USERNAME/fortnite-api:$(cat VERSION) --finish-upgrade --wait-for-upgrade-to-finish
