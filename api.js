@@ -2,7 +2,8 @@ var express = require('express'),
   app = express(),
   morgan = require('morgan'),
   swaggerUi = require('swagger-ui-express'),
-  mcache = require('memory-cache'),
+  Config = require('./src/config'),
+  cache = require('express-redis-cache')(Config.redis),
   auth = [];
 
 //routes methods
@@ -13,35 +14,18 @@ var user = require('./routes/user'),
   store = require('./routes/store'),
   check = require('./routes/check');
 
-// https://medium.com/the-node-js-collection/simple-server-side-cache-for-express-js-with-node-js-45ff296ca0f0
-/* istanbul ignore next */
-var cache = (duration) => {
-  return (req, res, next) => {
-    let key = '__express__' + req.originalUrl || req.url
-    let cachedBody = mcache.get(key)
-    if (cachedBody) {
-      res.send(cachedBody)
-      return
-    } else {
-      res.sendResponse = res.send
-      res.send = (body) => {
-        // convert to milliseconds
-        mcache.put(key, body, duration * 60000);
-        res.sendResponse(body)
-      }
-      next()
-    }
-  }
-}
-
 //don't show the log when it is test
 /* istanbul ignore if */
 if (process.env.NODE_ENV !== 'test') {
   //use morgan to log at command line
   app.use(morgan('combined')); //'combined' outputs the Apache style LOGs
-  //use cache for response, defaut 6 hours
-  app.use(cache(process.env.CACHE_DURATION || 360));
+  app.use(cache.route());
 }
+
+//redis config
+cache.on('message', function (message) {
+  console.log('[REDIS] : ' + message);
+});
 
 app.set('port', process.env.PORT || 3000);
 app.all('/*', function(req, res, next) {
@@ -54,10 +38,10 @@ app.use('/static', express.static('public'));
 app.route('/v1/user/:platform/:username').get(user.checkPlayer);
 
 // get user stats by username
-app.route('/v1/stats/:platform/:username').get(stats.getStatsBR);
+app.route('/v1/stats/:platform/:username').get(cache.route({ expire: 3600  }), stats.getStatsBR);
 
 // get users stats by user id
-app.route('/v1/stats/id/:platform/:id').get(stats.getStatsBRFromID);
+app.route('/v1/stats/id/:platform/:id').get(cache.route({ expire: 3600  }), stats.getStatsBRFromID);
 
 // PVE stats by username
 app.route('/v1/pve/:username').get(pve.getStatsPVE);
@@ -66,13 +50,13 @@ app.route('/v1/pve/:username').get(pve.getStatsPVE);
 app.route('/v1/pve/info/:lang?').get(pve.getFortnitePVEInfo);
 
 // get fortnite news
-app.route('/v1/news/:lang?').get(news.getFortniteNews);
+app.route('/v1/news/:lang?').get(cache.route({ expire: 3600  }), news.getFortniteNews);
 
 // get fortnite status
 app.route('/v1/check').get(check.checkFortniteStatus);
 
 // get store
-app.route('/v1/store/:lang?').get(store.getStore);
+app.route('/v1/store/:lang?').get(cache.route({ expire: 3600  }), store.getStore);
 
 
 //swaggerUi
