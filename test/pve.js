@@ -11,7 +11,6 @@ chai.use(chaiHttp);
 
 //Our parent block
 describe('PVE', () => {
-
   describe('/GET /v1/pve/:username', () => {
     it('it should return 404 because wrong username', (done) => {
       chai.request(server)
@@ -37,9 +36,9 @@ describe('PVE', () => {
         });
     });
   });
+});
 
-  // <-------------------> PVE INFO
-
+describe('PVE INFO', () => {
   describe('/GET /v1/pve/info/:lang?', () => {
     it('it fornite pve info in french', (done) => {
       chai.request(server)
