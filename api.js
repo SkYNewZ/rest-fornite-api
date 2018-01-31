@@ -1,3 +1,4 @@
+// <----REQUIRED PACKAGES---->
 var express = require('express'),
   app = express(),
   morgan = require('morgan'),
@@ -12,30 +13,40 @@ var user = require('./routes/user'),
   stats = require('./routes/stats'),
   store = require('./routes/store'),
   check = require('./routes/check');
+// <----END REQUIRED PACKAGES---->
 
+// <----APP CONFIG---->
 app.set('port', process.env.PORT || 3000);
 app.all('/*', function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   next();
 });
 app.use(Config.static_uri, express.static('public'));
+// <----END APP CONFIG---->
 
+// <----REDIS ACTIVATION---->
+//enable redis if process.env.REDIS_HOST provided
+if (Config.redis.host) {
+  var cache = require('express-redis-cache')(Config.redis);
+  app.use(cache.route());
+}
+// <----END REDIS ACTIVATION---->
+
+// <----IF TESTING---->
 /* istanbul ignore if */
 if (process.env.NODE_ENV !== 'test') {
   //use morgan to log at command line
   app.use(morgan('combined')); //'combined' outputs the Apache style LOGs
 
-  //enable redis if process.env.REDIS_HOST provided
-  if (Config.redis.host) {
-    var cache = require('express-redis-cache')(Config.redis);
-    app.use(cache.route());
-    //redis config
-    cache.on('message', function(message) {
-      console.log('[REDIS] : ' + message);
-    });
-  }
+  //redis logs
+  cache.on('message', function(message) {
+    console.log('[REDIS] : ' + message);
+  });
 }
+// <---END IF TESTING---->
 
+
+// <----ROUTING---->
 // check user bu username
 app.route('/user/:platform/:username').get(user.checkPlayer);
 
@@ -47,8 +58,8 @@ app.route('/stats/:platform/:username').get(
       cache.route({
         expire: 3600
       });
-      next();
     }
+    next();
   },
   stats.getStatsBR);
 
@@ -59,8 +70,8 @@ app.route('/stats/id/:platform/:id').get(function(req, res, next) {
     cache.route({
       expire: 3600
     });
-    next();
   }
+  next();
 }, stats.getStatsBRFromID);
 
 // PVE stats by username
@@ -76,8 +87,8 @@ app.route('/news/:lang?').get(function(req, res, next) {
     cache.route({
       expire: 3600
     });
-    next();
   }
+  next();
 }, news.getFortniteNews);
 
 // get fortnite status
@@ -90,8 +101,8 @@ app.route('/store/:lang?').get(function(req, res, next) {
     cache.route({
       expire: 3600
     });
-    next();
   }
+  next();
 }, store.getStore);
 
 
@@ -106,6 +117,7 @@ app.get('*', function(req, res) {
     message: "Page not found"
   });
 });
+// <----END ROUTING---->
 
 // start server
 app.listen(app.get('port'), function() {
