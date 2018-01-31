@@ -6,15 +6,15 @@ let chai = require('chai');
 let chaiHttp = require('chai-http');
 let should = chai.should();
 let server = require('../api');
-const uuidv1 = require('uuid/v1');
+const uuidv1 = require('uuid');
 
 chai.use(chaiHttp);
 
 describe('Stats with username', () => {
-  describe('/GET /v1/stats/:plateform/:username', () => {
+  describe('/GET /stats/:plateform/:username', () => {
     it('it should return 404 because wrong username', (done) => {
       chai.request(server)
-        .get('/v1/stats/pc/wrongusernameatall')
+        .get('/stats/pc/wrongusernameatall')
         .end((err, res) => {
           res.should.have.status(404);
           res.body.should.be.a('object');
@@ -25,10 +25,10 @@ describe('Stats with username', () => {
     });
   });
 
-  describe('/GET /v1/stats/:plateform/:username', () => {
+  describe('/GET /stats/:plateform/:username', () => {
     it('it should return 404 because wrond plateform for given username', (done) => {
       chai.request(server)
-        .get('/v1/stats/ps4/skynewz')
+        .get('/stats/ps4/skynewz')
         .end((err, res) => {
           res.should.have.status(404);
           res.body.should.be.a('object');
@@ -39,10 +39,10 @@ describe('Stats with username', () => {
     });
   });
 
-  describe('/GET /v1/stats/:plateform/:username', () => {
+  describe('/GET /stats/:plateform/:username', () => {
     it('it should return 400 because bad plateform', (done) => {
       chai.request(server)
-        .get('/v1/stats/aaa/skynewz')
+        .get('/stats/aaa/skynewz')
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
@@ -53,10 +53,10 @@ describe('Stats with username', () => {
     });
   });
 
-  describe('/GET /v1/stats/:plateform/:username', () => {
+  describe('/GET /stats/:plateform/:username', () => {
     it('it should get stats', (done) => {
       chai.request(server)
-        .get('/v1/stats/pc/skynewz')
+        .get('/stats/pc/skynewz')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
@@ -67,10 +67,10 @@ describe('Stats with username', () => {
 });
 
 describe('Stats with ID', () => {
-  describe('/GET /v1/stats/id/:platform/:id', () => {
+  describe('/GET /stats/id/:platform/:id', () => {
     it('it should GET stats by the given ID', (done) => {
       chai.request(server)
-        .get('/v1/stats/id/pc/8b057df0-e637-44f3-8962-f3c7635674b4')
+        .get('/stats/id/pc/8b057df0-e637-44f3-8962-f3c7635674b4')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
@@ -79,10 +79,10 @@ describe('Stats with ID', () => {
     });
   });
 
-  describe('/GET /v1/stats/id/:platform/:id', () => {
+  describe('/GET /stats/id/:platform/:id', () => {
     it('it should return 404 because GOOD id but WRONG plateform', (done) => {
       chai.request(server)
-        .get('/v1/stats/id/ps4/8b057df0-e637-44f3-8962-f3c7635674b4')
+        .get('/stats/id/ps4/8b057df0-e637-44f3-8962-f3c7635674b4')
         .end((err, res) => {
           res.should.have.status(404);
           res.body.should.be.a('object');
@@ -93,10 +93,10 @@ describe('Stats with ID', () => {
     });
   });
 
-  describe('/GET /v1/stats/id/:platform/:id with id : ' + uuidv1(), () => {
+  describe('/GET /stats/id/:platform/:id with id : ' + uuidv1(), () => {
     it('it should return 404 because GOOD platform but WROND id', (done) => {
       chai.request(server)
-        .get('/v1/stats/id/pc/' + uuidv1())
+        .get('/stats/id/pc/' + uuidv1())
         .end((err, res) => {
           res.should.have.status(404);
           res.body.should.be.a('object');
@@ -107,10 +107,10 @@ describe('Stats with ID', () => {
     });
   });
 
-  describe('/GET /v1/stats/id/:platform/:id', () => {
+  describe('/GET /stats/id/:platform/:id', () => {
     it('it should return 400 because plateform is unknown', (done) => {
       chai.request(server)
-        .get('/v1/stats/id/aaa/8b057df0-e637-44f3-8962-f3c7635674b4')
+        .get('/stats/id/aaa/8b057df0-e637-44f3-8962-f3c7635674b4')
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');

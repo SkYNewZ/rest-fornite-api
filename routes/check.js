@@ -5,7 +5,9 @@ function checkFortniteStatus(req, res) {
     .then(() => {
       fortniteAPI.checkFortniteStatus()
         .then((status) => {
-          res.json(status);
+          res.json({
+            status: status
+          });
         })
         .catch((err) => {
           /* istanbul ignore next */

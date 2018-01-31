@@ -27,6 +27,12 @@ How to get these headers ?
 --------
 
 ## Start as docker container
+
+### With REDIS
+If you want to use a [Redis](https://hub.docker.com/_/redis/), use this [docker-compose.yml for example](https://github.com/SkYNewZ/rest-fornite-api/blob/master/docker-compose.yml) **replacing environements variables values by yours**.
+
+
+### Without REDIS
 ```bash
 $ docker run -d --restart=always \     
   -e LOGIN_EMAIL=EMAIL ACCOUNT \
@@ -36,18 +42,17 @@ $ docker run -d --restart=always \
   -p 3000:3000
   skynewz/fortnite-api
 ```
-This will launch node server, listening on port 3000. You can check at http://localhost:3000/v1/check
+This will listening on port 3000. You can check at http://localhost:3000/check
 
 > **Note:**
 > You can can the option -e PORT=1234 in order to use a custom port
-> You can add -e CACHE_DURATION=<duration in minutes> to change the defaut caching duration at 6 hours
 
 ## Start with nodejs
 ### Requirements
 * Nodejs >= 8.9
 > **Note:**
-> You can can the option environnement variable PORT=1234 in order to use a custom port
-> You can add environnement variable CACHE_DURATION=`duration in minutes` to change the defaut caching duration at 6 hours
+> You can can the option environements variable PORT=1234 in order to use a custom port
+> You can add environements variable CACHE_DURATION=`duration in minutes` to change the defaut caching duration at 6 hours
 
 ### Start
 ```bash
@@ -57,61 +62,6 @@ $ cd rest-fornite-api
 $ LOGIN_EMAIL=mail LOGIN_PASSWORD=pass ........ npm start
 ```
 
---------
-
 ## Endpoint
 Supported plateform : `pc`, `ps4`, `xb1`.
-
-- `/v1/user/<platform>/<username>` get user info by epic games username
-https://api.fortnite.lemairepro.fr/v1/user/pc/skynewz
----
-
-- `/v1/stats/id/<platform>/<id>` Get stats of given user ID : https://api.fortnite.lemairepro.fr/v1/pve/skynewz
----
-
-- `/v1/pve/<username>` Get stats of given username : https://api.fortnite.lemairepro.fr/v1/pve/skynewz
----
-
-- `/v1/news/<lang>` Check Fortnite ETA : https://api.fortnite.lemairepro.fr/v1/news
-```js
-{
-  "common": {
-    "_type": "CommonUI Simple Message Base",
-    "title": "Battle Royale",
-    "body": "Now with SQUADS! Grab three friends and hop into the action. \n\nRemember - Squads are here! Teaming in solo play is still unfair to others and is a bannable offense."
-  },
-  "br": [
-    {
-      "image": "https://cdn2.unrealengine.com/Fortnite%2FFNBR_MOTD_New-POI-256x256-589475a047855266499cf9aac03782fe868bf3f1.png",
-      "_type": "CommonUI Simple Message Base",
-      "title": "Map Update!",
-      "body": " Discover a new city, underground mine and more."
-    },
-    {
-      "image": "https://cdn2.unrealengine.com/Fortnite%2FFNBR_MOTD_TierBundle-256x256-d64ea9edadbcd75714b5e9c1fc578b547d22238b.png",
-      "_type": "CommonUI Simple Message Base",
-      "title": "10 Tier Bundle: On Sale Now!",
-      "body": "Buy ten Battle Pass tiers for the price of six with this limited time bundle. "
-    }
-  ],
-  "loginmessage": {
-    "_type": "CommonUI Simple Message Base",
-    "title": "Map Update is live!",
-    "body": "BATTLE ROYALE:\n\nDiscover a new city, underground mine and more.\n\nBATTLE PASS BUNDLE:\n\nBuy ten Battle Pass tiers for the price of six in the item shop. On sale now for a limited time!\n\nSAVE THE WORLD: \n\nHelp Ray bring holiday cheer to this husk-ridden world for the last week of the holiday event.\n"
-  },
-  "survivalmessage": {
-    "_type": "CommonUI Simple Message Base",
-    "title": "The Survive the Storm event is now live!",
-    "body": "Take the pledge:\nSelect a target survival time of 3 or 7 nights.\n\nSend Feedback:\nSurvive the Storm is still in development. We’d love to hear what you think."
-  }
-}
-```
----
-
-- `/v1/check` Get Fornite ETA : https://api.fortnite.lemairepro.fr/v1/check
-```js
-true
-```
----
-
-- `/v1/store` Get current store - OPTIONAL, add /en or /<language code> : https://api.fortnite.lemairepro.fr/v1/store
+You can view endpoints at https://api.fortnite.lemairepro.fr/api-docs/

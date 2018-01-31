@@ -11,10 +11,10 @@ chai.use(chaiHttp);
 
 //Our parent block
 describe('PVE', () => {
-  describe('/GET /v1/pve/:username', () => {
+  describe('/GET /pve/:username', () => {
     it('it should return 404 because wrong username', (done) => {
       chai.request(server)
-        .get('/v1/pve/wrongusernameatall')
+        .get('/pve/wrongusernameatall')
         .end((err, res) => {
           res.should.have.status(404);
           res.body.should.be.a('object');
@@ -25,10 +25,10 @@ describe('PVE', () => {
     });
   });
 
-  describe('/GET /v1/pve/:username', () => {
+  describe('/GET /pve/:username', () => {
     it('it should return pve info for given username', (done) => {
       chai.request(server)
-        .get('/v1/pve/skynewz')
+        .get('/pve/skynewz')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
@@ -39,10 +39,10 @@ describe('PVE', () => {
 });
 
 describe('PVE INFO', () => {
-  describe('/GET /v1/pve/info/:lang?', () => {
+  describe('/GET /pve/info/:lang?', () => {
     it('it fornite pve info in french', (done) => {
       chai.request(server)
-        .get('/v1/pve/info/fr')
+        .get('/pve/info/fr')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
@@ -51,10 +51,10 @@ describe('PVE INFO', () => {
     });
   });
 
-  describe('/GET /v1/pve/info/:lang?', () => {
+  describe('/GET /pve/info/:lang?', () => {
     it('it fornite pve info in it', (done) => {
       chai.request(server)
-        .get('/v1/pve/info/it')
+        .get('/pve/info/it')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
@@ -63,10 +63,10 @@ describe('PVE INFO', () => {
     });
   });
 
-  describe('/GET /v1/pve/info/:lang?', () => {
+  describe('/GET /pve/info/:lang?', () => {
     it('it fornite pve info', (done) => {
       chai.request(server)
-        .get('/v1/pve/info')
+        .get('/pve/info')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');

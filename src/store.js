@@ -12,7 +12,7 @@ module.exports = {
               devName: catalogEntry.devName,
               offerId: catalogEntry.offerId,
               prices: catalogEntry.prices,
-              picturePath: url + "/static/store/" + catalogEntry.devName.replace(/ /g, "_") + ".png"
+              picturePath: url + "/store/" + catalogEntry.devName.replace(/ /g, "_") + ".png"
             })
           });
           newStoreFront.push({

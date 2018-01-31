@@ -11,10 +11,10 @@ chai.use(chaiHttp);
 
 //Our parent block
 describe('User', () => {
-  describe('/GET /v1/user/:plateform/:username', () => {
+  describe('/GET /user/:plateform/:username', () => {
     it('it should GET a user by the given username', (done) => {
       chai.request(server)
-        .get('/v1/user/pc/skynewz')
+        .get('/user/pc/skynewz')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
@@ -23,10 +23,10 @@ describe('User', () => {
     });
   });
 
-  describe('/GET /v1/user/:plateform/:username', () => {
+  describe('/GET /user/:plateform/:username', () => {
     it('it should return 404 because wrong username', (done) => {
       chai.request(server)
-        .get('/v1/user/pc/wrongusernameatall')
+        .get('/user/pc/wrongusernameatall')
         .end((err, res) => {
           res.should.have.status(404);
           res.body.should.be.a('object');
@@ -37,10 +37,10 @@ describe('User', () => {
     });
   });
 
-  describe('/GET /v1/user/:plateform/:username', () => {
+  describe('/GET /user/:plateform/:username', () => {
     it('it should return 404 because wrond plateform', (done) => {
       chai.request(server)
-        .get('/v1/user/ps4/skynewz')
+        .get('/user/ps4/skynewz')
         .end((err, res) => {
           res.should.have.status(404);
           res.body.should.be.a('object');
@@ -51,10 +51,10 @@ describe('User', () => {
     });
   });
 
-  describe('/GET /v1/user/:plateform/:username', () => {
+  describe('/GET /user/:plateform/:username', () => {
     it('it should return 400 because wrond plateform', (done) => {
       chai.request(server)
-        .get('/v1/user/aaa/skynewz')
+        .get('/user/aaa/skynewz')
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');

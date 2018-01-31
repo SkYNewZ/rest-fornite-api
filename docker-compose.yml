@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  api:
+    image: skynewz/fortnite-api
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - LOGIN_EMAIL=fake@mail.me
+      - LOGIN_PASSWORD=pass
+      - OAUTH_EPIC_LAUNCHER=XXXXX
+      - OAUTH_FORTNITE=XXXXX
+      - REDIS_HOST=cache
+
+  cache:
+    image: redis:4.0-alpine

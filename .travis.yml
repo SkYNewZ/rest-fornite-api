@@ -5,6 +5,7 @@ node_js:
 
 services:
   - docker
+  - redis-server
 
 before_install:
   - node -v
@@ -16,7 +17,7 @@ install:
   - npm install -g istanbul codecov
 
 script:
-  - npm test
+  - REDIS_HOST=localhost npm test
   - codecov
 
 before_deploy:
