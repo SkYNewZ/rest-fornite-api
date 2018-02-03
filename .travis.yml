@@ -8,8 +8,6 @@ services:
   - redis-server
 
 before_install:
-  - node -v
-  - npm -v
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 
 install:
