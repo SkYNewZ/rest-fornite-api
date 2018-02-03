@@ -10,10 +10,10 @@ let server = require('../api');
 chai.use(chaiHttp);
 
 //Our parent block
-describe('News', () => {
-    it('it should return news', (done) => {
+describe('Shop', () => {
+    it('it should get store info', (done) => {
         chai.request(server)
-            .get('/news')
+            .get('/store')
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
@@ -21,9 +21,9 @@ describe('News', () => {
             });
     });
 
-    it('it should return news in french', (done) => {
+    it('it should get store info in french', (done) => {
         chai.request(server)
-            .get('/news/fr')
+            .get('/store/fr')
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
@@ -31,9 +31,9 @@ describe('News', () => {
             });
     });
 
-    it('it should return news in it', (done) => {
+    it('it should get store info in it', (done) => {
         chai.request(server)
-            .get('/news/it')
+            .get('/store/it')
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
