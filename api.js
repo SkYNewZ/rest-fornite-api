@@ -15,8 +15,6 @@ let user = require('./routes/user'),
     check = require('./routes/check');
 // <----END REQUIRED PACKAGES---->
 
-let cache = null;
-
 // <----APP CONFIG---->
 app.set('port', process.env.PORT || 3000);
 app.all('/*', function (req, res, next) {
@@ -28,8 +26,9 @@ app.use(Config.static_uri, express.static('public'));
 
 // <----REDIS ACTIVATION---->
 //enable redis if process.env.REDIS_HOST provided
+let cache = null;
 if (Config.redis.host) {
-    let cache = require('express-redis-cache')(Config.redis);
+    cache = require('express-redis-cache')(Config.redis);
     app.use(cache.route());
 }
 // <----END REDIS ACTIVATION---->
