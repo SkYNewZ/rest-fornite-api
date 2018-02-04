@@ -58,3 +58,6 @@ typings/
 .env
 
 test-server.js
+
+#IDE
+.idea
