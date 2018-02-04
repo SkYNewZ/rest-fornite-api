@@ -22,10 +22,6 @@ RUN npm install
 # add sources
 COPY . .
 
-#ensure all files are correct
-RUN cd /app/public/store && \
-    for f in ./*; do mv "$f" "${f// /_}"; done
-
 EXPOSE 3000
 
 ENTRYPOINT ["node", "api.js"]

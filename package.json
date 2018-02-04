@@ -1,6 +1,6 @@
 {
   "name": "rest-fortnite-api",
-  "version": "2.5.9",
+  "version": "2.5.10",
   "description": "REST Fortnite API. Get stats, score, kills...",
   "main": "api.js",
   "scripts": {
