@@ -51,8 +51,7 @@ function getStatsBRFromID(req, res) {
                             code: 404,
                             message: err
                         });
-                    } else /* istanbul ignore else  */
-                    if (err === "Please precise a good platform: ps4/xb1/pc") {
+                    } else /* istanbul ignore else  */ if (err === "Please precise a good platform: ps4/xb1/pc") {
                         res.status(400).send({
                             code: 400,
                             message: err
