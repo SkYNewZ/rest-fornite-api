@@ -7,13 +7,13 @@ module.exports = {
                 // keep only the BRDailyStorefront and BRWeeklyStorefront
                 if (storefront.name === "BRDailyStorefront" || storefront.name === "BRWeeklyStorefront") {
                     let newCatalogEntries = [];
-                    storefront.catalogEntries.forEach((catalogEntry, index) => {
+                    storefront.catalogEntries.forEach((catalogEntry) => {
                         newCatalogEntries.push({
                             devName: catalogEntry.devName,
                             offerId: catalogEntry.offerId,
                             prices: catalogEntry.prices,
                             picturePath: url + "/store/" + catalogEntry.devName.replace(/ /g, "_") + ".png"
-                        })
+                        });
                     });
                     newStoreFront.push({
                         name: storefront.name,

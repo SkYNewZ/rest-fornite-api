@@ -7,6 +7,11 @@ services:
   - docker
   - redis-server
 
+cache:
+  directories:
+    - node_modules
+
+
 before_install:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 

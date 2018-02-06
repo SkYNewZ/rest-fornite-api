@@ -5,6 +5,7 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/skynewz/fortnite-api.svg)](https://hub.docker.com/r/skynewz/fortnite-api/)
 [![](https://images.microbadger.com/badges/image/skynewz/fortnite-api.svg)](https://microbadger.com/images/skynewz/fortnite-api "Get your own image badge on microbadger.com")
 [![](https://images.microbadger.com/badges/version/skynewz/fortnite-api.svg)](https://microbadger.com/images/skynewz/fortnite-api "Get your own version badge on microbadger.com")
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg)](#contributors)
 
 A simple NodeJS API under docker container to retrieve stats and infos from [Fortnite Game](https://www.epicgames.com/fortnite/fr/home) API.
 See on [Docker Hub](https://hub.docker.com/r/skynewz/fortnite-api/).
@@ -65,3 +66,13 @@ $ LOGIN_EMAIL=mail LOGIN_PASSWORD=pass ........ npm start
 ## Endpoint
 Supported plateform : `pc`, `ps4`, `xb1`.
 You can view endpoints at https://api.fortnite.lemairepro.fr/api-docs/
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+| [<img src="https://avatars3.githubusercontent.com/u/26750012?v=4" width="100px;"/><br /><sub><b>Quentin LEMAIRE</b></sub>](https://www.lemairepro.fr/)<br />[💻](https://github.com/SkYNewZ/rest-fornite-api/commits?author=SkYNewZ "Code") [📖](https://github.com/SkYNewZ/rest-fornite-api/commits?author=SkYNewZ "Documentation") [💡](#example-SkYNewZ "Examples") [🤔](#ideas-SkYNewZ "Ideas, Planning, & Feedback") [📦](#platform-SkYNewZ "Packaging/porting to new platform") [⚠️](https://github.com/SkYNewZ/rest-fornite-api/commits?author=SkYNewZ "Tests") | [<img src="https://avatars1.githubusercontent.com/u/24639184?v=4" width="100px;"/><br /><sub><b>Xewtwo</b></sub>](https://github.com/Xewtwo)<br />[🐛](https://github.com/SkYNewZ/rest-fornite-api/issues?q=author%3AXewtwo "Bug reports") [🤔](#ideas-Xewtwo "Ideas, Planning, & Feedback") |
+| :---: | :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
