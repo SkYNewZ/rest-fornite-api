@@ -5,7 +5,9 @@
   "main": "api.js",
   "scripts": {
     "start": "node api.js",
-    "test": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec --timeout 10000"
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec --timeout 10000",
+    "contrib:add": "all-contributors add",
+    "contrib:build": "all-contributors generate"
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,7 @@
     "swagger-ui-express": "^2.0.15"
   },
   "devDependencies": {
+    "all-contributors-cli": "^4.10.1",
     "chai": "^3.5.0",
     "chai-http": "^2.0.1",
     "eslint": "^4.17.0",
