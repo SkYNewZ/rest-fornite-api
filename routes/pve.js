@@ -14,9 +14,7 @@ function getStatsPVE(req, res) {
                             code: 404,
                             message: err
                         });
-                    }
-                    /* istanbul ignore next */
-                    else if (err === "No Data") {
+                    } /* istanbul ignore next */ else if (err === "No Data") {
                         res.status(400).send({
                             code: 400,
                             message: err

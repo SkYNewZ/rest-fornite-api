@@ -28,6 +28,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-http": "^2.0.1",
+    "eslint": "^4.17.0",
     "mocha": "^2.4.5",
     "uuid": "^3.2.1"
   }
