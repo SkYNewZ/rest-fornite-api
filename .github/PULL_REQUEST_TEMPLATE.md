@@ -1,5 +1,5 @@
 - [ ] Verify good token
-- [ ] Tests correctly executed on lapto
+- [ ] Tests correctly executed on laptop
 
 ## Description
 <!--- Describe your changes -->
