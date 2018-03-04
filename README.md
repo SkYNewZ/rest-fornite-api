@@ -1,15 +1,14 @@
 # Fortnite-API on NodeJs Server
 [![Build Status](https://travis-ci.org/SkYNewZ/rest-fornite-api.svg?branch=master)](https://travis-ci.org/SkYNewZ/rest-fornite-api)
 [![codecov](https://codecov.io/gh/SkYNewZ/rest-fornite-api/branch/master/graph/badge.svg)](https://codecov.io/gh/SkYNewZ/rest-fornite-api)
-[![npm version](https://badge.fury.io/js/fortnite-api.svg)](https://www.npmjs.com/package/fortnite-api)
 [![Docker Pulls](https://img.shields.io/docker/pulls/skynewz/fortnite-api.svg)](https://hub.docker.com/r/skynewz/fortnite-api/)
-[![](https://images.microbadger.com/badges/image/skynewz/fortnite-api.svg)](https://microbadger.com/images/skynewz/fortnite-api "Get your own image badge on microbadger.com")
 [![](https://images.microbadger.com/badges/version/skynewz/fortnite-api.svg)](https://microbadger.com/images/skynewz/fortnite-api "Get your own version badge on microbadger.com")
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg)](#contributors)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/QLemaire/2)
 
 A simple NodeJS API under docker container to retrieve stats and infos from [Fortnite Game](https://www.epicgames.com/fortnite/fr/home) API.
 See on [Docker Hub](https://hub.docker.com/r/skynewz/fortnite-api/).
-Thanks to [qlaffont](https://github.com/qlaffont/fortnite-api) for doing this API. You can support him with a donation : [Paypal Donation](https://www.paypal.me/qlaffont)
+Thanks to [qlaffont](https://github.com/qlaffont/fortnite-api) for doing this API.
 
 ## Example
 You can found SwaggerUI here https://api.fortnite.lemairepro.fr/api-docs
