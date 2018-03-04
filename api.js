@@ -3,7 +3,8 @@ let express = require('express'),
     app = express(),
     morgan = require('morgan'),
     swaggerUi = require('swagger-ui-express'),
-    Config = require('./src/config');
+    Config = require('./src/config'),
+    ua = require('universal-analytics');
 
 //routes methods
 let user = require('./routes/user'),
@@ -14,10 +15,14 @@ let user = require('./routes/user'),
     check = require('./routes/check');
 // <----END REQUIRED PACKAGES---->
 
+// analytics
+let visitor = ua(Config.universal_analytics_id);
+
 // <----APP CONFIG---->
 app.set('port', process.env.PORT || 3000);
 app.all('/*', function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
+    visitor.pageview(req.url, req.headers.host).send()
     next();
 });
 app.use(Config.static_uri, express.static('public'));
