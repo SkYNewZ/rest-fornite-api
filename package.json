@@ -1,6 +1,6 @@
 {
   "name": "rest-fortnite-api",
-  "version": "2.5.11",
+  "version": "2.5.12",
   "description": "REST Fortnite API. Get stats, score, kills...",
   "main": "api.js",
   "scripts": {
@@ -20,20 +20,20 @@
   },
   "homepage": "https://github.com/SkYNewZ/docker-fortnite-api#readme",
   "dependencies": {
-    "express": "^4.16.2",
-    "express-redis-cache": "^1.0.0",
-    "fortnite-api": "^2.6.0",
+    "express": "^4.16.3",
+    "express-redis-cache": "^1.1.1",
+    "fortnite-api": "^2.7.0",
     "memory-cache": "^0.2.0",
     "morgan": "^1.9.0",
     "swagger-ui-express": "^2.0.15",
     "universal-analytics": "^0.4.16"
   },
   "devDependencies": {
-    "all-contributors-cli": "^4.10.1",
-    "chai": "^3.5.0",
-    "chai-http": "^2.0.1",
-    "eslint": "^4.17.0",
-    "mocha": "^2.4.5",
+    "all-contributors-cli": "^4.11.1",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "eslint": "^4.19.0",
+    "mocha": "^5.0.4",
     "uuid": "^3.2.1"
   }
 }
