@@ -6,5 +6,6 @@ module.exports = {
         expire: 21600
     },
     static_uri: '/assets',
-    universal_analytics_id: 'UA-93941787-3'
+    universal_analytics_id: 'UA-93941787-3',
+    debug: process.env.DEBUG || false
 };

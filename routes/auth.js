@@ -1,4 +1,5 @@
-let Fortnite = require('fortnite-api');
+let Fortnite = require('fortnite-api'),
+    Config = require('../src/config');
 let auth = [];
 
 if (process.env.LOGIN_EMAIL) {
@@ -17,6 +18,8 @@ if (process.env.OAUTH_FORTNITE) {
     auth.push(process.env.OAUTH_FORTNITE);
 }
 
-let fortniteAPI = new Fortnite(auth);
+let fortniteAPI = new Fortnite(auth, {
+    debug: Config.debug
+  });
 
 module.exports = fortniteAPI;
