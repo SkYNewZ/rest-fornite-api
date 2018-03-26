@@ -1,5 +1,6 @@
 - [ ] Verify good token
-- [ ] Tests correctly executed on laptop
+- [ ] Tests passed on laptop
+- [ ] Correct pull request name
 
 ## Description
 <!--- Describe your changes -->
