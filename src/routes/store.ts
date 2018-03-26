@@ -1,6 +1,6 @@
-const fortniteAPI = require('./auth')
-const Store = require('../src/store')
-const Config = require('../src/config')
+const fortniteAPI = require('../tools/auth')
+const Store = require('../tools/store')
+const Config = require('../config/config')
 
 function getStore (req, res) {
   let language = req.params.lang || 'en'

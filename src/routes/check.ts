@@ -1,12 +1,13 @@
-const fortniteAPI = require('./auth')
+const fortniteAPI = require('../tools/auth')
 
-function getFortniteNews (req, res) {
-  let language = req.params.lang || 'en'
+function checkFortniteStatus (req, res) {
   fortniteAPI.login()
     .then(() => {
-      fortniteAPI.getFortniteNews(language)
-        .then((news) => {
-          res.json(news)
+      fortniteAPI.checkFortniteStatus()
+        .then((status) => {
+          res.json({
+            status: status
+          })
         })
         .catch((err) => {
           /* istanbul ignore next */
@@ -19,5 +20,5 @@ function getFortniteNews (req, res) {
 }
 
 module.exports = {
-  getFortniteNews
+  checkFortniteStatus
 }

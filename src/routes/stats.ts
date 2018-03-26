@@ -1,4 +1,4 @@
-const fortniteAPI = require('./auth')
+const fortniteAPI = require('../tools/auth')
 
 function getStatsBR (req, res) {
   let username = req.params.username

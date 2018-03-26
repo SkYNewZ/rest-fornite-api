@@ -1,5 +1,5 @@
 const Fortnite = require('fortnite-api')
-const Config = require('../src/config')
+const Config = require('../config/config')
 const auth = []
 
 if (process.env.LOGIN_EMAIL) {

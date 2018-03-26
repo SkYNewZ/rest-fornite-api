@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 const swaggerUi = require('swagger-ui-express')
-const Config = require('./src/config')
+const Config = require('./config/config')
 const ua = require('universal-analytics')
 
 // routes methods
@@ -120,7 +120,7 @@ app.route('/store/:lang?')
   }, store.getStore)
 
 // swaggerUi
-let swaggerDocument = require('./public/swagger.json')
+const swaggerDocument = require('../public/swagger.json')
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 // The 404 Route (ALWAYS Keep this as the last route)

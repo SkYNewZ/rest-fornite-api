@@ -57,7 +57,9 @@ typings/
 # dotenv environment variables file
 .env
 
-test-server.js
+# Compiled sources
+built/*
+!built/.gitkeep
 
 #IDE
 .idea
