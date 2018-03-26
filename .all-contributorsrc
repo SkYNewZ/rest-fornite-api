@@ -30,6 +30,18 @@
         "bug",
         "ideas"
       ]
+    },
+    {
+      "login": "qlaffont",
+      "name": "Quentin",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/10044790?v=4",
+      "profile": "http://qlaffont.com",
+      "contributions": [
+        "code",
+        "ideas",
+        "test"
+      ]
     }
-  ]
+  ],
+  "repoType": "github"
 }
