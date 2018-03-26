@@ -1,24 +1,26 @@
-//During the test the env letiable is set to test
-process.env.NODE_ENV = 'test';
+// During the test the env letiable is set to test
+process.env.NODE_ENV = 'test'
 
-//Require the dev-dependencies
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-let should = chai.should();
-let server = require('../api');
+// Require the dev-dependencies
+const chai = require('chai')
+const chaiHttp = require('chai-http')
+const server = require('../api')
+const expect = chai.expect
+chai.use(chaiHttp)
 
-chai.use(chaiHttp);
-
-//Our parent block
+// Our parent block
 describe('Check', () => {
-    it('it should return fornite ETA', (done) => {
-        chai.request(server)
-            .get('/check')
-            .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-                res.should.have.property('status');
-                done();
-            });
-    });
-});
+  it('it should return fornite ETA', (done) => {
+    chai.request(server)
+      .get('/check')
+      .end((err, res) => {
+        if (err) {
+          done()
+        }
+        expect(res).to.have.status(200)
+        expect(res.body).to.be.a('object')
+        expect(res.body).to.have.property('status')
+        done()
+      })
+  })
+})

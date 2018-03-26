@@ -1,25 +1,27 @@
-//During the test the env letiable is set to test
-process.env.NODE_ENV = 'test';
+// During the test the env letiable is set to test
+process.env.NODE_ENV = 'test'
 
-//Require the dev-dependencies
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-let should = chai.should();
-let server = require('../api');
+// Require the dev-dependencies
+const chai = require('chai')
+const chaiHttp = require('chai-http')
+const server = require('../api')
+const expect = chai.expect
+chai.use(chaiHttp)
 
-chai.use(chaiHttp);
-
-//Our parent block
-describe('Default tests', () => {
-    it('it should 404', (done) => {
-        chai.request(server)
-            .get('/404')
-            .end((err, res) => {
-                res.should.have.status(404);
-                res.body.should.be.a('object');
-                res.body.should.have.property('code');
-                res.body.should.have.property('message').eql('Page not found');
-                done();
-            });
-    });
-});
+// Our parent block
+describe('Default', () => {
+  it('it should 404', (done) => {
+    chai.request(server)
+      .get('/404')
+      .end((err, res) => {
+        if (err) {
+          console.log(err)
+        }
+        expect(res).to.have.status(404)
+        expect(res.body).to.be.a('object')
+        expect(res.body).to.have.property('code')
+        expect(res.body).to.have.property('message').to.equal('Page not found')
+        done()
+      })
+  })
+})
