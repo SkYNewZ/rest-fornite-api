@@ -7,7 +7,8 @@
     "start": "node dist/index.js",
     "test": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec --timeout 10000 --exit",
     "contrib:add": "all-contributors add",
-    "contrib:build": "all-contributors generate"
+    "contrib:build": "all-contributors generate",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
