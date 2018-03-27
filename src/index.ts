@@ -1,5 +1,4 @@
 // <----REQUIRED PACKAGES---->
-import * as _ from 'lodash'
 import * as express from 'express';
 import * as morgan from 'morgan'
 import * as swaggerUi from 'swagger-ui-express'
