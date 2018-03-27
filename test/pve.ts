@@ -19,8 +19,8 @@ describe('PVE', () => {
         }
         expect(res).to.have.status(404);
         expect(res.body).to.be.a('object')
-        expect(res.body).to.have.property('code')
-        expect(res.body).to.have.property('message')
+        expect(res.body).to.have.property('_code')
+        expect(res.body).to.have.property('_message')
         done()
       })
   })
