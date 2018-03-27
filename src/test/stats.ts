@@ -2,16 +2,16 @@
 process.env.NODE_ENV = 'test'
 
 // Require the dev-dependencies
-const chai = require('chai')
-const chaiHttp = require('chai-http')
-const server = require('../api')
-const uuidv1 = require('uuid')
+import * as chai from "chai"
+import * as chaiHttp from 'chai-http'
+import { AppServer } from '../index'
+import { uuidv1 } from 'uuid'
 const expect = chai.expect
 chai.use(chaiHttp)
 
 describe('Stats with username', () => {
   it('it should return 404 because wrong username', (done) => {
-    chai.request(server)
+    chai.request(AppServer)
       .get('/stats/pc/wrongusernameatall')
       .end((err, res) => {
         if (err) {
@@ -26,7 +26,7 @@ describe('Stats with username', () => {
   })
 
   it('it should return 404 because wrond plateform for given username', (done) => {
-    chai.request(server)
+    chai.request(AppServer)
       .get('/stats/ps4/skynewz')
       .end((err, res) => {
         if (err) {
@@ -41,7 +41,7 @@ describe('Stats with username', () => {
   })
 
   it('it should return 400 because bad plateform', (done) => {
-    chai.request(server)
+    chai.request(AppServer)
       .get('/stats/aaa/skynewz')
       .end((err, res) => {
         if (err) {
@@ -56,7 +56,7 @@ describe('Stats with username', () => {
   })
 
   it('it should get stats', (done) => {
-    chai.request(server)
+    chai.request(AppServer)
       .get('/stats/pc/skynewz')
       .end((err, res) => {
         if (err) {
@@ -71,7 +71,7 @@ describe('Stats with username', () => {
 
 describe('Stats with ID', () => {
   it('it should GET stats by the given ID', (done) => {
-    chai.request(server)
+    chai.request(AppServer)
       .get('/stats/id/pc/8b057df0-e637-44f3-8962-f3c7635674b4')
       .end((err, res) => {
         if (err) {
@@ -84,7 +84,7 @@ describe('Stats with ID', () => {
   })
 
   it('it should return 404 because GOOD id but WRONG plateform', (done) => {
-    chai.request(server)
+    chai.request(AppServer)
       .get('/stats/id/ps4/8b057df0-e637-44f3-8962-f3c7635674b4')
       .end((err, res) => {
         if (err) {
@@ -99,7 +99,7 @@ describe('Stats with ID', () => {
   })
 
   it('it should return 404 because GOOD platform but WROND id', (done) => {
-    chai.request(server)
+    chai.request(AppServer)
       .get('/stats/id/pc/' + uuidv1())
       .end((err, res) => {
         if (err) {
@@ -114,7 +114,7 @@ describe('Stats with ID', () => {
   })
 
   it('it should return 400 because plateform is unknown', (done) => {
-    chai.request(server)
+    chai.request(AppServer)
       .get('/stats/id/aaa/8b057df0-e637-44f3-8962-f3c7635674b4')
       .end((err, res) => {
         if (err) {

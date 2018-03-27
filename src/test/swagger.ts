@@ -2,18 +2,18 @@
 process.env.NODE_ENV = 'test'
 
 // Require the dev-dependencies
-const chai = require('chai')
-const chaiHttp = require('chai-http')
-const server = require('../api')
-const Config = require('../config/config')
+import * as chai from 'chai'
+import * as chaiHttp from 'chai-http'
+import { AppServer } from '../index'
+import { AppConfig } from '../config/config'
 const expect = chai.expect
 chai.use(chaiHttp)
 
 // Our parent block
 describe('Swagger', () => {
   it('it should 200', (done) => {
-    chai.request(server)
-      .get(Config.static_uri + '/swagger.json')
+    chai.request(AppServer)
+      .get(AppConfig.static_uri + '/swagger.json')
       .end((err, res) => {
         if (err) {
           console.log(err)
@@ -24,8 +24,8 @@ describe('Swagger', () => {
   })
 
   it('it should 200', (done) => {
-    chai.request(server)
-      .get(Config.static_uri + '/swagger.yaml')
+    chai.request(AppServer)
+      .get(AppConfig.static_uri + '/swagger.yaml')
       .end((err, res) => {
         if (err) {
           console.log(err)
@@ -36,7 +36,7 @@ describe('Swagger', () => {
   })
 
   it('it should 200', (done) => {
-    chai.request(server)
+    chai.request(AppServer)
       .get('/api-docs')
       .end((err, res) => {
         if (err) {

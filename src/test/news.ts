@@ -2,16 +2,16 @@
 process.env.NODE_ENV = 'test'
 
 // Require the dev-dependencies
-const chai = require('chai')
-const chaiHttp = require('chai-http')
-const server = require('../api')
+import * as chai from "chai"
+import * as chaiHttp from 'chai-http'
+import { AppServer } from '../index'
 const expect = chai.expect
 chai.use(chaiHttp)
 
 // Our parent block
 describe('News', () => {
   it('it should return news', (done) => {
-    chai.request(server)
+    chai.request(AppServer)
       .get('/news')
       .end((err, res) => {
         if (err) {
@@ -24,7 +24,7 @@ describe('News', () => {
   })
 
   it('it should return news in french', (done) => {
-    chai.request(server)
+    chai.request(AppServer)
       .get('/news/fr')
       .end((err, res) => {
         if (err) {
@@ -37,7 +37,7 @@ describe('News', () => {
   })
 
   it('it should return news in it', (done) => {
-    chai.request(server)
+    chai.request(AppServer)
       .get('/news/it')
       .end((err, res) => {
         if (err) {
