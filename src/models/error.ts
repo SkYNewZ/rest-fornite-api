@@ -2,6 +2,11 @@ export class CustomError {
     private _code: number;
     private _message: string;
 
+	/**
+	 * Constructor
+	 * @param code code of the error
+	 * @param message message
+	 */
     constructor(code: number, message: string) {
         this._code = code;
         this._message = message
