@@ -49,7 +49,7 @@
     "@types/universal-analytics": "^0.4.2",
     "express": "^4.16.3",
     "express-redis-cache": "^1.1.1",
-    "fortnite-api": "^2.7.0",
+    "fortnite-api": "^2.6.0",
     "memory-cache": "^0.2.0",
     "morgan": "^1.9.0",
     "swagger-ui-express": "^2.0.15",
