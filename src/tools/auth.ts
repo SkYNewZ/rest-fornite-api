@@ -1,4 +1,4 @@
-import * as FortniteAPI from 'fortnite-api'
+const FortniteAPI = require('fortnite-api');
 import { AppConfig } from '../config/config'
 const auth = []
 

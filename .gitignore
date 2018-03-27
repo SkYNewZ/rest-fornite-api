@@ -58,8 +58,8 @@ typings/
 .env
 
 # Compiled sources
-built/*
-!built/.gitkeep
+dist/*
+!dist/.gitkeep
 
 #IDE
 .idea

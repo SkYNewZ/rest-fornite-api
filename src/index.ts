@@ -1,9 +1,9 @@
 // <----REQUIRED PACKAGES---->
-import * as express from 'express';
-import * as morgan from 'morgan'
-import * as swaggerUi from 'swagger-ui-express'
 import { AppConfig } from './config/config'
-import * as ua from 'universal-analytics'
+const express = require("express");
+const morgan = require("morgan");
+const swaggerUi = require('swagger-ui-express');
+const ua = require('universal-analytics');
 
 const app = express()
 

@@ -8,7 +8,7 @@ export function getStore(req, res) {
     .then(() => {
       fortniteAPI.getStore(language)
         .then((store) => {
-          Store.convert(store, req.protocol + '://' + req.headers.host + Config.static_uri)
+          Store.convert(store, req.protocol + '://' + req.headers.host + AppConfig.static_uri)
             .then((resultStore) => {
               res.json(resultStore)
             })

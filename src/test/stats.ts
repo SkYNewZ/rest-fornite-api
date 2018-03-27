@@ -2,12 +2,13 @@
 process.env.NODE_ENV = 'test'
 
 // Require the dev-dependencies
-import * as chai from "chai"
-import * as chaiHttp from 'chai-http'
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const uuidv1 = require('uuid')
 import { AppServer } from '../index'
-import { uuidv1 } from 'uuid'
 const expect = chai.expect
 chai.use(chaiHttp)
+
 
 describe('Stats with username', () => {
   it('it should return 404 because wrong username', (done) => {
