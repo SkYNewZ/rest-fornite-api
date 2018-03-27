@@ -1,4 +1,4 @@
-FROM node:9-alpine as BUILDER
+FROM node as BUILDER
 ENV NODE_ENV production
 WORKDIR /app
 
@@ -9,7 +9,7 @@ RUN npm install -g typescript && npm install
 
 # add sources
 COPY . .
-RUN npm build
+RUN npm run build
 
 
 FROM node:9-alpine
@@ -27,7 +27,10 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.version=$VERSION \
       org.label-schema.schema-version="1.0"
 
-COPY --from=BUILDER /app .
+COPY --from=BUILDER /app/dist .
+COPY --from=BUILDER /app/node_modules node_modules
+COPY --from=BUILDER /app/src/swagger swagger
+COPY --from=BUILDER /app/package.json .
 EXPOSE 3000
 
-ENTRYPOINT ["node", "index.js"]
+CMD ["npm", "start"]

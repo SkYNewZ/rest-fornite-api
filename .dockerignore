@@ -19,6 +19,7 @@ coverage
 
 # nyc test coverage
 .nyc_output
+/coverage.lcov
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
@@ -54,4 +55,13 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-test.js
+# dotenv environment variables file
+.env
+
+# Compiled sources
+dist/*
+!dist/.gitkeep
+
+#IDE
+.idea
+.vscode

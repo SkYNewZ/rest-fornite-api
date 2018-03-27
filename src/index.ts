@@ -122,7 +122,7 @@ app.route('/store/:lang?')
   }, store.getStore)
 
 // swaggerUi
-const swaggerDocument = require('../public/swagger.json')
+const swaggerDocument = require('./swagger/swagger.json')
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 // The 404 Route (ALWAYS Keep this as the last route)
