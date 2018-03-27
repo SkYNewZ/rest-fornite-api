@@ -1,6 +1,6 @@
-const FortniteAPI = require('fortnite-api');
+const FortniteAPI = require('fortnite-api')
 import { AppConfig } from '../config/config'
-const auth = []
+const auth: String[] = []
 
 if (process.env.LOGIN_EMAIL) {
   auth.push(process.env.LOGIN_EMAIL)

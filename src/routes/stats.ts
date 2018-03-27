@@ -1,8 +1,10 @@
 import { fortniteAPI } from '../tools/auth'
+import { CustomError } from '../class/error'
+import { Response, Request } from 'express'
 
-export function getStatsBR (req, res) {
-  let username = req.params.username
-  let platform = req.params.platform
+export function getStatsBR (req: Request, res: Response) {
+  let username: string = req.params.username
+  let platform: string = req.params.platform
   fortniteAPI.login()
     .then(() => {
       fortniteAPI.getStatsBR(username, platform)
@@ -11,34 +13,22 @@ export function getStatsBR (req, res) {
         })
         .catch((err) => {
           if (err === 'Player Not Found') {
-            res.status(404).send({
-              code: 404,
-              message: err
-            })
+            res.status(404).send(new CustomError(404, err))
           } else if (err === 'Impossible to fetch User. User not found on this platform') {
-            res.status(404).send({
-              code: 404,
-              message: err
-            })
+            res.status(404).send(new CustomError(404, err))
           } else /* istanbul ignore else  */
           if (err === 'Please precise a good platform: ps4/xb1/pc') {
-            res.status(400).send({
-              code: 400,
-              message: err
-            })
+            res.status(400).send(new CustomError(400, err))
           } else {
-            res.status(500).send({
-              code: 500,
-              message: err
-            })
+            res.status(500).send(new CustomError(500, err))
           }
         })
     })
 }
 
-export function getStatsBRFromID (req, res) {
-  let id = req.params.id
-  let platform = req.params.platform
+export function getStatsBRFromID (req: Request, res: Response) {
+  let id: number = req.params.id
+  let platform: number = req.params.platform
   fortniteAPI.login()
     .then(() => {
       fortniteAPI.getStatsBRFromID(id, platform)
@@ -47,20 +37,11 @@ export function getStatsBRFromID (req, res) {
         })
         .catch((err) => {
           if (err === 'Impossible to fetch User. User not found on this platform') {
-            res.status(404).send({
-              code: 404,
-              message: err
-            })
+            res.status(404).send(new CustomError(404, err))
           } else /* istanbul ignore else  */ if (err === 'Please precise a good platform: ps4/xb1/pc') {
-            res.status(400).send({
-              code: 400,
-              message: err
-            })
+            res.status(400).send(new CustomError(400, err))
           } else {
-            res.status(500).send({
-              code: 500,
-              message: err
-            })
+            res.status(500).send(new CustomError(500, err))
           }
         })
     })

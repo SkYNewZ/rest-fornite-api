@@ -1,6 +1,8 @@
 import { fortniteAPI } from '../tools/auth'
+import { CustomError } from '../class/error'
+import { Response, Request } from 'express'
 
-export function getStatsPVE (req, res) {
+export function getStatsPVE (req: Request, res: Response) {
   let username = req.params.username
   fortniteAPI.login()
     .then(() => {
@@ -10,27 +12,18 @@ export function getStatsPVE (req, res) {
         })
         .catch((err) => {
           if (err === 'Player Not Found') {
-            res.status(404).send({
-              code: 404,
-              message: err
-            })
+            res.status(404).send(new CustomError(404, err))
           } /* istanbul ignore next */ else if (err === 'No Data') {
-            res.status(400).send({
-              code: 400,
-              message: err
-            })
+            res.status(400).send(new CustomError(400, err))
           } else {
             /* istanbul ignore next */
-            res.status(500).send({
-              code: 500,
-              message: err
-            })
+            res.status(500).send(new CustomError(500, err))
           }
         })
     })
 }
 
-export function getFortnitePVEInfo (req, res) {
+export function getFortnitePVEInfo (req: Request, res: Response) {
   let language = req.params.lang || 'en'
   fortniteAPI.login()
     .then(() => {
@@ -40,10 +33,7 @@ export function getFortnitePVEInfo (req, res) {
         })
         .catch((err) => {
           /* istanbul ignore next */
-          res.status(500).send({
-            code: 500,
-            message: err
-          })
+          res.status(500).send(new CustomError(500, err))
         })
     })
 }

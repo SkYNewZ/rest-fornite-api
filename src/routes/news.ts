@@ -1,6 +1,8 @@
 import { fortniteAPI } from '../tools/auth'
+import { CustomError } from '../class/error'
+import { Response, Request } from 'express'
 
-export function getFortniteNews (req, res) {
+export function getFortniteNews (req: Request, res: Response) {
   let language = req.params.lang || 'en'
   fortniteAPI.login()
     .then(() => {
@@ -10,10 +12,7 @@ export function getFortniteNews (req, res) {
         })
         .catch((err) => {
           /* istanbul ignore next */
-          res.status(500).send({
-            code: 500,
-            message: err
-          })
+          res.status(500).send(new CustomError(500, err))
         })
     })
 }
