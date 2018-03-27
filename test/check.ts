@@ -2,16 +2,18 @@
 process.env.NODE_ENV = 'test'
 
 // Require the dev-dependencies
-const chai = require('chai')
-const chaiHttp = require('chai-http')
-const server = require('../api')
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+import { AppServer } from '../src/index'
 const expect = chai.expect
+chai.use(chaiHttp)
+
 chai.use(chaiHttp)
 
 // Our parent block
 describe('Check', () => {
   it('it should return fornite ETA', (done) => {
-    chai.request(server)
+    chai.request(AppServer)
       .get('/check')
       .end((err, res) => {
         if (err) {

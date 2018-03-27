@@ -2,25 +2,23 @@
 process.env.NODE_ENV = 'test'
 
 // Require the dev-dependencies
-const chai = require('chai')
-const chaiHttp = require('chai-http')
-const server = require('../api')
+import { Response, Request } from 'express'
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+import { AppServer } from '../src/index'
 const expect = chai.expect
 chai.use(chaiHttp)
 
 // Our parent block
 describe('Default', () => {
   it('it should 404', (done) => {
-    chai.request(server)
+    chai.request(AppServer)
       .get('/404')
-      .end((err, res) => {
+      .end((err, res: Express.Response) => {
         if (err) {
           console.log(err)
         }
         expect(res).to.have.status(404)
-        expect(res.body).to.be.a('object')
-        expect(res.body).to.have.property('code')
-        expect(res.body).to.have.property('message').to.equal('Page not found')
         done()
       })
   })

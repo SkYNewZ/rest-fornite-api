@@ -16,11 +16,12 @@ before_install:
 
 install:
   - npm install
-  - npm install -g istanbul codecov
 
 script:
   - REDIS_HOST=localhost npm test
-  - codecov
+
+after_success:
+  - npm run coverage
 
 before_deploy:
     - git tag "$(cat VERSION)"

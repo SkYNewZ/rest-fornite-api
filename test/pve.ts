@@ -2,31 +2,31 @@
 process.env.NODE_ENV = 'test'
 
 // Require the dev-dependencies
-const chai = require('chai')
-const chaiHttp = require('chai-http')
-const server = require('../api')
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+import { AppServer } from '../src/index'
 const expect = chai.expect
 chai.use(chaiHttp)
 
 // Our parent block
 describe('PVE', () => {
   it('it should return 404 because wrong username', (done) => {
-    chai.request(server)
+    chai.request(AppServer)
       .get('/pve/wrongusernameatall')
       .end((err, res) => {
         if (err) {
           console.log(err)
         }
-        expect(res).to.have.status(404)
+        expect(res).to.have.status(404);
         expect(res.body).to.be.a('object')
-        expect(res.body).to.have.property('code')
-        expect(res.body).to.have.property('message')
+        expect(res.body).to.have.property('_code')
+        expect(res.body).to.have.property('_message')
         done()
       })
   })
 
   it('it should return pve info for given username', (done) => {
-    chai.request(server)
+    chai.request(AppServer)
       .get('/pve/skynewz')
       .end((err, res) => {
         if (err) {
@@ -41,7 +41,7 @@ describe('PVE', () => {
 
 describe('PVE INFO', () => {
   it('it fornite pve info in french', (done) => {
-    chai.request(server)
+    chai.request(AppServer)
       .get('/pve/info/fr')
       .end((err, res) => {
         if (err) {
@@ -54,7 +54,7 @@ describe('PVE INFO', () => {
   })
 
   it('it fornite pve info in it', (done) => {
-    chai.request(server)
+    chai.request(AppServer)
       .get('/pve/info/it')
       .end((err, res) => {
         if (err) {
@@ -67,7 +67,7 @@ describe('PVE INFO', () => {
   })
 
   it('it fornite pve info', (done) => {
-    chai.request(server)
+    chai.request(AppServer)
       .get('/pve/info')
       .end((err, res) => {
         if (err) {

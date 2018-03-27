@@ -1,6 +1,5 @@
-module.exports = {
-  // resize store object and add picture path
-  convert: (store, url) => {
+export class Tools {
+  static convertStore(store: any) {
     return new Promise((resolve) => {
       let newStoreFront = []
       store.storefronts.forEach((storefront) => {
@@ -11,8 +10,7 @@ module.exports = {
             newCatalogEntries.push({
               devName: catalogEntry.devName,
               offerId: catalogEntry.offerId,
-              prices: catalogEntry.prices,
-              picturePath: url + '/store/' + catalogEntry.devName.replace(/ /g, '_') + '.png'
+              prices: catalogEntry.prices
             })
           })
           newStoreFront.push({
