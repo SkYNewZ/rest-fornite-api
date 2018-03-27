@@ -1,6 +1,7 @@
 import { fortniteAPI } from '../tools/auth'
 import { CustomError } from '../models/error'
 import { Response, Request } from 'express'
+import { FortniteStats } from '../models/stats';
 
 export function getStatsBR (req: Request, res: Response) {
   let username: string = req.params.username
@@ -8,7 +9,7 @@ export function getStatsBR (req: Request, res: Response) {
   fortniteAPI.login()
     .then(() => {
       fortniteAPI.getStatsBR(username, platform)
-        .then((stats) => {
+        .then((stats: FortniteStats) => {
           res.json(stats)
         })
         .catch((err) => {
@@ -32,7 +33,7 @@ export function getStatsBRFromID (req: Request, res: Response) {
   fortniteAPI.login()
     .then(() => {
       fortniteAPI.getStatsBRFromID(id, platform)
-        .then((stats) => {
+        .then((stats: FortniteStats) => {
           res.json(stats)
         })
         .catch((err) => {

@@ -3,15 +3,16 @@ import { Tools } from '../tools/store'
 import { AppConfig } from '../config/config'
 import { CustomError } from '../models/error'
 import { Response, Request } from 'express'
+import { FortniteStore } from '../models/store';
 
 export function getStore(req: Request, res: Response) {
   let language: string = req.params.lang || 'en'
   fortniteAPI.login()
     .then(() => {
       fortniteAPI.getStore(language)
-        .then((store) => {
+        .then((store: Promise<any> ) => {
           Tools.convertStore(store)
-            .then((resultStore) => {
+            .then((resultStore: FortniteStore) => {
               res.json(resultStore)
             })
             .catch((err) => {

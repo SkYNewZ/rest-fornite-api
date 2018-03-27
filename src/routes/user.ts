@@ -1,6 +1,7 @@
 import { fortniteAPI } from '../tools/auth'
 import { CustomError } from '../models/error'
 import { Response, Request } from 'express'
+import { FortniteUser } from '../models/user'
 
 export function checkPlayer(req: Request, res: Response) {
   const username: string = req.params.username
@@ -8,8 +9,9 @@ export function checkPlayer(req: Request, res: Response) {
   fortniteAPI.login()
     .then(() => {
       fortniteAPI.checkPlayer(username, platform)
-        .then((stats) => {
-          res.json(stats)
+        .then((r: FortniteUser) => {
+          r.platform = platform;
+          res.json(r);
         })
         .catch((err) => {
           if (err === 'Player Not Found') {
@@ -19,7 +21,7 @@ export function checkPlayer(req: Request, res: Response) {
           } else /* istanbul ignore else  */ if (err === 'Please precise a good platform: ps4/xb1/pc') {
             res.status(400).send(new CustomError(400, err))
           } else {
-            res.status(500).send(new CustomError(50040, err))
+            res.status(500).send(new CustomError(500, err))
           }
         })
     })
