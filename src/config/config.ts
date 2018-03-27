@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 export const AppConfig = { 
   redis: { 
     host: process.env.REDIS_HOST, 

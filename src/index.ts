@@ -4,6 +4,7 @@ import * as express from 'express'
 import * as morgan from 'morgan'
 import * as swaggerUi from 'swagger-ui-express'
 import * as ua from 'universal-analytics'
+require('dotenv').config()
 
 const app: express.Application = express()
 
