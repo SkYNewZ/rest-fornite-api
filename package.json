@@ -47,6 +47,7 @@
     "@types/morgan": "^1.7.35",
     "@types/node": "^9.6.0",
     "@types/universal-analytics": "^0.4.2",
+    "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "express-redis-cache": "^1.1.1",
     "fortnite-api": "^2.6.0",
