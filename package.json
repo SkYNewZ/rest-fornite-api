@@ -65,7 +65,6 @@
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
     "codecov": "^3.0.0",
-    "dotenv": "^5.0.1",
     "eslint": "^4.19.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.9.0",
