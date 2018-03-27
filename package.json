@@ -1,15 +1,18 @@
 {
   "name": "rest-fortnite-api",
-  "version": "2.7.0",
+  "version": "2.7.2",
   "description": "REST Fortnite API. Get stats, score, kills...",
   "main": "api.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start-dev": "./node_modules/.bin/ts-node src/index.ts",
+    "start": "node index.js",
     "test": "./node_modules/.bin/nyc mocha",
     "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/.bin/codecov",
     "contrib:add": "all-contributors add",
-    "contrib:build": "all-contributors generate"
+    "contrib:build": "all-contributors generate",
+    "docker-build": "docker build -t skynewz/fortnite-api:dev --no-cache .",
+    "docker-run": "docker run -it --rm -p 3000:3000 --env-file=.env skynewz/fortnite-api:dev"
   },
   "repository": {
     "type": "git",
@@ -47,6 +50,7 @@
     "@types/morgan": "^1.7.35",
     "@types/node": "^9.6.0",
     "@types/universal-analytics": "^0.4.2",
+    "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "express-redis-cache": "^1.1.1",
     "fortnite-api": "^2.6.0",
@@ -64,7 +68,6 @@
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
     "codecov": "^3.0.0",
-    "dotenv": "^5.0.1",
     "eslint": "^4.19.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.9.0",
