@@ -27,7 +27,7 @@ app.all('/*', function (req: express.Request, res: express.Response, next: expre
   visitor.pageview(req.url, req.headers.host).send()
   next()
 })
-app.use(AppConfig.static_uri, express.static('public'))
+app.use(AppConfig.static_uri, express.static(__dirname + '/swagger'))
 // <----END APP CONFIG---->
 
 // <----REDIS ACTIVATION---->
