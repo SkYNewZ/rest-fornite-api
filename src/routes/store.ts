@@ -1,7 +1,7 @@
 import { fortniteAPI } from '../tools/auth'
 import { Tools } from '../tools/store'
 import { AppConfig } from '../config/config'
-import { CustomError } from '../class/error'
+import { CustomError } from '../models/error'
 import { Response, Request } from 'express'
 
 export function getStore(req: Request, res: Response) {

@@ -1,6 +1,6 @@
 import { fortniteAPI } from '../tools/auth'
 import { Response, Request } from 'express'
-import { CustomError } from '../class/error'
+import { CustomError } from '../models/error'
 
 export function checkFortniteStatus(req: Request, res: Response) {
   fortniteAPI.login()

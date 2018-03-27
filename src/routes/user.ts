@@ -1,5 +1,5 @@
 import { fortniteAPI } from '../tools/auth'
-import { CustomError } from '../class/error'
+import { CustomError } from '../models/error'
 import { Response, Request } from 'express'
 
 export function checkPlayer(req: Request, res: Response) {
