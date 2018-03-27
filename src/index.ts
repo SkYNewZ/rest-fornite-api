@@ -1,38 +1,40 @@
 // <----REQUIRED PACKAGES---->
-const express = require('express')
+import * as _ from 'lodash'
+import * as express from 'express';
+import * as morgan from 'morgan'
+import * as swaggerUi from 'swagger-ui-express'
+import { AppConfig } from './config/config'
+import * as ua from 'universal-analytics'
+
 const app = express()
-const morgan = require('morgan')
-const swaggerUi = require('swagger-ui-express')
-const Config = require('./config/config')
-const ua = require('universal-analytics')
 
 // routes methods
-const user = require('./routes/user')
-const news = require('./routes/news')
-const pve = require('./routes/pve')
-const stats = require('./routes/stats')
-const store = require('./routes/store')
-const check = require('./routes/check')
+import * as user from './routes/user'
+import * as pve from './routes/pve'
+import * as stats from './routes/stats'
+import * as store from './routes/store'
+import * as check from './routes/check'
+import * as news from './routes/news'
 // <----END REQUIRED PACKAGES---->
 
 // analytics
-let visitor = ua(Config.universal_analytics_id)
+let visitor = ua(AppConfig.universal_analytics_id)
 
 // <----APP CONFIG---->
-app.set('port', process.env.PORT || 3000)
+app.set('port', 3000)
 app.all('/*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   visitor.pageview(req.url, req.headers.host).send()
   next()
 })
-app.use(Config.static_uri, express.static('public'))
+app.use(AppConfig.static_uri, express.static('public'))
 // <----END APP CONFIG---->
 
 // <----REDIS ACTIVATION---->
 // enable redis if process.env.REDIS_HOST provided
 let cache = null
-if (Config.redis.host) {
-  cache = require('express-redis-cache')(Config.redis)
+if (AppConfig.redis.host) {
+  cache = require('express-redis-cache')(AppConfig.redis)
   app.use(cache.route())
 }
 // <----END REDIS ACTIVATION---->
@@ -40,7 +42,7 @@ if (Config.redis.host) {
 // <----IF TESTING---->
 /* istanbul ignore if */
 if (process.env.NODE_ENV !== 'test') {
-// use morgan to log at command line
+  // use morgan to log at command line
   app.use(morgan('combined')) // 'combined' outputs the Apache style LOGs
 
   if (cache) {
@@ -138,4 +140,4 @@ app.listen(app.get('port'), function () {
   console.log('Listening on port ' + app.get('port'))
 })
 
-module.exports = app
+export const AppServer = app;

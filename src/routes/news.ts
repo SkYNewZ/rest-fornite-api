@@ -1,6 +1,6 @@
-const fortniteAPI = require('../tools/auth')
+import { fortniteAPI } from '../tools/auth'
 
-function getFortniteNews (req, res) {
+export function getFortniteNews (req, res) {
   let language = req.params.lang || 'en'
   fortniteAPI.login()
     .then(() => {
@@ -16,8 +16,4 @@ function getFortniteNews (req, res) {
           })
         })
     })
-}
-
-module.exports = {
-  getFortniteNews
 }

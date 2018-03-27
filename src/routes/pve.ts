@@ -1,6 +1,6 @@
-const fortniteAPI = require('../tools/auth')
+import { fortniteAPI } from '../tools/auth'
 
-function getStatsPVE (req, res) {
+export function getStatsPVE (req, res) {
   let username = req.params.username
   fortniteAPI.login()
     .then(() => {
@@ -30,7 +30,7 @@ function getStatsPVE (req, res) {
     })
 }
 
-function getFortnitePVEInfo (req, res) {
+export function getFortnitePVEInfo (req, res) {
   let language = req.params.lang || 'en'
   fortniteAPI.login()
     .then(() => {
@@ -46,10 +46,4 @@ function getFortnitePVEInfo (req, res) {
           })
         })
     })
-}
-
-// export all the functions
-module.exports = {
-  getStatsPVE,
-  getFortnitePVEInfo
 }

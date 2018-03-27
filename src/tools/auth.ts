@@ -1,5 +1,5 @@
-const Fortnite = require('fortnite-api')
-const Config = require('../config/config')
+import * as FortniteAPI from 'fortnite-api'
+import { AppConfig } from '../config/config'
 const auth = []
 
 if (process.env.LOGIN_EMAIL) {
@@ -18,8 +18,6 @@ if (process.env.OAUTH_FORTNITE) {
   auth.push(process.env.OAUTH_FORTNITE)
 }
 
-let fortniteAPI = new Fortnite(auth, {
-  debug: Config.debug
+export const fortniteAPI = new FortniteAPI(auth, {
+  debug: AppConfig.debug
 })
-
-module.exports = fortniteAPI

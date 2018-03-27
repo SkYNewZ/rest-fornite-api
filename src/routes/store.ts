@@ -1,8 +1,8 @@
-const fortniteAPI = require('../tools/auth')
-const Store = require('../tools/store')
-const Config = require('../config/config')
+import { fortniteAPI } from '../tools/auth'
+import { Store } from '../tools/store'
+import { AppConfig } from '../config/config'
 
-function getStore (req, res) {
+export function getStore(req, res) {
   let language = req.params.lang || 'en'
   fortniteAPI.login()
     .then(() => {
@@ -28,8 +28,4 @@ function getStore (req, res) {
           })
         })
     })
-}
-
-module.exports = {
-  getStore
 }

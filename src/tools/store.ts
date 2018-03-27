@@ -1,6 +1,5 @@
-module.exports = {
-  // resize store object and add picture path
-  convert: (store, url) => {
+export class Store {
+  static convert(store: any, url: string) {
     return new Promise((resolve) => {
       let newStoreFront = []
       store.storefronts.forEach((storefront) => {

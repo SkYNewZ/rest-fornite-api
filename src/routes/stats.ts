@@ -1,6 +1,6 @@
-const fortniteAPI = require('../tools/auth')
+import { fortniteAPI } from '../tools/auth'
 
-function getStatsBR (req, res) {
+export function getStatsBR (req, res) {
   let username = req.params.username
   let platform = req.params.platform
   fortniteAPI.login()
@@ -36,7 +36,7 @@ function getStatsBR (req, res) {
     })
 }
 
-function getStatsBRFromID (req, res) {
+export function getStatsBRFromID (req, res) {
   let id = req.params.id
   let platform = req.params.platform
   fortniteAPI.login()
@@ -64,10 +64,4 @@ function getStatsBRFromID (req, res) {
           }
         })
     })
-}
-
-// export all the functions
-module.exports = {
-  getStatsBR,
-  getStatsBRFromID
 }

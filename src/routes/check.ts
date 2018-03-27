@@ -1,6 +1,6 @@
-const fortniteAPI = require('../tools/auth')
+import { fortniteAPI } from '../tools/auth'
 
-function checkFortniteStatus (req, res) {
+export function checkFortniteStatus (req, res) {
   fortniteAPI.login()
     .then(() => {
       fortniteAPI.checkFortniteStatus()
@@ -17,8 +17,4 @@ function checkFortniteStatus (req, res) {
           })
         })
     })
-}
-
-module.exports = {
-  checkFortniteStatus
 }

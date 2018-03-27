@@ -1,8 +1,8 @@
-const fortniteAPI = require('../tools/auth')
+import { fortniteAPI } from '../tools/auth'
 
-function checkPlayer (req, res) {
-  let username = req.params.username
-  let platform = req.params.platform
+export function checkPlayer (req, res) {
+  const username = req.params.username
+  const platform = req.params.platform
   fortniteAPI.login()
     .then(() => {
       fortniteAPI.checkPlayer(username, platform)
@@ -33,9 +33,4 @@ function checkPlayer (req, res) {
           }
         })
     })
-}
-
-// export all the functions
-module.exports = {
-  checkPlayer
 }
