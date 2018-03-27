@@ -4,11 +4,12 @@
   "description": "REST Fortnite API. Get stats, score, kills...",
   "main": "api.js",
   "scripts": {
+    "build": "tsc",
     "start": "node dist/index.js",
-    "test": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec --timeout 10000 -r ts-node/register test/**/*.ts --exit",
+    "test": "./node_modules/.bin/nyc mocha",
+    "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/.bin/codecov",
     "contrib:add": "all-contributors add",
-    "contrib:build": "all-contributors generate",
-    "build": "tsc"
+    "contrib:build": "all-contributors generate"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,27 @@
     "url": "https://github.com/SkYNewZ/docker-fortnite-api/issues"
   },
   "homepage": "https://github.com/SkYNewZ/docker-fortnite-api#readme",
+  "nyc": {
+    "check-coverage": true,
+    "per-file": true,
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "src/models/*.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "lcov",
+      "html"
+    ],
+    "all": true
+  },
   "dependencies": {
     "@types/express": "^4.11.1",
     "@types/morgan": "^1.7.35",
@@ -41,6 +63,7 @@
     "all-contributors-cli": "^4.11.1",
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
+    "codecov": "^3.0.0",
     "dotenv": "^5.0.1",
     "eslint": "^4.19.0",
     "eslint-config-standard": "^11.0.0",
@@ -49,6 +72,7 @@
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
     "mocha": "^5.0.5",
+    "nyc": "^11.6.0",
     "ts-node": "^5.0.1",
     "uuid": "^3.2.1"
   }

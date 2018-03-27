@@ -8,18 +8,22 @@ module String {
   }
 }
 
+/* istanbul ignore if */
 if (!process.env.LOGIN_EMAIL) {
   throw new Error(String.getErrorMessage('LOGIN_EMAIL')).message
 }
 
+/* istanbul ignore if */
 if (!process.env.LOGIN_PASSWORD) {
   throw new Error(String.getErrorMessage('LOGIN_PASSWORD')).message
 }
 
+/* istanbul ignore if */
 if (!process.env.OAUTH_EPIC_LAUNCHER) {
   throw new Error(String.getErrorMessage('OAUTH_EPIC_LAUNCHER')).message
 }
 
+/* istanbul ignore if */
 if (!process.env.OAUTH_FORTNITE) {
   throw new Error(String.getErrorMessage('OAUTH_FORTNITE')).message
 }
