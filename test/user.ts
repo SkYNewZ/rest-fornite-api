@@ -4,20 +4,33 @@ process.env.NODE_ENV = 'test'
 // Require the dev-dependencies
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-import { AppServer } from '../index'
+import { AppServer } from '../src/index'
 const expect = chai.expect
 chai.use(chaiHttp)
 
 // Our parent block
-describe('PVE', () => {
-  it('it should return 404 because wrong username', (done) => {
+describe('User', () => {
+  it('it should GET a user by the given username', (done) => {
     chai.request(AppServer)
-      .get('/pve/wrongusernameatall')
+      .get('/user/pc/skynewz')
       .end((err, res) => {
         if (err) {
           console.log(err)
         }
-        expect(res).to.have.status(404);
+        expect(res).to.have.status(200)
+        expect(res.body).to.be.a('object')
+        done()
+      })
+  })
+
+  it('it should return 404 because wrong username', (done) => {
+    chai.request(AppServer)
+      .get('/user/pc/wrongusernameatall')
+      .end((err, res) => {
+        if (err) {
+          console.log(err)
+        }
+        expect(res).to.have.status(404)
         expect(res.body).to.be.a('object')
         expect(res.body).to.have.property('code')
         expect(res.body).to.have.property('message')
@@ -25,56 +38,32 @@ describe('PVE', () => {
       })
   })
 
-  it('it should return pve info for given username', (done) => {
+  it('it should return 404 because wrond plateform', (done) => {
     chai.request(AppServer)
-      .get('/pve/skynewz')
+      .get('/user/ps4/skynewz')
       .end((err, res) => {
         if (err) {
           console.log(err)
         }
-        expect(res).to.have.status(200)
+        expect(res).to.have.status(404)
         expect(res.body).to.be.a('object')
-        done()
-      })
-  })
-})
-
-describe('PVE INFO', () => {
-  it('it fornite pve info in french', (done) => {
-    chai.request(AppServer)
-      .get('/pve/info/fr')
-      .end((err, res) => {
-        if (err) {
-          console.log(err)
-        }
-        expect(res).to.have.status(200)
-        expect(res.body).to.be.a('object')
+        expect(res.body).to.have.property('code')
+        expect(res.body).to.have.property('message')
         done()
       })
   })
 
-  it('it fornite pve info in it', (done) => {
+  it('it should return 400 because wrond plateform', (done) => {
     chai.request(AppServer)
-      .get('/pve/info/it')
+      .get('/user/aaa/skynewz')
       .end((err, res) => {
         if (err) {
           console.log(err)
         }
-        expect(res).to.have.status(200)
+        expect(res).to.have.status(400)
         expect(res.body).to.be.a('object')
-        done()
-      })
-  })
-
-  it('it fornite pve info', (done) => {
-    chai.request(AppServer)
-      .get('/pve/info')
-      .end((err, res) => {
-        if (err) {
-          console.log(err)
-        }
-        expect(res).to.have.status(200)
-        expect(res.body).to.be.a('object')
+        expect(res.body).to.have.property('code')
+        expect(res.body).to.have.property('message')
         done()
       })
   })

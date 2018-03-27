@@ -4,7 +4,7 @@ process.env.NODE_ENV = 'test'
 // Require the dev-dependencies
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-import { AppServer } from '../index'
+import { AppServer } from '../src/index'
 const expect = chai.expect
 chai.use(chaiHttp)
 
