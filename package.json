@@ -21,7 +21,10 @@
   },
   "homepage": "https://github.com/SkYNewZ/docker-fortnite-api#readme",
   "dependencies": {
+    "@types/express": "^4.11.1",
+    "@types/morgan": "^1.7.35",
     "@types/node": "^9.6.0",
+    "@types/universal-analytics": "^0.4.2",
     "express": "^4.16.3",
     "express-redis-cache": "^1.1.1",
     "fortnite-api": "^2.7.0",
