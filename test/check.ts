@@ -16,9 +16,6 @@ describe('Check', () => {
     chai.request(AppServer)
       .get('/check')
       .end((err, res) => {
-        if (err) {
-          done()
-        }
         expect(res).to.have.status(200)
         expect(res.body).to.be.a('object')
         expect(res.body).to.have.property('status')

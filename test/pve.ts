@@ -14,9 +14,6 @@ describe('PVE', () => {
     chai.request(AppServer)
       .get('/pve/wrongusernameatall')
       .end((err, res) => {
-        if (err) {
-          console.log(err)
-        }
         expect(res).to.have.status(404);
         expect(res.body).to.be.a('object')
         expect(res.body).to.have.property('_code')
@@ -29,9 +26,6 @@ describe('PVE', () => {
     chai.request(AppServer)
       .get('/pve/skynewz')
       .end((err, res) => {
-        if (err) {
-          console.log(err)
-        }
         expect(res).to.have.status(200)
         expect(res.body).to.be.a('object')
         done()
@@ -44,9 +38,6 @@ describe('PVE INFO', () => {
     chai.request(AppServer)
       .get('/pve/info/fr')
       .end((err, res) => {
-        if (err) {
-          console.log(err)
-        }
         expect(res).to.have.status(200)
         expect(res.body).to.be.a('object')
         done()
@@ -57,9 +48,6 @@ describe('PVE INFO', () => {
     chai.request(AppServer)
       .get('/pve/info/it')
       .end((err, res) => {
-        if (err) {
-          console.log(err)
-        }
         expect(res).to.have.status(200)
         expect(res.body).to.be.a('object')
         done()
@@ -70,9 +58,6 @@ describe('PVE INFO', () => {
     chai.request(AppServer)
       .get('/pve/info')
       .end((err, res) => {
-        if (err) {
-          console.log(err)
-        }
         expect(res).to.have.status(200)
         expect(res.body).to.be.a('object')
         done()
