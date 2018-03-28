@@ -52,14 +52,27 @@ This will listening on port 3000. You can check at http://localhost:3000/check
 * Nodejs >= 8.9
 > **Note:**
 > You can can the option environements variable PORT=1234 in order to use a custom port
-> You can add environements variable CACHE_DURATION=`duration in minutes` to change the defaut caching duration at 6 hours
 
-### Start
+### Start in developement mode
 ```bash
 $ git clone https://github.com/SkYNewZ/rest-fornite-api
 $ cd rest-fornite-api
-# set environments variables on execution
-$ LOGIN_EMAIL=mail LOGIN_PASSWORD=pass ........ npm start
+# write a .env file with you credentials from abose
+$ vim .env
+# Run
+$ npm run start-dev
+```
+
+### Start in production mode
+```bash
+$ git clone https://github.com/SkYNewZ/rest-fornite-api
+$ cd rest-fornite-api
+# write a .env file with you credentials from abose
+$ vim .env
+# build the TypeScript
+$ npm run build
+# Run
+$ npm start
 ```
 
 ## Endpoint
