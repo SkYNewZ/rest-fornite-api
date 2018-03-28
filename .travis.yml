@@ -1,6 +1,3 @@
-branches:
-  only:
-  - master
 language: node_js
 node_js:
   - "8"
@@ -27,13 +24,18 @@ after_success:
 
 before_deploy:
     - git tag "$(cat VERSION)"
-    - docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg VERSION=$(cat VERSION) -t $DOCKER_USERNAME/fortnite-api:$(cat VERSION) .
-    - docker push $DOCKER_USERNAME/fortnite-api:$(cat VERSION)
-    - docker tag $DOCKER_USERNAME/fortnite-api:$(cat VERSION) $DOCKER_USERNAME/fortnite-api:latest
-    - docker push $DOCKER_USERNAME/fortnite-api:latest
 
 deploy:
-  provider: releases
-  api_key: $GITHUB_TOKEN
-  name: v$(cat VERSION)
-  skip_cleanup: true
+  - provider: releases
+    api_key: $GITHUB_TOKEN
+    name: v$(cat VERSION)
+    skip_cleanup: true
+  - provider: heroku
+    api_key: $HEROKU_API_KEY
+    name: skynewz-api-fortnite
+
+after_deploy:
+  - docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg VERSION=$(cat VERSION) -t $DOCKER_USERNAME/fortnite-api:$(cat VERSION) .
+  - docker push $DOCKER_USERNAME/fortnite-api:$(cat VERSION)
+  - docker tag $DOCKER_USERNAME/fortnite-api:$(cat VERSION) $DOCKER_USERNAME/fortnite-api:latest
+  - docker push $DOCKER_USERNAME/fortnite-api:latest
