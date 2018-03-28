@@ -21,9 +21,9 @@ WORKDIR /app
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="Fortnite REST API" \
       org.label-schema.description="NodeJS REST FORTNITE API, get users infos and stats" \
-      org.label-schema.url="https://api.fortnite.lemairepro.fr" \
+      org.label-schema.url="https://skynewz-api-fortnite.herokuapp.com" \
       org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.vcs-url="https://github.com/SkYNewZ/docker-fortnite-api" \
+      org.label-schema.vcs-url="https://github.com/SkYNewZ/rest-fornite-api" \
       org.label-schema.version=$VERSION \
       org.label-schema.schema-version="1.0"
 

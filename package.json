@@ -16,14 +16,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SkYNewZ/docker-fortnite-api.git"
+    "url": "git+https://github.com/SkYNewZ/rest-fornite-api.git"
   },
   "author": "Quentin LEMAIRE <quentin@lemairepro.fr>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SkYNewZ/docker-fortnite-api/issues"
+    "url": "https://github.com/SkYNewZ/rest-fornite-api/issues"
   },
-  "homepage": "https://github.com/SkYNewZ/docker-fortnite-api#readme",
+  "homepage": "https://skynewz.github.io/rest-fornite-api",
   "nyc": {
     "check-coverage": true,
     "per-file": true,

@@ -5,11 +5,10 @@
     "description": "REST API about Fortnite game",
     "version": "2.7.2"
   },
-  "host": "api.fortnite.lemairepro.fr",
+  "host": "skynewz-api-fortnite.herokuapp.com",
   "schemes": [
     "https"
   ],
-  "basePath": "/",
   "tags": [
     {
       "name": "User",

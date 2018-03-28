@@ -7,7 +7,7 @@
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/QLemaire/2)
 
 ## Example
-You can found SwaggerUI here https://api.fortnite.lemairepro.fr/api-docs
+You can found SwaggerUI here https://skynewz-api-fortnite.herokuapp.com/api-docs
 
 ## INIT
 To setup this module, you need to have an account on Epic Games. After that you need to get 2 dedicated headers from Fortnite.
@@ -73,4 +73,4 @@ $ npm start
 
 ## Endpoint
 Supported plateform : `pc`, `ps4`, `xb1`.
-You can view endpoints at https://api.fortnite.lemairepro.fr/api-docs/
+You can view endpoints at https://skynewz-api-fortnite.herokuapp.com/api-docs/
