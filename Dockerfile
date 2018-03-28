@@ -33,4 +33,5 @@ COPY --from=BUILDER /app/src/swagger swagger
 COPY --from=BUILDER /app/package.json .
 EXPOSE 3000
 
-CMD ["npm", "start"]
+ENTRYPOINT ["npm"]
+CMD ["start"]
