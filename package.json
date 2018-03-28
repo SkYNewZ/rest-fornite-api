@@ -1,6 +1,6 @@
 {
   "name": "rest-fortnite-api",
-  "version": "2.7.2",
+  "version": "3.0.0",
   "description": "REST Fortnite API. Get stats, score, kills...",
   "main": "api.js",
   "scripts": {
@@ -16,14 +16,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SkYNewZ/docker-fortnite-api.git"
+    "url": "git+https://github.com/SkYNewZ/rest-fornite-api.git"
   },
   "author": "Quentin LEMAIRE <quentin@lemairepro.fr>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SkYNewZ/docker-fortnite-api/issues"
+    "url": "https://github.com/SkYNewZ/rest-fornite-api/issues"
   },
-  "homepage": "https://github.com/SkYNewZ/docker-fortnite-api#readme",
+  "homepage": "https://skynewz.github.io/rest-fornite-api",
   "nyc": {
     "check-coverage": true,
     "per-file": true,
@@ -56,17 +56,18 @@
     "fortnite-api": "^2.6.0",
     "memory-cache": "^0.2.0",
     "morgan": "^1.9.0",
-    "swagger-ui-express": "^2.0.15",
-    "typescript": "^2.7.2",
+    "swagger-ui-express": "^3.0.6",
+    "typescript": "^2.8.1",
     "universal-analytics": "^0.4.16"
   },
   "devDependencies": {
     "@types/chai": "^4.1.2",
+    "@types/chai-http": "^3.0.4",
     "@types/expect": "^1.20.3",
     "@types/mocha": "^5.0.0",
     "all-contributors-cli": "^4.11.1",
     "chai": "^4.1.2",
-    "chai-http": "^3.0.0",
+    "chai-http": "^4.0.0",
     "codecov": "^3.0.0",
     "eslint": "^4.19.0",
     "eslint-config-standard": "^11.0.0",

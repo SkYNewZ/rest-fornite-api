@@ -2,11 +2,10 @@ swagger: '2.0'
 info:
   title: FORTNITE REST API
   description: REST API about Fortnite game
-  version: 2.7.2
-host: api.fortnite.lemairepro.fr
+  version: 3.0.0
+host: skynewz-api-fortnite.herokuapp.com
 schemes:
   - https
-basePath: /
 tags:
   - name: User
     description: Get user info

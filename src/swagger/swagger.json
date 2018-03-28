@@ -3,13 +3,12 @@
   "info": {
     "title": "FORTNITE REST API",
     "description": "REST API about Fortnite game",
-    "version": "2.7.2"
+    "version": "3.0.0"
   },
-  "host": "api.fortnite.lemairepro.fr",
+  "host": "skynewz-api-fortnite.herokuapp.com",
   "schemes": [
     "https"
   ],
-  "basePath": "/",
   "tags": [
     {
       "name": "User",

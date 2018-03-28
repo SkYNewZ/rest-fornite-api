@@ -12,6 +12,7 @@ services:
       - OAUTH_EPIC_LAUNCHER=XXXXX
       - OAUTH_FORTNITE=XXXXX
       - REDIS_HOST=cache
+      - REDIS_PASSWORD=XXXXX
 
   cache:
-    image: redis:4.0-alpine
+    image: redis
