@@ -127,7 +127,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 // The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', function (req: express.Request, res: express.Response) {
-  res.sendStatus(404);
+  res.status(404).send('<h1><a href="https://github.com/SkYNewZ/rest-fornite-api/blob/master/README.md" target="_blanck">Hello</a></h1>');
 })
 // <----END ROUTING---->
 
