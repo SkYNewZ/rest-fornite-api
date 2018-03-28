@@ -19,6 +19,10 @@ cache:
   directories:
     - node_modules
 
+before_install:
+  - git config --global user.email "travis@travis-ci.org"
+  - git config --global user.name "Travis CI"
+
 install:
   - npm install
 
@@ -30,6 +34,7 @@ after_success:
 
 before_deploy:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  - git tag "$(cat VERSION)"
 
 deploy:
   - provider: releases
@@ -50,3 +55,8 @@ after_deploy:
   - docker push $DOCKER_USERNAME/fortnite-api:$(cat VERSION)
   - docker tag $DOCKER_USERNAME/fortnite-api:$(cat VERSION) $DOCKER_USERNAME/fortnite-api:latest
   - docker push $DOCKER_USERNAME/fortnite-api:latest
+  - npm run generate-changelog --override --token=$GITHUB_TOKEN
+  - git add CHANGELOG.md
+  - git commit -m "Auto generated changelog :notebook:"
+  - git remote add origin https://$GITHUB_TOKEN@github.com/SkYNewZ/rest-fornite-api.git
+  - git push --quiet --set-upstream origin master
