@@ -14,9 +14,6 @@ describe('Shop', () => {
     chai.request(AppServer)
       .get('/store')
       .end((err, res) => {
-        if (err) {
-          console.log(err)
-        }
         expect(res).to.have.status(200)
         expect(res.body).to.be.a('object')
         done()
@@ -27,9 +24,6 @@ describe('Shop', () => {
     chai.request(AppServer)
       .get('/store/fr')
       .end((err, res) => {
-        if (err) {
-          console.log(err)
-        }
         expect(res).to.have.status(200)
         expect(res.body).to.be.a('object')
         done()
@@ -40,9 +34,6 @@ describe('Shop', () => {
     chai.request(AppServer)
       .get('/store/it')
       .end((err, res) => {
-        if (err) {
-          console.log(err)
-        }
         expect(res).to.have.status(200)
         expect(res.body).to.be.a('object')
         done()

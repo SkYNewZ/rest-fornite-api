@@ -15,9 +15,6 @@ describe('Default', () => {
     chai.request(AppServer)
       .get('/404')
       .end((err, res: Express.Response) => {
-        if (err) {
-          console.log(err)
-        }
         expect(res).to.have.status(404)
         done()
       })

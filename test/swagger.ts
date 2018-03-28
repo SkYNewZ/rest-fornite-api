@@ -15,9 +15,6 @@ describe('Swagger', () => {
     chai.request(AppServer)
       .get(AppConfig.static_uri + '/swagger.json')
       .end((err, res) => {
-        if (err) {
-          console.log(err)
-        }
         expect(res).to.have.status(200)
         done()
       })
@@ -27,9 +24,6 @@ describe('Swagger', () => {
     chai.request(AppServer)
       .get(AppConfig.static_uri + '/swagger.yaml')
       .end((err, res) => {
-        if (err) {
-          console.log(err)
-        }
         expect(res).to.have.status(200)
         done()
       })
@@ -39,9 +33,6 @@ describe('Swagger', () => {
     chai.request(AppServer)
       .get('/api-docs')
       .end((err, res) => {
-        if (err) {
-          console.log(err)
-        }
         expect(res).to.have.status(200)
         done()
       })
