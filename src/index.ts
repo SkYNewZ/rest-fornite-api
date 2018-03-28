@@ -4,6 +4,7 @@ import * as express from 'express'
 import * as morgan from 'morgan'
 import * as swaggerUi from 'swagger-ui-express'
 import * as ua from 'universal-analytics'
+import * as cache from 'express-redis-cache'
 require('dotenv').config()
 
 const app: express.Application = express()
@@ -32,10 +33,10 @@ app.use(AppConfig.static_uri, express.static(__dirname + '/swagger'))
 
 // <----REDIS ACTIVATION---->
 // enable redis if process.env.REDIS_HOST provided
-let cache: any = null
+let cacheClient: any = null
 if (AppConfig.redis.host) {
-  cache = require('express-redis-cache')(AppConfig.redis)
-  app.use(cache.route())
+  cacheClient = cache(AppConfig.redis);
+  app.use(cacheClient.route())
 }
 // <----END REDIS ACTIVATION---->
 
@@ -45,9 +46,9 @@ if (process.env.NODE_ENV !== 'test') {
   // use morgan to log at command line
   app.use(morgan('combined')) // 'combined' outputs the Apache style LOGs
 
-  if (cache) {
+  if (cacheClient) {
     // redis logs
-    cache.on('message', function (message: any) {
+    cacheClient.on('message', function (message: any) {
       console.log('[REDIS] : ' + message)
     })
   }
@@ -64,8 +65,8 @@ app.route('/stats/:platform/:username')
   .get(
     // enable caching if cache enable ^^
     function (req: express.Request, res: express.Response, next: express.NextFunction) {
-      if (cache) {
-        cache.route({
+      if (cacheClient) {
+        cacheClient.route({
           expire: 3600
         })
       }
@@ -77,8 +78,8 @@ app.route('/stats/:platform/:username')
 app.route('/stats/id/:platform/:id')
   .get(function (req: express.Request, res: express.Response, next: express.NextFunction) {
     // enable caching if cache enable ^^
-    if (cache) {
-      cache.route({
+    if (cacheClient) {
+      cacheClient.route({
         expire: 3600
       })
     }
@@ -97,8 +98,8 @@ app.route('/pve/info/:lang?')
 app.route('/news/:lang?')
   .get(function (req: express.Request, res: express.Response, next: express.NextFunction) {
     // enable caching if cache enable ^^
-    if (cache) {
-      cache.route({
+    if (cacheClient) {
+      cacheClient.route({
         expire: 3600
       })
     }
@@ -113,8 +114,8 @@ app.route('/check')
 app.route('/store/:lang?')
   .get(function (req: express.Request, res: express.Response, next: express.NextFunction) {
     // enable caching if cache enable ^^
-    if (cache) {
-      cache.route({
+    if (cacheClient) {
+      cacheClient.route({
         expire: 3600
       })
     }
