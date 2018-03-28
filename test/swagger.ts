@@ -2,12 +2,13 @@
 process.env.NODE_ENV = 'test'
 
 // Require the dev-dependencies
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-import { AppServer } from '../src/index'
-const expect = chai.expect
-chai.use(chaiHttp)
 import { AppConfig } from '../src/config/config'
+import { Response, Request } from 'express'
+import * as chai from 'chai'
+import { expect } from 'chai'
+import { AppServer } from '../src/index'
+import chaiHttp = require('chai-http')
+chai.use(chaiHttp)
 
 // Our parent block
 describe('Swagger', () => {

@@ -19,10 +19,11 @@ export function checkPlayer(req: Request, res: Response) {
           } else if (err === 'Impossible to fetch User. User not found on this platform') {
             res.status(404).send(new CustomError(404, err))
           } else
-            /* istanbul ignore else  */
             if (err === 'Please precise a good platform: ps4/xb1/pc') {
               res.status(400).send(new CustomError(400, err))
-            } else {
+            }
+            /* istanbul ignore next  */
+            else {
               res.status(500).send(new CustomError(500, err))
             }
         })
