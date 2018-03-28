@@ -127,7 +127,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 // The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', function (req: express.Request, res: express.Response) {
-  res.status(404).send('<h1><a href="https://github.com/SkYNewZ/rest-fornite-api/blob/master/README.md" target="_blanck">Hello</a></h1>');
+  res.status(404).send('<iframe src="https://skynewz.github.io/rest-fornite-api/" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;">Your browser doesn\'t support iframes</iframe>');
 })
 // <----END ROUTING---->
 
