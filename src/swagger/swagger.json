@@ -3,7 +3,7 @@
   "info": {
     "title": "FORTNITE REST API",
     "description": "REST API about Fortnite game",
-    "version": "3.0.0"
+    "version": "3.0.1"
   },
   "host": "skynewz-api-fortnite.herokuapp.com",
   "schemes": [
