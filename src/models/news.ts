@@ -1,23 +1,35 @@
 export class FortniteNews {
+  private common: object;
+  private br: Array<{
+    image: string;
+    _type: string;
+    title: string;
+    body: string;
+  }>;
+  private loginmessage: object;
+  private survivalmessage: object;
 
-    private _common: Object;
-    private _br: { image: string, _type: string, title: string, body: string }[];
-    private _loginmessage: Object;
-    private _survivalmessage: Object;
+  /**
+   * Getter $common
+   * @return {object}
+   */
+  public get $common(): object {
+    return this.common;
+  }
 
-    public get common(): Object {
-        return this._common;
-    }
+  /**
+   * Getter $loginmessage
+   * @return {object}
+   */
+  public get $loginmessage(): object {
+    return this.loginmessage;
+  }
 
-    public get loginmessage(): Object {
-        return this._loginmessage;
-    }
-
-    public get survivalmessage(): Object {
-        return this._survivalmessage;
-    }
-
-    public get br(): { image: string, _type: string, title: string, body: string }[] {
-        return this._br;
-    }
+  /**
+   * Getter $survivalmessage
+   * @return {object}
+   */
+  public get $survivalmessage(): object {
+    return this.survivalmessage;
+  }
 }

@@ -1,41 +1,40 @@
-import { storeFront } from "./storefront";
+import { StoreFront } from "./storefront";
 
 export class FortniteStore {
+  private refreshIntervalHrs: number;
+  private dailyPurchaseHrs: number;
+  private expiration: string;
+  private storefronts: StoreFront[];
 
-    private _refreshIntervalHrs: number;
-    private _dailyPurchaseHrs: number;
-	private _expiration: string;
-	private _storefronts: storeFront[];
+  /**
+   * Getter $refreshIntervalHrs
+   * @return {number}
+   */
+  public get $refreshIntervalHrs(): number {
+    return this.refreshIntervalHrs;
+  }
 
-	public set refreshIntervalHrs(value: number) {
-		this._refreshIntervalHrs = value;
-	}
+  /**
+   * Getter $dailyPurchaseHrs
+   * @return {number}
+   */
+  public get $dailyPurchaseHrs(): number {
+    return this.dailyPurchaseHrs;
+  }
 
-	public set dailyPurchaseHrs(value: number) {
-		this._dailyPurchaseHrs = value;
-	}
+  /**
+   * Getter $expiration
+   * @return {string}
+   */
+  public get $expiration(): string {
+    return this.expiration;
+  }
 
-	public set expiration(value: string) {
-		this._expiration = value;
-	}
-
-	public set storefronts(value: storeFront[]) {
-		this._storefronts = value;
-	}
-
-	public get refreshIntervalHrs(): number {
-		return this._refreshIntervalHrs;
-	}
-
-	public get dailyPurchaseHrs(): number {
-		return this._dailyPurchaseHrs;
-	}
-
-	public get expiration(): string {
-		return this._expiration;
-	}
-
-	public get storefronts(): storeFront[] {
-		return this._storefronts;
-	}
+  /**
+   * Getter $storefronts
+   * @return {StoreFront[]}
+   */
+  public get $storefronts(): StoreFront[] {
+    return this.storefronts;
+  }
 }

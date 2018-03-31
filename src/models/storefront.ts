@@ -1,33 +1,38 @@
-import { catalogEntry } from "./catalogEntry";
+import { CatalogEntry } from "./catalogEntry";
 
-export class storeFront {
+export class StoreFront {
+  private name: string;
+  private CatalogEntries: CatalogEntry[];
 
-    private _name: string;
-    private _catalogEntries: catalogEntry[];
+  /**
+   * Getter $name
+   * @return {string}
+   */
+  public get $name(): string {
+    return this.name;
+  }
 
-    /**
-     * Constructor
-     * @param catalogEntries 
-     * @param name 
-     */
-	constructor(catalogEntries: catalogEntry[], name: string) {
-        this.name = name;
-        this._catalogEntries = catalogEntries;
-	}
+  /**
+   * Setter $name
+   * @param {string} value
+   */
+  public set $name(value: string) {
+    this.name = value;
+  }
 
-    public set name(value: string) {
-        this._name = value;
-    }
+  /**
+   * Getter $catalogEntries
+   * @return {CatalogEntry[]}
+   */
+  public get $catalogEntries(): CatalogEntry[] {
+    return this.CatalogEntries;
+  }
 
-    public set catalogEntries(value: catalogEntry[]) {
-        this._catalogEntries = value;
-    }
-
-    public get name(): string {
-        return this._name;
-    }
-
-    public get catalogEntries(): catalogEntry[] {
-        return this._catalogEntries;
-    }
+  /**
+   * Setter $catalogEntries
+   * @param {CatalogEntry[]} value
+   */
+  public set $catalogEntries(value: CatalogEntry[]) {
+    this.CatalogEntries = value;
+  }
 }

@@ -1,32 +1,31 @@
 import { FortnitePrice } from "./price";
 
-export class catalogEntry {
+export class CatalogEntry {
+  private devname: string;
+  private offerid: string;
+  private pricesarray: FortnitePrice[];
 
-    private _devName: string;
-    private _offerId: string;
-    private _prices: FortnitePrice[];
+  /**
+   * Constructor
+   * @param devName
+   * @param offerId
+   * @param prices
+   */
+  constructor(devName: string, offerId: string, prices: FortnitePrice[]) {
+    this.devname = devName;
+    this.offerid = offerId;
+    this.pricesarray = prices;
+  }
 
-    /**
-     * Constructor
-     * @param devName
-     * @param offerId 
-     * @param prices 
-     */
-    constructor(devName: string, offerId: string, prices: FortnitePrice[]) {
-        this._devName = devName;
-        this._offerId = offerId;
-        this._prices = prices;
-    }
+  public get devName(): string {
+    return this.devname;
+  }
 
-    public get devName(): string {
-        return this._devName;
-    }
+  public get offerId(): string {
+    return this.offerid;
+  }
 
-    public get offerId(): string {
-        return this._offerId;
-    }
-
-    public get prices(): FortnitePrice[] {
-        return this._prices;
-    }
+  public get prices(): FortnitePrice[] {
+    return this.pricesarray;
+  }
 }

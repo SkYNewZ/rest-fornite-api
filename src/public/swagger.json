@@ -3,12 +3,10 @@
   "info": {
     "title": "FORTNITE REST API",
     "description": "REST API about Fortnite game",
-    "version": "3.0.0"
+    "version": "3.0.2"
   },
   "host": "skynewz-api-fortnite.herokuapp.com",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "tags": [
     {
       "name": "User",
@@ -31,15 +29,11 @@
       "description": "Get store infos"
     }
   ],
-  "produces": [
-    "application/json"
-  ],
+  "produces": ["application/json"],
   "paths": {
     "/check": {
       "get": {
-        "tags": [
-          "Check"
-        ],
+        "tags": ["Check"],
         "summary": "Get Fortnite game status",
         "responses": {
           "200": {
@@ -73,9 +67,7 @@
     },
     "/news": {
       "get": {
-        "tags": [
-          "News"
-        ],
+        "tags": ["News"],
         "summary": "Get Fortnite News",
         "responses": {
           "200": {
@@ -167,9 +159,7 @@
     },
     "/user/{plateform}/{username}": {
       "get": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["User"],
         "summary": "Get a user by username",
         "parameters": [
           {
@@ -238,9 +228,7 @@
     },
     "/stats/{plateform}/{username}": {
       "get": {
-        "tags": [
-          "Stats"
-        ],
+        "tags": ["Stats"],
         "summary": "Get user's stats by username",
         "parameters": [
           {
@@ -312,7 +300,8 @@
                         },
                         "timePlayed": {
                           "type": "string",
-                          "description": "Number of days, hours and minutes played"
+                          "description":
+                            "Number of days, hours and minutes played"
                         },
                         "killsPerMatch": {
                           "type": "string",
@@ -372,7 +361,8 @@
                         },
                         "timePlayed": {
                           "type": "string",
-                          "description": "Number of days, hours and minutes played"
+                          "description":
+                            "Number of days, hours and minutes played"
                         },
                         "killsPerMatch": {
                           "type": "string",
@@ -432,7 +422,8 @@
                         },
                         "timePlayed": {
                           "type": "string",
-                          "description": "Number of days, hours and minutes played"
+                          "description":
+                            "Number of days, hours and minutes played"
                         },
                         "killsPerMatch": {
                           "type": "string",
@@ -566,9 +557,7 @@
     },
     "/stats/id/{plateform}/{id}": {
       "get": {
-        "tags": [
-          "Stats"
-        ],
+        "tags": ["Stats"],
         "summary": "Get user's stats by user id",
         "parameters": [
           {
@@ -640,7 +629,8 @@
                         },
                         "timePlayed": {
                           "type": "string",
-                          "description": "Number of days, hours and minutes played"
+                          "description":
+                            "Number of days, hours and minutes played"
                         },
                         "killsPerMatch": {
                           "type": "string",
@@ -700,7 +690,8 @@
                         },
                         "timePlayed": {
                           "type": "string",
-                          "description": "Number of days, hours and minutes played"
+                          "description":
+                            "Number of days, hours and minutes played"
                         },
                         "killsPerMatch": {
                           "type": "string",
@@ -760,7 +751,8 @@
                         },
                         "timePlayed": {
                           "type": "string",
-                          "description": "Number of days, hours and minutes played"
+                          "description":
+                            "Number of days, hours and minutes played"
                         },
                         "killsPerMatch": {
                           "type": "string",
@@ -894,9 +886,7 @@
     },
     "/pve/{username}": {
       "get": {
-        "tags": [
-          "PVE"
-        ],
+        "tags": ["PVE"],
         "summary": "Get PVE Stat by given username",
         "parameters": [
           {
@@ -949,9 +939,7 @@
     },
     "/pve/info": {
       "get": {
-        "tags": [
-          "PVE"
-        ],
+        "tags": ["PVE"],
         "summary": "Get Fortnite PVE Info (storm, etc)",
         "responses": {
           "200": {
@@ -980,9 +968,7 @@
     },
     "/store": {
       "get": {
-        "tags": [
-          "Store"
-        ],
+        "tags": ["Store"],
         "summary": "Get Fortnite Store",
         "responses": {
           "200": {

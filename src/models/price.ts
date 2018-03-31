@@ -1,81 +1,56 @@
 export class FortnitePrice {
-    private _currencyType: string;
-    private _currencySubType: string;
-    private _regularPrice: number;
-    private _finalPrice: number;
-    private _saleExpiration: string;
-    private _basePrice: number;
+  private currencyType: string;
+  private currencySubType: string;
+  private regularPrice: number;
+  private finalPrice: number;
+  private saleExpiration: string;
+  private basePrice: number;
 
-    /**
-     * Constructor
-     * @param currencyType 
-     * @param currencySubType 
-     * @param regularPrice 
-     * @param finalPrice 
-     * @param saleExpiration 
-     * @param basePrice 
-     */
-    constructor(
-        currencyType: string,
-        currencySubType: string,
-        regularPrice: number,
-        finalPrice: number,
-        saleExpiration: string,
-        basePrice: number
-    ) {
-        this._basePrice = basePrice;
-        this._currencySubType = currencySubType;
-        this._currencyType = currencyType;
-        this._saleExpiration = saleExpiration;
-        this._finalPrice = finalPrice;
-        this._regularPrice = regularPrice;
-    }
+  /**
+   * Getter $currencyType
+   * @return {string}
+   */
+  public get $currencyType(): string {
+    return this.currencyType;
+  }
 
-    public get currencyType(): string {
-        return this._currencyType;
-    }
+  /**
+   * Getter $currencySubType
+   * @return {string}
+   */
+  public get $currencySubType(): string {
+    return this.currencySubType;
+  }
 
-    public set currencyType(value: string) {
-        this._currencyType = value;
-    }
+  /**
+   * Getter $regularPrice
+   * @return {number}
+   */
+  public get $regularPrice(): number {
+    return this.regularPrice;
+  }
 
+  /**
+   * Getter $finalPrice
+   * @return {number}
+   */
+  public get $finalPrice(): number {
+    return this.finalPrice;
+  }
 
-    public get finalPrice(): number {
-        return this._finalPrice;
-    }
+  /**
+   * Getter $saleExpiration
+   * @return {string}
+   */
+  public get $saleExpiration(): string {
+    return this.saleExpiration;
+  }
 
-    public set finalPrice(value: number) {
-        this._finalPrice = value;
-    }
-
-    public get saleExpiration(): string {
-        return this._saleExpiration;
-    }
-
-    public set saleExpiration(value: string) {
-        this._saleExpiration = value;
-    }
-
-    public get basePrice(): number {
-        return this._basePrice;
-    }
-
-    public set basePrice(value: number) {
-        this._basePrice = value;
-    }
-    public get currencySubType(): string {
-        return this._currencySubType;
-    }
-
-    public set currencySubType(value: string) {
-        this._currencySubType = value;
-    }
-
-    public get regularPrice(): number {
-        return this._regularPrice;
-    }
-
-    public set regularPrice(value: number) {
-        this._regularPrice = value;
-    }
+  /**
+   * Getter $basePrice
+   * @return {number}
+   */
+  public get $basePrice(): number {
+    return this.basePrice;
+  }
 }
