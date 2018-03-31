@@ -1,30 +1,30 @@
 export class CustomError {
-    private _code: number;
-    private _message: string;
+  private code: number;
+  private message: string;
 
-	/**
-	 * Constructor
-	 * @param code code of the error
-	 * @param message message
-	 */
-    constructor(code: number, message: string) {
-        this._code = code;
-        this._message = message
-	}
+  /**
+   * Constructor
+   * @param code code of the error
+   * @param message message
+   */
+  constructor(code: number, message: string) {
+    this.code = code;
+    this.message = message;
+  }
 
-	public get code(): number {
-		return this._code;
-	}
+  /**
+   * Getter $code
+   * @return {number}
+   */
+  public get $code(): number {
+    return this.code;
+  }
 
-	public set code(value: number) {
-		this._code = value;
-	}
-
-	public get message(): string {
-		return this._message;
-	}
-
-	public set message(value: string) {
-		this._message = value;
-	}
+  /**
+   * Getter $message
+   * @return {string}
+   */
+  public get $message(): string {
+    return this.message;
+  }
 }

@@ -1,29 +1,59 @@
 export class FortniteUser {
-    private _id: number;
-    private _displayName: string;
-    private _platform: string;
+  private id: number;
+  private displayName: string;
+  private platform: string;
+  /**
+   * Constructor
+   * @param platform
+   */
+  constructor(platform: string) {
+    this.platform = platform;
+  }
 
-    /**
-     * Constructor
-     * @param platform
-     */
-    constructor(platform: string) {
-        this._platform = platform;
-    }
+  /**
+   * Getter $id
+   * @return {number}
+   */
+  public get $id(): number {
+    return this.id;
+  }
+  /**
+   * Setter $id
+   * @param {number} value
+   */
+  public set $id(value: number) {
+    this.id = value;
+  }
 
-    public get id(): number {
-        return this._id;
-    }
+  /**
+   * Getter $displayName
+   * @return {string}
+   */
+  public get $displayName(): string {
+    return this.displayName;
+  }
 
-    public get displayName(): string {
-        return this._displayName;
-    }
+  /**
+   * Setter $displayName
+   * @param {string} value
+   */
+  public set $displayName(value: string) {
+    this.displayName = value;
+  }
 
-    public get platform(): string {
-        return this._platform;
-    }
+  /**
+   * Getter $platform
+   * @return {string}
+   */
+  public get $platform(): string {
+    return this.platform;
+  }
 
-    public set platform(value: string) {
-        this._platform = value;
-    }
+  /**
+   * Setter $platform
+   * @param {string} value
+   */
+  public set $platform(value: string) {
+    this.platform = value;
+  }
 }
