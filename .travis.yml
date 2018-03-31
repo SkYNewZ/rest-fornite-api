@@ -5,6 +5,9 @@ branches:
 language: node_js
 
 node_js:
+  - "8.9.4"
+  - "9.9.0"
+  - "9.10.1"
   - "lts/*"
 
 notifications:
@@ -28,21 +31,33 @@ after_success:
   - npm run coverage
 
 before_deploy:
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-  - git tag "$(cat VERSION)"
+  - >
+    if ! [ "$BEFORE_DEPLOY_ALREADY_RUN" ]; then
+      export BEFORE_DEPLOY_ALREADY_RUN=1;
+      docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+      git tag "$(cat VERSION)";
+    fi
 
 deploy:
   - provider: releases
     api_key: $GITHUB_TOKEN
     name: v$(cat VERSION)
     skip_cleanup: true
+    on:
+      node: '9.9.0'
   - provider: heroku
     api_key: $HEROKU_API_KEY
     skip_cleanup: true
     app: skynewz-api-fortnite
+    on:
+      node: '9.9.0'
 
 after_deploy:
-  - docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg VERSION=$(cat VERSION) -t $DOCKER_USERNAME/fortnite-api:$(cat VERSION) .
-  - docker push $DOCKER_USERNAME/fortnite-api:$(cat VERSION)
-  - docker tag $DOCKER_USERNAME/fortnite-api:$(cat VERSION) $DOCKER_USERNAME/fortnite-api:latest
-  - docker push $DOCKER_USERNAME/fortnite-api:latest
+  - >
+    if ! [ "$AFTER_DEPLOY_ALREADY_RUN" ]; then
+      export AFTER_DEPLOY_ALREADY_RUN=1;
+      docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg VERSION=$(cat VERSION) -t $DOCKER_USERNAME/fortnite-api:$(cat VERSION) .
+      docker push $DOCKER_USERNAME/fortnite-api:$(cat VERSION)
+      docker tag $DOCKER_USERNAME/fortnite-api:$(cat VERSION) $DOCKER_USERNAME/fortnite-api:latest
+      docker push $DOCKER_USERNAME/fortnite-api:latest
+    fi
