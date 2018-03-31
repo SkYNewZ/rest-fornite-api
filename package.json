@@ -1,18 +1,19 @@
 {
   "name": "rest-fortnite-api",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "REST Fortnite API. Get stats, score, kills...",
   "main": "api.js",
   "scripts": {
     "build": "tsc",
-    "start-dev": "./node_modules/.bin/ts-node src/index.ts",
+    "dev": "./node_modules/.bin/ts-node src/index.ts",
     "start": "node index.js",
     "test": "./node_modules/.bin/nyc mocha",
     "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/.bin/codecov",
     "contrib:add": "all-contributors add",
     "contrib:build": "all-contributors generate",
     "docker-build": "docker build -t skynewz/fortnite-api:dev --no-cache .",
-    "docker-run": "docker run -it --rm -p 3000:3000 --env-file=.env skynewz/fortnite-api:dev"
+    "docker-run": "docker run -it --rm -p 3000:3000 --env-file=.env skynewz/fortnite-api:dev",
+    "lint": "./node_modules/.bin/prettier --write ./**/*.ts && ./node_modules/.bin/tslint --fix --project ."
   },
   "repository": {
     "type": "git",
