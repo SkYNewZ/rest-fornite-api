@@ -36,14 +36,10 @@ deploy:
     api_key: $GITHUB_TOKEN
     name: v$(cat VERSION)
     skip_cleanup: true
-    on:
-      node: '9.9.0'
   - provider: heroku
     api_key: $HEROKU_API_KEY
     skip_cleanup: true
     app: skynewz-api-fortnite
-    on:
-      node: '9.9.0'
 
 after_deploy:
   - docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg VERSION=$(cat VERSION) -t $DOCKER_USERNAME/fortnite-api:$(cat VERSION) .

@@ -29,7 +29,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 
 COPY --from=BUILDER /app/dist .
 COPY --from=BUILDER /app/node_modules node_modules
-COPY --from=BUILDER /app/src/swagger swagger
+COPY --from=BUILDER /app/src/public public
 COPY --from=BUILDER /app/package.json .
 EXPOSE 3000
 
