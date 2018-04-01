@@ -13,5 +13,4 @@ export const AppConfig = {
     prefix: process.env.REDIS_PREFIX || "api-fortnite",
   },
   static_uri: "/static",
-  universal_analytics_id: "UA-93941787-3",
 };
