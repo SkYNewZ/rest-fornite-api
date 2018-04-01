@@ -3,9 +3,11 @@ import { config } from "dotenv";
 config();
 import * as express from "express";
 import * as cache from "express-redis-cache";
+import { existsSync, mkdirSync } from "fs";
 import * as morgan from "morgan";
+import { join } from "path";
+import * as rfs from "rotating-file-stream";
 import * as swaggerUi from "swagger-ui-express";
-import * as ua from "universal-analytics";
 import { AppConfig } from "./config/config";
 
 const app: express.Application = express();
@@ -19,8 +21,13 @@ import * as store from "./routes/store";
 import * as user from "./routes/user";
 // <----END REQUIRED PACKAGES---->
 
-// analytics
-const visitor: ua.Visitor = ua(AppConfig.universal_analytics_id);
+// logs
+const logDirectory = join(__dirname, "logs");
+existsSync(logDirectory) || mkdirSync(logDirectory);
+const accessLogStream = rfs("access.log", {
+  interval: "1d", // rotate daily
+  path: logDirectory,
+});
 
 // <----APP CONFIG---->
 app.set("port", process.env.PORT || 3000);
@@ -28,7 +35,6 @@ app.all(
   "/*",
   (req: express.Request, res: express.Response, next: express.NextFunction) => {
     res.header("Access-Control-Allow-Origin", "*");
-    visitor.pageview(req.url, req.headers.host).send();
     next();
   },
 );
@@ -48,7 +54,8 @@ if (AppConfig.redis.host) {
 /* istanbul ignore if */
 if (process.env.NODE_ENV !== "test") {
   // use morgan to log at command line
-  app.use(morgan("combined")); // 'combined' outputs the Apache style LOGs
+  app.use(morgan("combined", { stream: accessLogStream })); // 'combined' outputs the Apache style LOGs
+  app.use(morgan("combined"));
   if (cacheClient) {
     // redis logs
     cacheClient.on("message", (message: any) => {
