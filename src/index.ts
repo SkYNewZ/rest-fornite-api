@@ -6,6 +6,7 @@ import * as cache from "express-redis-cache";
 import * as morgan from "morgan";
 import * as swaggerUi from "swagger-ui-express";
 import { AppConfig } from "./config/config";
+import { json } from "body-parser"
 
 const app: express.Application = express();
 
@@ -28,6 +29,7 @@ app.all(
   }
 );
 app.use(AppConfig.static_uri, express.static(__dirname + "/public"));
+app.use(json());
 // <----END APP CONFIG---->
 
 // <----REDIS ACTIVATION---->
