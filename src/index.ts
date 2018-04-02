@@ -3,10 +3,7 @@ import { config } from "dotenv";
 config();
 import * as express from "express";
 import * as cache from "express-redis-cache";
-import { existsSync, mkdirSync } from "fs";
 import * as morgan from "morgan";
-import { join } from "path";
-import * as rfs from "rotating-file-stream";
 import * as swaggerUi from "swagger-ui-express";
 import { AppConfig } from "./config/config";
 
@@ -20,14 +17,6 @@ import * as stats from "./routes/stats";
 import * as store from "./routes/store";
 import * as user from "./routes/user";
 // <----END REQUIRED PACKAGES---->
-
-// logs
-const logDirectory = join(__dirname, "logs");
-existsSync(logDirectory) || mkdirSync(logDirectory);
-const accessLogStream = rfs("access.log", {
-  interval: "1d", // rotate daily
-  path: logDirectory,
-});
 
 // <----APP CONFIG---->
 app.set("port", process.env.PORT || 3000);
@@ -53,8 +42,6 @@ if (AppConfig.redis.host) {
 // <----IF TESTING---->
 /* istanbul ignore if */
 if (process.env.NODE_ENV !== "test") {
-  // use morgan to log at command line
-  app.use(morgan("combined", { stream: accessLogStream })); // 'combined' outputs the Apache style LOGs
   app.use(morgan("combined"));
   if (cacheClient) {
     // redis logs
