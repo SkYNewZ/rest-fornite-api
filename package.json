@@ -2,7 +2,7 @@
   "name": "rest-fortnite-api",
   "version": "3.1.0",
   "description": "REST Fortnite API. Get stats, score, kills...",
-  "main": "api.js",
+  "main": "index.js",
   "scripts": {
     "build": "tsc",
     "dev": "./node_modules/.bin/ts-node src/index.ts",

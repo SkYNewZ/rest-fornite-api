@@ -15,6 +15,10 @@ Thanks to [qlaffont](https://github.com/qlaffont/fortnite-api) for doing this AP
 
 You can found SwaggerUI here https://skynewz-api-fortnite.herokuapp.com/api-docs
 
+## Authentification JWT
+:warning: **This API is now with JWT authentification. [Send me an e-mail ](mailto:quentin@lemairepro.fr) to obtain a login and password in order to use this with a valid token** :warning:
+For all the `/api` routes, you need to set the `Authorization; Bearer <token>` header.
+
 ## INIT
 
 To setup this module, you need to have an account on Epic Games. After that you need to get 2 dedicated headers from Fortnite.
@@ -30,46 +34,38 @@ How to get these headers ?
 
 ---
 
-## Start as docker container
+## Start with docker :whale:
 
-### With REDIS
-
-If you want to use a [Redis](https://hub.docker.com/_/redis/), use this [docker-compose.yml for example](https://github.com/SkYNewZ/rest-fornite-api/blob/master/docker-compose.yml) **replacing environements variables values by yours**.
-
-### Without REDIS
-
-```bash
-$ docker run -d --restart=always \
-  -e LOGIN_EMAIL=EMAIL ACCOUNT \
-  -e LOGIN_PASSWORD=PASSWORD \
-  -e OAUTH_EPIC_LAUNCHER=CLIENT LAUNCHER TOKEN \
-  -e OAUTH_FORTNITE=FORTNITE CLIENT TOKEN \
-  -p 3000:3000
-  skynewz/fortnite-api
-```
-
-This will listening on port 3000. You can check at http://localhost:3000/check
-
-> **Note:**
-> You can can the option -e PORT=1234 in order to use a custom port
+You can use this [docker-compose.yml](https://github.com/SkYNewZ/rest-fornite-api/blob/master/docker-compose.yml) **replacing environements variables values by yours**. in order to startup this API.
+Just download this file and `docker-compose up`
 
 ## Start with nodejs
 
 ### Requirements
 
 * Nodejs >= 8.9
-  > **Note:**
-  > You can can the option environements variable PORT=1234 in order to use a custom port
+* Rename `.env.example` to `.env` and set your values for the environements variables :
+```
+LOGIN_EMAIL=Your epic games account
+LOGIN_PASSWORD=Your epic games password
+OAUTH_EPIC_LAUNCHER=See init part
+OAUTH_FORTNITE=See init part
+PGHOST=Postgres host
+PGPORT=Postgres port
+PGDATABASE=Postgres database
+PGUSER=Postgres user
+PGPASSWORD=Postgres password
+REDIS_HOST=Redis host
+REDIS_PASSWORD=Redis password
+```
 
 ### Start in developement mode
 
 ```bash
 $ git clone https://github.com/SkYNewZ/rest-fornite-api
 $ cd rest-fornite-api
-# write a .env file with you credentials from abose
-$ vim .env
 # Run
-$ npm run start-dev
+$ npm run dev
 ```
 
 ### Start in production mode
@@ -77,8 +73,6 @@ $ npm run start-dev
 ```bash
 $ git clone https://github.com/SkYNewZ/rest-fornite-api
 $ cd rest-fornite-api
-# write a .env file with you credentials from abose
-$ vim .env
 # build the TypeScript
 $ npm run build
 # Run
