@@ -68,7 +68,7 @@ app.use("/", freeRoutes);
 // <----ROUTING---->
 
 // get token
-apiRoutes.post("/oauth/token", security.getToken);
+apiRoutes.post("/oauth/token", cacheClient.route(0), security.getToken);
 
 // check user bu username
 apiRoutes.get("/user/:platform/:username", user.checkPlayer);
