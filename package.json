@@ -48,11 +48,15 @@
     "all": true
   },
   "dependencies": {
+    "@types/bcrypt": "^1.0.0",
     "@types/body-parser": "^1.16.8",
     "@types/dotenv": "^4.0.2",
     "@types/express": "^4.11.1",
+    "@types/jsonwebtoken": "^7.2.6",
     "@types/morgan": "^1.7.35",
     "@types/node": "^9.6.0",
+    "@types/pg": "^7.4.5",
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
@@ -60,8 +64,9 @@
     "fortnite-api": "^2.7.1",
     "jsonwebtoken": "^8.2.0",
     "memory-cache": "^0.2.0",
-    "mongoose": "^5.0.12",
     "morgan": "^1.9.0",
+    "pg": "^7.4.1",
+    "random-key": "^0.3.2",
     "swagger-ui-express": "^3.0.6",
     "typescript": "^2.8.1"
   },
