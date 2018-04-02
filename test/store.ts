@@ -11,10 +11,27 @@ chai.use(chaiHttp);
 
 // Our parent block
 describe("Shop", () => {
+  let token: string = "";
+
+  before((done) => {
+    chai.request(AppServer)
+      .post("/api/oauth/token")
+      .type("application/x-www-form-urlencoded")
+      .send({
+        email: process.env.OAUTH_TEST_MAIL,
+        password: process.env.OAUTH_TEST_PASSWORD,
+      })
+      .end((err, res) => {
+        token = res.body.access_token;
+        done();
+      });
+  });
+
   it("it should get store info", (done: MochaDone) => {
     chai
       .request(AppServer)
-      .get("/store")
+      .get("/api/store")
+      .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.a("object");
@@ -25,7 +42,8 @@ describe("Shop", () => {
   it("it should get store info in french", (done: MochaDone) => {
     chai
       .request(AppServer)
-      .get("/store/fr")
+      .get("/api/store/fr")
+      .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.a("object");
@@ -36,7 +54,8 @@ describe("Shop", () => {
   it("it should get store info in it", (done: MochaDone) => {
     chai
       .request(AppServer)
-      .get("/store/it")
+      .get("/api/store/it")
+      .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.a("object");

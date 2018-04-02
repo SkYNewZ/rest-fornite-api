@@ -11,10 +11,27 @@ chai.use(chaiHttp);
 
 // Our parent block
 describe("Check", () => {
+  let token: string = "";
+
+  before((done) => {
+    chai.request(AppServer)
+      .post("/api/oauth/token")
+      .type("application/x-www-form-urlencoded")
+      .send({
+        email: process.env.OAUTH_TEST_MAIL,
+        password: process.env.OAUTH_TEST_PASSWORD,
+      })
+      .end((err, res) => {
+        token = res.body.access_token;
+        done();
+      });
+  });
+
   it("it should return fornite ETA", (done: MochaDone) => {
     chai
       .request(AppServer)
-      .get("/check")
+      .get("/api/check")
+      .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.a("object");

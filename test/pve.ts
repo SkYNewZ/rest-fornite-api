@@ -10,6 +10,8 @@ import { beforeEach } from "mocha";
 import { AppServer } from "../src/index";
 chai.use(chaiHttp);
 
+let token: string = "";
+
 // Our parent block
 describe("PVE", () => {
   // ignore beacause of https://github.com/qlaffont/fortnite-api/issues/48
@@ -17,10 +19,25 @@ describe("PVE", () => {
     this.skip();
   });
 
+  before((done) => {
+    chai.request(AppServer)
+      .post("/api/oauth/token")
+      .type("application/x-www-form-urlencoded")
+      .send({
+        email: process.env.OAUTH_TEST_MAIL,
+        password: process.env.OAUTH_TEST_PASSWORD,
+      })
+      .end((err, res) => {
+        token = res.body.access_token;
+        done();
+      });
+  });
+
   it("it should return 404 because wrong username", (done: MochaDone) => {
     chai
       .request(AppServer)
-      .get("/pve/user/wrongusernameatall")
+      .get("/api/pve/user/wrongusernameatall")
+      .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res).to.have.status(404);
         expect(res.body).to.be.a("object");
@@ -33,7 +50,8 @@ describe("PVE", () => {
   it("it should return pve info for given username", (done: MochaDone) => {
     chai
       .request(AppServer)
-      .get("/pve/user/skynewz")
+      .get("/api/pve/user/skynewz")
+      .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.a("object");
@@ -46,7 +64,8 @@ describe("PVE INFO", () => {
   it("it should return fornite pve info in french", (done: MochaDone) => {
     chai
       .request(AppServer)
-      .get("/pve/info/fr")
+      .get("/api/pve/info/fr")
+      .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.a("object");
@@ -57,7 +76,8 @@ describe("PVE INFO", () => {
   it("it should return fornite pve info in it", (done: MochaDone) => {
     chai
       .request(AppServer)
-      .get("/pve/info/it")
+      .get("/api/pve/info/it")
+      .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.a("object");
@@ -68,7 +88,8 @@ describe("PVE INFO", () => {
   it("it should return fornite pve info", (done: MochaDone) => {
     chai
       .request(AppServer)
-      .get("/pve/info")
+      .get("/api/pve/info")
+      .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.a("object");

@@ -11,10 +11,27 @@ chai.use(chaiHttp);
 
 // Our parent block
 describe("News", () => {
+  let token: string = "";
+
+  before((done) => {
+    chai.request(AppServer)
+      .post("/api/oauth/token")
+      .type("application/x-www-form-urlencoded")
+      .send({
+        email: process.env.OAUTH_TEST_MAIL,
+        password: process.env.OAUTH_TEST_PASSWORD,
+      })
+      .end((err, res) => {
+        token = res.body.access_token;
+        done();
+      });
+  });
+
   it("it should return news", (done: MochaDone) => {
     chai
       .request(AppServer)
-      .get("/news")
+      .get("/api/news")
+      .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.a("object");
@@ -25,7 +42,8 @@ describe("News", () => {
   it("it should return news in french", (done: MochaDone) => {
     chai
       .request(AppServer)
-      .get("/news/fr")
+      .get("/api/news/fr")
+      .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.a("object");
@@ -36,7 +54,8 @@ describe("News", () => {
   it("it should return news in it", (done: MochaDone) => {
     chai
       .request(AppServer)
-      .get("/news/it")
+      .get("/api/news/it")
+      .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.a("object");
