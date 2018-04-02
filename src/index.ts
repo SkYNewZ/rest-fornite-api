@@ -28,9 +28,6 @@ let cacheClient: any = null;
 if (AppConfig.redis.host) {
   cacheClient = cache(AppConfig.redis);
   app.use(cacheClient.route());
-  cacheClient.on("message", (message: any) => {
-    console.log("[REDIS] : " + message);
-  });
 }
 // <----END REDIS ACTIVATION---->
 
@@ -38,6 +35,11 @@ if (AppConfig.redis.host) {
 /* istanbul ignore if */
 if (process.env.NODE_ENV !== "test") {
   app.use(morgan("combined"));
+  if (cacheClient) {
+    cacheClient.on("message", (message: any) => {
+      console.log("[REDIS] : " + message);
+    });
+  }
 }
 // <---END IF TESTING---->
 
