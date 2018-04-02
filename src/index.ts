@@ -25,7 +25,7 @@ app.all(
   (req: express.Request, res: express.Response, next: express.NextFunction) => {
     res.header("Access-Control-Allow-Origin", "*");
     next();
-  },
+  }
 );
 app.use(AppConfig.static_uri, express.static(__dirname + "/public"));
 // <----END APP CONFIG---->
@@ -82,8 +82,8 @@ app.use(
   "/api-docs",
   swaggerUi.serve,
   swaggerUi.setup(null, {
-    swaggerUrl: "https://skynewz-api-fortnite.herokuapp.com/static/swagger.json",
-  }),
+    swaggerUrl: "https://skynewz-api-fortnite.herokuapp.com/static/swagger.json"
+  })
 );
 
 // display https://skynewz.github.io/rest-fornite-api/ on home page
@@ -98,7 +98,7 @@ app.get("*", (req: express.Request, res: express.Response) => {
 
 // start server
 app.listen(app.get("port"), () =>
-  console.log("Listening on port " + app.get("port")),
+  console.log("Listening on port " + app.get("port"))
 );
 
 export const AppServer: express.Application = app;
