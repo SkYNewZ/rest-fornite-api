@@ -1,5 +1,3 @@
-import * as rand from "random-key";
-
 export const AppConfig = {
   debug: process.env.DEBUG || false,
   redis: {
@@ -14,6 +12,6 @@ export const AppConfig = {
     port: process.env.REDIS_PORT || 6379,
     prefix: process.env.REDIS_PREFIX || "api-fortnite",
   },
-  secret: process.env.SECRET || rand.generate(),
+  secret: process.env.SECRET || "g6ePcR'G36]l63n",
   static_uri: "/static",
 };
