@@ -10,10 +10,11 @@ const pool = new Pool();
 export function getToken(req: Request, res: Response) {
 
   pool.query("SELECT * FROM users where email=$1::text", [req.body.email], (err: Error, result: QueryResult) => {
+    /* istanbul ignore if */
     if (err) { throw err; }
 
     if (!result.rowCount || result.rowCount > 1) {
-      res
+      return res
         .status(404)
         .json({
           message: "Authentication failed. User not found",
@@ -25,7 +26,7 @@ export function getToken(req: Request, res: Response) {
 
     // check if password matches
     if (!bcrypt.compareSync(req.body.password, currentUser.password)) {
-      res
+      return res
         .status(401)
         .json({
           message: "Authentication failed.",
@@ -41,10 +42,13 @@ export function getToken(req: Request, res: Response) {
       expiresIn: 7200,
     });
 
-    console.log("[JWT] : " + req.body.email + " get a new token");
+    /* istanbul ignore if */
+    if (process.env.NODE_ENV !== "test") {
+      console.log("[JWT] : " + req.body.email + " get a new token");
+    }
 
     // return the information including token as JSON
-    res.json({
+    return res.json({
       access_token: token,
       expiresIn: 7200,
     });
@@ -59,7 +63,7 @@ function getTokenFromHeader(req: Request): string | null {
 }
 
 export function authMiddleware(req: Request, res: Response, next: NextFunction) {
-  if (req.path === "/oauth/token" || req.path === "/oauth/login") {
+  if (req.path === "/oauth/token") {
     return next();
   }
   const token: string | null = getTokenFromHeader(req);
@@ -77,7 +81,7 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction) 
         reason: err.message,
       });
     } else {
-      next();
+      return next();
     }
   });
 
