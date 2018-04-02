@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "./node_modules/.bin/ts-node src/index.ts",
+    "watch": "./node_modules/.bin/nodemon",
     "start": "node index.js",
     "test": "./node_modules/.bin/nyc mocha",
     "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/.bin/codecov",
@@ -71,6 +72,7 @@
     "chai-http": "^4.0.0",
     "codecov": "^3.0.0",
     "mocha": "^5.0.5",
+    "nodemon": "^1.17.3",
     "nyc": "^11.6.0",
     "prettier": "^1.11.1",
     "ts-node": "^5.0.1",
