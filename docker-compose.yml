@@ -15,21 +15,11 @@ services:
       - LOGIN_PASSWORD=XXXXX
       - OAUTH_EPIC_LAUNCHER=XXXXX
       - OAUTH_FORTNITE=XXXXX
-      - REDIS_HOST=cache
-      - REDIS_PASSWORD=secretpasswordtoo
       - PGHOST=database
       - PGPORT=5432
       - PGDATABASE=fortnite-api
       - PGUSER=postgres
       - PGPASSWORD=secretpassword
-
-  cache:
-    image: bitnami/redis
-    # you should stay comment this line for prevent useless open port on your server
-    # ports:
-    #   - 6379:6379
-    environment:
-      - REDIS_PASSWORD=secretpasswordtoo
 
   database:
      image: postgres

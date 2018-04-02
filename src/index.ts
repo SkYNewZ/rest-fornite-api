@@ -3,7 +3,6 @@ import { config } from "dotenv";
 config();
 import { json, urlencoded } from "body-parser";
 import * as express from "express";
-import * as cache from "express-redis-cache";
 import * as morgan from "morgan";
 import * as swaggerUi from "swagger-ui-express";
 import { AppConfig } from "./config/config";
@@ -22,24 +21,10 @@ import * as store from "./routes/store";
 import * as user from "./routes/user";
 // <----END REQUIRED PACKAGES---->
 
-// <----REDIS ACTIVATION---->
-// enable redis if process.env.REDIS_HOST provided
-let cacheClient: any = null;
-if (AppConfig.redis.host) {
-  cacheClient = cache(AppConfig.redis);
-  app.use(cacheClient.route());
-}
-// <----END REDIS ACTIVATION---->
-
 // <----IF TESTING---->
 /* istanbul ignore if */
 if (process.env.NODE_ENV !== "test") {
   app.use(morgan("combined"));
-  if (cacheClient) {
-    cacheClient.on("message", (message: any) => {
-      console.log("[REDIS] : " + message);
-    });
-  }
 }
 // <---END IF TESTING---->
 
@@ -68,7 +53,7 @@ app.use("/", freeRoutes);
 // <----ROUTING---->
 
 // get token
-apiRoutes.post("/oauth/token", cacheClient.route(0), security.getToken);
+apiRoutes.post("/oauth/token", security.getToken);
 
 // check user bu username
 apiRoutes.get("/user/:platform/:username", user.checkPlayer);

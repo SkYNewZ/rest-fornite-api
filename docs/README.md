@@ -51,8 +51,6 @@ PGPORT=Postgres port
 PGDATABASE=Postgres database
 PGUSER=Postgres user
 PGPASSWORD=Postgres password
-REDIS_HOST=Redis host
-REDIS_PASSWORD=Redis password
 ```
 
 ### Start in developement mode
