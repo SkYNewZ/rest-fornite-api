@@ -28,7 +28,7 @@ if (process.env.NODE_ENV !== "test") {
 // <---END IF TESTING---->
 
 // <----APP CONFIG---->
-app.set("port", process.env.PORT || 3000);
+app.set("port", AppConfig.application.port);
 app.use(AppConfig.static_uri, express.static(__dirname + "/public"));
 app.use(json());
 app.use(urlencoded({ extended: false }));
