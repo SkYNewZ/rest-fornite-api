@@ -8,17 +8,13 @@ import { AppConfig } from "../config/config";
 const client = new Client({
   connectionString: process.env.DATABSE_CONNECTION_STING,
 });
+/* istanbul ignore next */
+client.connect()
+  .catch((e) => {
+    throw e.message;
+  });
 
 export function getToken(req: Request, res: Response) {
-
-  client.connect((err: Error) => {
-    if (err) {
-      return res.status(500).json({
-        message: "Failed getting token",
-        success: false,
-      });
-  }
-  });
 
   client.query("SELECT * FROM users where email=$1::text", [req.body.email], (err: Error, result: QueryResult) => {
     /* istanbul ignore if */

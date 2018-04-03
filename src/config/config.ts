@@ -4,6 +4,7 @@ const client = new Client({
   connectionString: process.env.DATABSE_CONNECTION_STING,
 });
 client.connect((err) => {
+  /* istanbul ignore if */
   if (err) {
     throw err;
   } else {
