@@ -12,7 +12,7 @@ COPY . .
 RUN npm run build
 
 
-FROM node:9-alpine
+FROM node:9
 ARG BUILD_DATE
 ARG VCS_REF
 ARG VERSION
