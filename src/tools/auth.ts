@@ -24,7 +24,7 @@ if (!process.env.OAUTH_FORTNITE) {
     .message;
 }
 
-export const fortniteAPI = new FortniteAPI(
+const fortniteAPI = new FortniteAPI(
   [
     process.env.LOGIN_EMAIL,
     process.env.LOGIN_PASSWORD,
@@ -35,3 +35,6 @@ export const fortniteAPI = new FortniteAPI(
     debug: AppConfig.debug,
   },
 );
+fortniteAPI.login();
+
+export default fortniteAPI;

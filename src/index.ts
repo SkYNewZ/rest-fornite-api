@@ -1,4 +1,3 @@
-// <----REQUIRED PACKAGES---->
 import { config } from "dotenv";
 config();
 import { json, urlencoded } from "body-parser";
