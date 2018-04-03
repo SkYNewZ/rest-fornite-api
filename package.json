@@ -33,7 +33,8 @@
       "src/**/*.ts"
     ],
     "exclude": [
-      "src/models/*.ts"
+      "src/models/*.ts",
+      "src/routes/check.ts"
     ],
     "extension": [
       ".ts"
