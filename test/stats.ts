@@ -11,16 +11,16 @@ import { AppServer } from "../src/index";
 chai.use(chaiHttp);
 
 describe("Stats with username", () => {
-
   let token: string = "";
 
-  before((done) => {
-    chai.request(AppServer)
+  before(done => {
+    chai
+      .request(AppServer)
       .post("/api/oauth/token")
       .type("application/x-www-form-urlencoded")
       .send({
         email: process.env.OAUTH_TEST_MAIL,
-        password: process.env.OAUTH_TEST_PASSWORD,
+        password: process.env.OAUTH_TEST_PASSWORD
       })
       .end((err, res) => {
         token = res.body.access_token;
@@ -98,16 +98,16 @@ describe("Stats with username", () => {
 });
 
 describe("Stats with ID", () => {
-
   let token: string = "";
 
-  before((done) => {
-    chai.request(AppServer)
+  before(done => {
+    chai
+      .request(AppServer)
       .post("/api/oauth/token")
       .type("application/x-www-form-urlencoded")
       .send({
         email: process.env.OAUTH_TEST_MAIL,
-        password: process.env.OAUTH_TEST_PASSWORD,
+        password: process.env.OAUTH_TEST_PASSWORD
       })
       .end((err, res) => {
         token = res.body.access_token;

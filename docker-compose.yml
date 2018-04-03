@@ -15,11 +15,7 @@ services:
       - LOGIN_PASSWORD=XXXXX
       - OAUTH_EPIC_LAUNCHER=XXXXX
       - OAUTH_FORTNITE=XXXXX
-      - PGHOST=database
-      - PGPORT=5432
-      - PGDATABASE=fortnite-api
-      - PGUSER=postgres
-      - PGPASSWORD=secretpassword
+      - DATABSE_CONNECTION_STING=postgres://postgres:secretpassword@database:5432/fortnite-api
 
   database:
      image: postgres

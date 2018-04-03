@@ -2,14 +2,21 @@ import * as bcrypt from "bcrypt";
 import { Request, Response } from "express";
 import { NextFunction } from "express-serve-static-core";
 import { JsonWebTokenError, NotBeforeError, sign, TokenExpiredError, verify } from "jsonwebtoken";
-import { Client, Pool, QueryResult } from "pg";
+import { Client, QueryResult } from "pg";
 import { AppConfig } from "../config/config";
 
-const pool = new Pool();
+const client = new Client({
+  connectionString: process.env.DATABSE_CONNECTION_STING,
+});
+/* istanbul ignore next */
+client.connect()
+  .catch((e) => {
+    throw e.message;
+  });
 
 export function getToken(req: Request, res: Response) {
 
-  pool.query("SELECT * FROM users where email=$1::text", [req.body.email], (err: Error, result: QueryResult) => {
+  client.query("SELECT * FROM users where email=$1::text", [req.body.email], (err: Error, result: QueryResult) => {
     /* istanbul ignore if */
     if (err) { throw err; }
 

@@ -50,11 +50,7 @@ LOGIN_EMAIL=Your epic games account
 LOGIN_PASSWORD=Your epic games password
 OAUTH_EPIC_LAUNCHER=See init part
 OAUTH_FORTNITE=See init part
-PGHOST=Postgres host
-PGPORT=Postgres port
-PGDATABASE=Postgres database
-PGUSER=Postgres user
-PGPASSWORD=Postgres password
+DATABSE_CONNECTION_STING=postgres://user:password@host:port/database
 ```
 
 ### Start in developement mode
