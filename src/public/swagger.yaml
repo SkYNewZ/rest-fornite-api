@@ -683,7 +683,7 @@ paths:
                 format: int32
               message:
                 type: string
-  '/pve/{username}':
+  '/pve/user/{username}':
     get:
       security:
         - Bearer: []

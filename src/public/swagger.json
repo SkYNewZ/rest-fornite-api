@@ -1000,7 +1000,7 @@
         }
       }
     },
-    "/pve/{username}": {
+    "/pve/user/{username}": {
       "get": {
         "security": [
           {
