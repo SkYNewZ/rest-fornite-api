@@ -14,7 +14,6 @@ export function checkFortniteStatus(req: Request, res: Response) {
       if (err === "Impossible to fetch fortnite data") {
         res.status(404).send(new CustomError(404, err));
       } else {
-        console.log(err);
         /* istanbul ignore next */
         res.status(500).send(new CustomError(500, err));
       }
