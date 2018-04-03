@@ -6,13 +6,29 @@ services:
     restart: always
     ports:
       - "3000:3000"
+    depends_on: 
+      - cache
+      - database
     environment:
-      - LOGIN_EMAIL=fake@mail.me
-      - LOGIN_PASSWORD=pass
+        # replace XXXXX by your values
+      - LOGIN_EMAIL=XXXXX
+      - LOGIN_PASSWORD=XXXXX
       - OAUTH_EPIC_LAUNCHER=XXXXX
       - OAUTH_FORTNITE=XXXXX
-      - REDIS_HOST=cache
-      - REDIS_PASSWORD=XXXXX
+      - PGHOST=database
+      - PGPORT=5432
+      - PGDATABASE=fortnite-api
+      - PGUSER=postgres
+      - PGPASSWORD=secretpassword
 
-  cache:
-    image: redis
+  database:
+     image: postgres
+    # you should stay comment this line for prevent useless open port on your server
+    #  ports:
+    #    - 5432:5432
+     environment:
+       - POSTGRES_PASSWORD=secretpassword
+       - POSTGRES_DB=fortnite-api
+     volumes:
+        # if you want to persist data
+       - ./postgres:/var/lib/postgresql/data

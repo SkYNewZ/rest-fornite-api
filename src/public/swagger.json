@@ -3,11 +3,25 @@
   "info": {
     "title": "FORTNITE REST API",
     "description": "REST API about Fortnite game",
-    "version": "3.0.2"
+    "version": "3.1.0"
   },
   "host": "skynewz-api-fortnite.herokuapp.com",
-  "schemes": ["https"],
+  "basePath": "/api",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
   "tags": [
+    {
+      "name": "Security",
+      "description": "How to access to this API"
+    },
     {
       "name": "User",
       "description": "Get user info"
@@ -29,11 +43,91 @@
       "description": "Get store infos"
     }
   ],
-  "produces": ["application/json"],
+  "consumes": [
+    "application/x-www-form-urlencoded",
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
+    "/oauth/token": {
+      "post": {
+        "tags": [
+          "Security"
+        ],
+        "summary": "Get a Bearer token",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Your access token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "access_toekn": {
+                  "type": "string"
+                },
+                "expiresIn": {
+                  "type": "string",
+                  "description": "Time in seconds for the validity of token"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "success": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Authentication failed. User not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "success": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/check": {
       "get": {
-        "tags": ["Check"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Check"
+        ],
         "summary": "Get Fortnite game status",
         "responses": {
           "200": {
@@ -67,7 +161,14 @@
     },
     "/news": {
       "get": {
-        "tags": ["News"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "News"
+        ],
         "summary": "Get Fortnite News",
         "responses": {
           "200": {
@@ -159,7 +260,14 @@
     },
     "/user/{plateform}/{username}": {
       "get": {
-        "tags": ["User"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "User"
+        ],
         "summary": "Get a user by username",
         "parameters": [
           {
@@ -228,7 +336,14 @@
     },
     "/stats/{plateform}/{username}": {
       "get": {
-        "tags": ["Stats"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Stats"
+        ],
         "summary": "Get user's stats by username",
         "parameters": [
           {
@@ -300,8 +415,7 @@
                         },
                         "timePlayed": {
                           "type": "string",
-                          "description":
-                            "Number of days, hours and minutes played"
+                          "description": "Number of days, hours and minutes played"
                         },
                         "killsPerMatch": {
                           "type": "string",
@@ -361,8 +475,7 @@
                         },
                         "timePlayed": {
                           "type": "string",
-                          "description":
-                            "Number of days, hours and minutes played"
+                          "description": "Number of days, hours and minutes played"
                         },
                         "killsPerMatch": {
                           "type": "string",
@@ -422,8 +535,7 @@
                         },
                         "timePlayed": {
                           "type": "string",
-                          "description":
-                            "Number of days, hours and minutes played"
+                          "description": "Number of days, hours and minutes played"
                         },
                         "killsPerMatch": {
                           "type": "string",
@@ -557,7 +669,14 @@
     },
     "/stats/id/{plateform}/{id}": {
       "get": {
-        "tags": ["Stats"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Stats"
+        ],
         "summary": "Get user's stats by user id",
         "parameters": [
           {
@@ -629,8 +748,7 @@
                         },
                         "timePlayed": {
                           "type": "string",
-                          "description":
-                            "Number of days, hours and minutes played"
+                          "description": "Number of days, hours and minutes played"
                         },
                         "killsPerMatch": {
                           "type": "string",
@@ -690,8 +808,7 @@
                         },
                         "timePlayed": {
                           "type": "string",
-                          "description":
-                            "Number of days, hours and minutes played"
+                          "description": "Number of days, hours and minutes played"
                         },
                         "killsPerMatch": {
                           "type": "string",
@@ -751,8 +868,7 @@
                         },
                         "timePlayed": {
                           "type": "string",
-                          "description":
-                            "Number of days, hours and minutes played"
+                          "description": "Number of days, hours and minutes played"
                         },
                         "killsPerMatch": {
                           "type": "string",
@@ -886,7 +1002,14 @@
     },
     "/pve/{username}": {
       "get": {
-        "tags": ["PVE"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "PVE"
+        ],
         "summary": "Get PVE Stat by given username",
         "parameters": [
           {
@@ -939,7 +1062,14 @@
     },
     "/pve/info": {
       "get": {
-        "tags": ["PVE"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "PVE"
+        ],
         "summary": "Get Fortnite PVE Info (storm, etc)",
         "responses": {
           "200": {
@@ -968,7 +1098,14 @@
     },
     "/store": {
       "get": {
-        "tags": ["Store"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Store"
+        ],
         "summary": "Get Fortnite Store",
         "responses": {
           "200": {

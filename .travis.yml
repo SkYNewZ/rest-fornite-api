@@ -15,7 +15,6 @@ notifications:
 
 services:
   - docker
-  - redis-server
 
 cache:
   directories:
@@ -25,7 +24,7 @@ install:
   - npm install
 
 script:
-  - REDIS_HOST=localhost npm test
+  - npm test
 
 after_success:
   - npm run coverage

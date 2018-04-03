@@ -2,11 +2,19 @@ swagger: '2.0'
 info:
   title: FORTNITE REST API
   description: REST API about Fortnite game
-  version: 3.0.2
+  version: 3.1.0
 host: skynewz-api-fortnite.herokuapp.com
+basePath: /api
 schemes:
   - https
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
 tags:
+  - name: Security
+    description: How to access to this API
   - name: User
     description: Get user info
   - name: Stats
@@ -17,11 +25,59 @@ tags:
     description: Get all your PVE Stats
   - name: Store
     description: Get store infos
+consumes:
+  - application/x-www-form-urlencoded
+  - application/json
 produces:
   - application/json
 paths:
+  /oauth/token:
+    post:
+      tags:
+        - Security
+      summary: Get a Bearer token
+      parameters:
+        - name: email
+          in: formData
+          type: string
+          required: true
+        - name: password
+          in: formData
+          type: string
+          required: true
+      responses:
+        '200':
+          description: Your access token
+          schema:
+            type: object
+            properties:
+              access_toekn:
+                type: string
+              expiresIn:
+                type: string
+                description: Time in seconds for the validity of token
+        '404':
+          description: Authentication failed. User not found
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              success:
+                type: boolean
+        '401':
+          description: Authentication failed
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              success:
+                type: boolean
   /check:
     get:
+      security:
+        - Bearer: []
       tags:
         - Check
       summary: Get Fortnite game status
@@ -45,6 +101,8 @@ paths:
                 type: string
   /news:
     get:
+      security:
+        - Bearer: []
       tags:
         - News
       summary: Get Fortnite News
@@ -106,6 +164,8 @@ paths:
                 type: string
   '/user/{plateform}/{username}':
     get:
+      security:
+        - Bearer: []
       tags:
         - User
       summary: Get a user by username
@@ -153,6 +213,8 @@ paths:
                 type: string
   '/stats/{plateform}/{username}':
     get:
+      security:
+        - Bearer: []
       tags:
         - Stats
       summary: Get user's stats by username
@@ -387,6 +449,8 @@ paths:
                 type: string
   '/stats/id/{plateform}/{id}':
     get:
+      security:
+        - Bearer: []
       tags:
         - Stats
       summary: Get user's stats by user id
@@ -621,6 +685,8 @@ paths:
                 type: string
   '/pve/{username}':
     get:
+      security:
+        - Bearer: []
       tags:
         - PVE
       summary: Get PVE Stat by given username
@@ -657,6 +723,8 @@ paths:
                 type: string
   /pve/info:
     get:
+      security:
+        - Bearer: []
       tags:
         - PVE
       summary: 'Get Fortnite PVE Info (storm, etc)'
@@ -677,6 +745,8 @@ paths:
                 type: string
   /store:
     get:
+      security:
+        - Bearer: []
       tags:
         - Store
       summary: Get Fortnite Store
