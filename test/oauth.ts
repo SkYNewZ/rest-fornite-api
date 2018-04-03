@@ -97,15 +97,14 @@ describe("Oauth", () => {
       });
   });
 
-  it("it shoult return 200 on /api/check with the previous token", (done: MochaDone) => {
+  it("it shoult return 200 on /api/user/pc/skynewz with the previous token", (done: MochaDone) => {
     chai
       .request(AppServer)
-      .get("/api/check")
+      .get("/api/user/pc/skynewz")
       .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.a("object");
-        expect(res.body).to.have.property("status");
         done();
       });
   });
