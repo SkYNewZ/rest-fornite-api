@@ -1,38 +1,43 @@
 import * as bcrypt from "bcrypt";
 import { Request, Response } from "express";
 import { NextFunction } from "express-serve-static-core";
-import { JsonWebTokenError, NotBeforeError, sign, TokenExpiredError, verify } from "jsonwebtoken";
+import {
+  JsonWebTokenError,
+  NotBeforeError,
+  sign,
+  TokenExpiredError,
+  verify,
+} from "jsonwebtoken";
 import { Client, QueryResult } from "pg";
 import { AppConfig, DatabaseClient } from "../config/config";
+import { IJwtPayload } from "../interfaces/jwt-payload.interface";
+import { ApiLogger } from "../middlewares/logging";
 
 export function getToken(req: Request, res: Response) {
-
   DatabaseClient.query(
     "SELECT * FROM users where email=$1::text",
     [req.body.email],
     (err: Error, result: QueryResult) => {
       /* istanbul ignore if */
-      if (err) { throw err; }
+      if (err) {
+        throw err;
+      }
 
       if (!result.rowCount || result.rowCount > 1) {
-        return res
-          .status(404)
-          .json({
-            message: "Authentication failed. User not found",
-            success: false,
-          });
+        return res.status(404).json({
+          message: "Authentication failed. User not found",
+          success: false,
+        });
       }
 
       const currentUser: any = result.rows[0];
 
       // check if password matches
       if (!bcrypt.compareSync(req.body.password, currentUser.password)) {
-        return res
-          .status(401)
-          .json({
-            message: "Authentication failed.",
-            success: false,
-          });
+        return res.status(401).json({
+          message: "Authentication failed.",
+          success: false,
+        });
       }
 
       const payload = {
@@ -53,17 +58,25 @@ export function getToken(req: Request, res: Response) {
         access_token: token,
         expiresIn: 7200,
       });
-    });
+    },
+  );
 }
 
 function getTokenFromHeader(req: Request): string | null {
-  if ((req.headers.authorization as string) && (req.headers.authorization as string).split(" ")[0] === "Bearer") {
+  if (
+    (req.headers.authorization as string) &&
+    (req.headers.authorization as string).split(" ")[0] === "Bearer"
+  ) {
     return (req.headers.authorization as string).split(" ")[1];
   }
   return null;
 }
 
-export function authMiddleware(req: Request, res: Response, next: NextFunction) {
+export function authMiddleware(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   if (req.path === "/oauth/token") {
     return next();
   }
@@ -75,15 +88,22 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction) 
     });
   }
 
-  verify(token, AppConfig.secret, (err: JsonWebTokenError | NotBeforeError | TokenExpiredError, decoded) => {
-    if (err) {
-      return res.status(403).json({
-        message: "Failed to authenticate token.",
-        reason: err.message,
-      });
-    } else {
-      return next();
-    }
-  });
-
+  verify(
+    token,
+    AppConfig.secret,
+    (
+      err: JsonWebTokenError | NotBeforeError | TokenExpiredError,
+      decoded: IJwtPayload,
+    ) => {
+      if (err) {
+        return res.status(403).json({
+          message: "Failed to authenticate token.",
+          reason: err.message,
+        });
+      } else {
+        ApiLogger(decoded, req.originalUrl, JSON.stringify(req.body));
+        return next();
+      }
+    },
+  );
 }
