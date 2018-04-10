@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { QueryResult } from "pg";
 import { AppConfig, DatabaseClient } from "../config/config";
 import { IJwtPayload } from "../interfaces/jwt-payload.interface";

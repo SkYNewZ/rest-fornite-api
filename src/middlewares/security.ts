@@ -101,7 +101,9 @@ export function authMiddleware(
           reason: err.message,
         });
       } else {
-        ApiLogger(decoded, req.originalUrl, JSON.stringify(req.body));
+        if (process.env.NODE_ENV !== "TEST") {
+          ApiLogger(decoded, req.originalUrl, JSON.stringify(req.body));
+        }
         return next();
       }
     },
