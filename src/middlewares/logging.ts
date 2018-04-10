@@ -8,11 +8,12 @@ export function ApiLogger(
   token: IJwtPayload,
   message: string = null,
   parameters: string = null,
+  userAgent: string = null,
 ) {
   const userEmail = token.email;
   DatabaseClient.query(
-    "INSERT INTO logs(message, user_mail, parameters) VALUES($1, $2, $3)",
-    [message, userEmail, parameters],
+    "INSERT INTO logs(message, user_mail, parameters, user_agent) VALUES($1, $2, $3, $4)",
+    [message, userEmail, parameters, userAgent],
     (err: Error, result: QueryResult) => {
       /* istanbul ignore if */
       if (err) {

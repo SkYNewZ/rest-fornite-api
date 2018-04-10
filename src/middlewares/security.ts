@@ -102,7 +102,7 @@ export function authMiddleware(
         });
       } else {
         if (process.env.NODE_ENV !== "test") {
-          ApiLogger(decoded, req.originalUrl, JSON.stringify(req.body));
+          ApiLogger(decoded, req.originalUrl, JSON.stringify(req.body), req.header("user-agent"));
         }
         return next();
       }
