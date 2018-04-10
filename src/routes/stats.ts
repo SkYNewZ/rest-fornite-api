@@ -36,9 +36,7 @@ export function getStatsBRFromID(req: Request, res: Response) {
       res.json(stats);
     })
     .catch((err) => {
-      if (
-        err === "Impossible to fetch User. User not found on this platform"
-      ) {
+      if (err === "Impossible to fetch User. User not found on this platform") {
         res.status(404).send(new CustomError(404, err));
       } else if (err === "Please precise a good platform: ps4/xb1/pc") {
         res.status(400).send(new CustomError(400, err));

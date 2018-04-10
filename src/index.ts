@@ -11,10 +11,10 @@ const apiRoutes = express.Router();
 const freeRoutes = express.Router();
 
 // routes methods
+import * as security from "./middlewares/security";
 import * as check from "./routes/check";
 import * as news from "./routes/news";
 import * as pve from "./routes/pve";
-import * as security from "./routes/security";
 import * as stats from "./routes/stats";
 import * as store from "./routes/store";
 import * as user from "./routes/user";
@@ -37,8 +37,8 @@ app.use(
   "/api-docs",
   swaggerUi.serve,
   swaggerUi.setup(null, {
-    swaggerUrl: "https://skynewz-api-fortnite.herokuapp.com/static/swagger.json",
-  }),
+    swaggerUrl: "https://skynewz-api-fortnite.herokuapp.com/static/swagger.json"
+  })
 );
 
 // oauth
@@ -90,7 +90,7 @@ freeRoutes.get("*", (req: express.Request, res: express.Response) => {
 
 // start server
 app.listen(app.get("port"), () =>
-  console.log("Listening on port " + app.get("port")),
+  console.log("Listening on port " + app.get("port"))
 );
 
 export const AppServer: express.Application = app;

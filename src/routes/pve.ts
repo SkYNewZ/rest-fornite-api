@@ -14,7 +14,7 @@ export function getStatsPVE(req: Request, res: Response) {
       if (err === "Player Not Found") {
         res.status(404).send(new CustomError(404, err));
       } else if (err === "No Data") {
-          /* istanbul ignore next */ res
+        /* istanbul ignore next */ res
           .status(400)
           .send(new CustomError(400, err));
       } else {

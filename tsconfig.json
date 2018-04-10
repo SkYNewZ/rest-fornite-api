@@ -8,10 +8,10 @@
             "es2015",
             "dom"
         ],
-        "typeRoots": ["./node_modules/@types", "./src/types"]
+        "typeRoots": ["./node_modules/@types"]
     },
     "include": [
-        "./src/**/*"
+        "./src/**/*.ts"
     ],
     "exclude": [
         "node_modules"
