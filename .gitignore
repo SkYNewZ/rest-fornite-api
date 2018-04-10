@@ -64,4 +64,5 @@ dist/*
 
 #IDE
 .idea
-.vscode
+.vscode/*
+!.vscode/launch.json
