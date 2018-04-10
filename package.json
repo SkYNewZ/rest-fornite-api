@@ -14,7 +14,8 @@
     "contrib:build": "all-contributors generate",
     "docker-build": "docker build -t skynewz/fortnite-api:dev --no-cache .",
     "docker-run": "docker run -it --rm -p 3000:3000 --env-file=.env skynewz/fortnite-api:dev",
-    "lint": "./node_modules/.bin/prettier --write ./**/*.ts && ./node_modules/.bin/tslint --fix --project ."
+    "lint": "tslint --project tsconfig.json --format stylish --fix src/**/*.ts",
+    "format": "prettier --write \"**/*.ts\""
   },
   "repository": {
     "type": "git",
