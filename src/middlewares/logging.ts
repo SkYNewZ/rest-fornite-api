@@ -7,13 +7,12 @@ import { IJwtPayload } from "../interfaces/jwt-payload.interface";
 export function ApiLogger(
   token: IJwtPayload,
   message: string = null,
-  parameters: string = null,
+  parameters: object = null,
   userAgent: string = null,
 ) {
-  const userEmail = token.email;
   DatabaseClient.query(
-    "INSERT INTO logs(message, user_mail, parameters, user_agent) VALUES($1, $2, $3, $4)",
-    [message, userEmail, parameters, userAgent],
+    "INSERT INTO logs(id, message, created_at, user_id, parameters, user_agent) VALUES(nextval('logs_id_seq'), $1, $2, $3, $4, $5)",
+    [message, new Date(), token.user_id, parameters, userAgent],
     (err: Error, result: QueryResult) => {
       /* istanbul ignore if */
       if (err) {
