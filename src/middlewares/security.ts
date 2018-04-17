@@ -41,8 +41,7 @@ export function getToken(req: Request, res: Response) {
       }
 
       const payload = {
-        admin: currentUser.is_admin,
-        email: currentUser.email,
+        user_id: currentUser.id,
       };
 
       const token = sign(payload, AppConfig.secret, {
