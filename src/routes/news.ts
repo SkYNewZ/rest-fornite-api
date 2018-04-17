@@ -4,7 +4,7 @@ import { FortniteNews } from "../models/news";
 import fortniteAPI from "../tools/auth";
 
 export function getFortniteNews(req: Request, res: Response) {
-  const language: string = req.params.lang || "en";
+  const language: string = req.query.lang || "en";
   fortniteAPI
     .getFortniteNews(language)
     .then((news: FortniteNews) => {
