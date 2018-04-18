@@ -25,7 +25,7 @@ export function getStatsPVE(req: Request, res: Response) {
 }
 
 export function getFortnitePVEInfo(req: Request, res: Response) {
-  const language = req.params.lang || "en";
+  const language = req.query.lang || "en";
   fortniteAPI
     .getFortnitePVEInfo(language)
     .then((store) => {

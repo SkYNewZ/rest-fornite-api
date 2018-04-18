@@ -6,7 +6,7 @@ import fortniteAPI from "../tools/auth";
 import { Tools } from "../tools/store";
 
 export function getStore(req: Request, res: Response) {
-  const language: string = req.params.lang || "en";
+  const language: string = req.query.lang || "en";
   fortniteAPI
     .getStore(language)
     .then((store: Promise<any>) => {

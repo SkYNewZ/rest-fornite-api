@@ -43,19 +43,7 @@ describe("Shop", () => {
   it("it should get store info in french", (done: MochaDone) => {
     chai
       .request(AppServer)
-      .get("/api/store/fr")
-      .set("Authorization", "Bearer " + token)
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).to.be.a("object");
-        done();
-      });
-  });
-
-  it("it should get store info in it", (done: MochaDone) => {
-    chai
-      .request(AppServer)
-      .get("/api/store/it")
+      .get("/api/store?lang=fr")
       .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res).to.have.status(200);

@@ -1,4 +1,4 @@
-import * as bcrypt from "bcrypt";
+import { compareSync } from "bcrypt";
 import { Request, Response } from "express";
 import { NextFunction } from "express-serve-static-core";
 import {
@@ -15,7 +15,7 @@ import { ApiLogger } from "../middlewares/logging";
 
 export function getToken(req: Request, res: Response) {
   DatabaseClient.query(
-    "SELECT * FROM users where email=$1::text",
+    "SELECT * FROM api_user where email=$1::text",
     [req.body.email],
     (err: Error, result: QueryResult) => {
       /* istanbul ignore if */
@@ -33,7 +33,7 @@ export function getToken(req: Request, res: Response) {
       const currentUser: any = result.rows[0];
 
       // check if password matches
-      if (!bcrypt.compareSync(req.body.password, currentUser.password)) {
+      if (!compareSync(req.body.password, currentUser.password)) {
         return res.status(401).json({
           message: "Authentication failed.",
           success: false,
@@ -41,7 +41,7 @@ export function getToken(req: Request, res: Response) {
       }
 
       const payload = {
-        email: currentUser.email,
+        user_id: currentUser.id,
       };
 
       const token = sign(payload, AppConfig.secret, {
@@ -101,8 +101,8 @@ export function authMiddleware(
           reason: err.message,
         });
       } else {
-        if (process.env.NODE_ENV !== "TEST") {
-          ApiLogger(decoded, req.originalUrl, JSON.stringify(req.body));
+        if (process.env.NODE_ENV !== "test") {
+          ApiLogger(decoded, req.originalUrl, req.query, req.header("user-agent"));
         }
         return next();
       }

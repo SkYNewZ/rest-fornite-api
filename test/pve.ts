@@ -65,19 +65,7 @@ describe("PVE INFO", () => {
   it("it should return fornite pve info in french", (done: MochaDone) => {
     chai
       .request(AppServer)
-      .get("/api/pve/info/fr")
-      .set("Authorization", "Bearer " + token)
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).to.be.a("object");
-        done();
-      });
-  });
-
-  it("it should return fornite pve info in it", (done: MochaDone) => {
-    chai
-      .request(AppServer)
-      .get("/api/pve/info/it")
+      .get("/api/pve/info?lang=fr")
       .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res).to.have.status(200);

@@ -43,19 +43,7 @@ describe("News", () => {
   it("it should return news in french", (done: MochaDone) => {
     chai
       .request(AppServer)
-      .get("/api/news/fr")
-      .set("Authorization", "Bearer " + token)
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).to.be.a("object");
-        done();
-      });
-  });
-
-  it("it should return news in it", (done: MochaDone) => {
-    chai
-      .request(AppServer)
-      .get("/api/news/it")
+      .get("/api/news?lang=fr")
       .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res).to.have.status(200);
