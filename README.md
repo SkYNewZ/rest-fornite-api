@@ -5,6 +5,7 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/skynewz/fortnite-api.svg)](https://hub.docker.com/r/skynewz/fortnite-api/)
 [![](https://images.microbadger.com/badges/version/skynewz/fortnite-api.svg)](https://microbadger.com/images/skynewz/fortnite-api "Get your own version badge on microbadger.com")
 ![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)
+[![](https://sonarcloud.io/dashboard?id=fornite-api)](https://sonarcloud.io/api/project_badges/measure?project=fornite-api&metric=alert_status)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/QLemaire/2)
 
 A simple NodeJS API under docker container to retrieve stats and infos from [Fortnite Game](https://www.epicgames.com/fortnite/fr/home) API.

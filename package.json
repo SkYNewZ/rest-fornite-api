@@ -16,7 +16,8 @@
     "docker-run": "docker run -it --rm -p 3000:3000 --env-file=.env skynewz/fortnite-api:dev",
     "lint": "tslint --project tsconfig.json --format stylish --fix src/**/*.ts",
     "format": "prettier --write \"**/*.ts\"",
-    "generate:changelog": "git changelog -f $(git describe --tags --abbrev=0) -p -x > CHANGELOG.md"
+    "generate:changelog": "git changelog -f $(git describe --tags --abbrev=0) -p -x > CHANGELOG.md",
+    "sonar-scanner": "sonar-scanner -Dsonar.projectVersion=$(cat VERSION) -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info"
   },
   "repository": {
     "type": "git",

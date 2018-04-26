@@ -6,7 +6,7 @@ import {
   NotBeforeError,
   sign,
   TokenExpiredError,
-  verify,
+  verify
 } from "jsonwebtoken";
 import { Client, QueryResult } from "pg";
 import { AppConfig, DatabaseClient } from "../config/config";
@@ -26,7 +26,7 @@ export function getToken(req: Request, res: Response) {
       if (!result.rowCount || result.rowCount > 1) {
         return res.status(404).json({
           message: "Authentication failed. User not found",
-          success: false,
+          success: false
         });
       }
 
@@ -36,16 +36,16 @@ export function getToken(req: Request, res: Response) {
       if (!compareSync(req.body.password, currentUser.password)) {
         return res.status(401).json({
           message: "Authentication failed.",
-          success: false,
+          success: false
         });
       }
 
       const payload = {
-        user_id: currentUser.id,
+        user_id: currentUser.id
       };
 
       const token = sign(payload, AppConfig.secret, {
-        expiresIn: 7200,
+        expiresIn: 7200
       });
 
       /* istanbul ignore if */
@@ -56,18 +56,18 @@ export function getToken(req: Request, res: Response) {
       // return the information including token as JSON
       return res.json({
         access_token: token,
-        expiresIn: 7200,
+        expiresIn: 7200
       });
-    },
+    }
   );
 }
 
 function getTokenFromHeader(req: Request): string | null {
   if (
-    (req.headers.authorization as string) &&
-    (req.headers.authorization as string).split(" ")[0] === "Bearer"
+    req.headers.authorization &&
+    req.headers.authorization.split(" ")[0] === "Bearer"
   ) {
-    return (req.headers.authorization as string).split(" ")[1];
+    return req.headers.authorization.split(" ")[1];
   }
   return null;
 }
@@ -75,7 +75,7 @@ function getTokenFromHeader(req: Request): string | null {
 export function authMiddleware(
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) {
   if (req.path === "/oauth/token") {
     return next();
@@ -84,7 +84,7 @@ export function authMiddleware(
 
   if (!token) {
     return res.status(403).send({
-      message: "No Bearer token provided.",
+      message: "No Bearer token provided."
     });
   }
 
@@ -93,19 +93,24 @@ export function authMiddleware(
     AppConfig.secret,
     (
       err: JsonWebTokenError | NotBeforeError | TokenExpiredError,
-      decoded: IJwtPayload,
+      decoded: IJwtPayload
     ) => {
       if (err) {
         return res.status(403).json({
           message: "Failed to authenticate token.",
-          reason: err.message,
+          reason: err.message
         });
       } else {
         if (process.env.NODE_ENV !== "test") {
-          ApiLogger(decoded, req.originalUrl, req.query, req.header("user-agent"));
+          ApiLogger(
+            decoded,
+            req.originalUrl,
+            req.query,
+            req.header("user-agent")
+          );
         }
         return next();
       }
-    },
+    }
   );
 }
